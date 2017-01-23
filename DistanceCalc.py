@@ -32,13 +32,7 @@ from operator import itemgetter, attrgetter, methodcaller
 import json
 import numpy as np
 
-rootdir ='./UsersReversed/anthony-coleman-reversed.json'
-
-checkNum = 0
-
-fileHandles = {}
-count = 0
-filenum = 0
+rootdir ='./UsersReversed/test-user.json'
 
 actualDist = 0
 optimalDist = 0
@@ -47,6 +41,10 @@ prevPoint = 0
 startTime = 0
 goalTime = 0
 measuring = False
+
+
+def dist(a, b):
+	return np.linalg.norm(a-b)
 
 #for current_directory, directories, files in os.walk(rootdir):
 	
@@ -68,19 +66,16 @@ with open(rootdir) as infile:
 			prevPoint = np.array((parsed['x'], parsed['y']))
 			startTime = parsed['time']
 
-		if(parsed['type'] == "mouseUp"):
+		if((parsed['time'] < (startTime - 2000) or parsed['type'] == "mouseUp") and measuring):
 			measuring = False
 			print "Actual distance: " + str(actualDist)
 			actualDist = 0
 			optimalDist = dist(prevPoint, startPoint)
-			print "Optimal Distance: " + str(optimalDist)
+			print "Optimal Distance: " + str(optimalDist) + "\n"
+			optimalDist = 0
 
 		if(measuring == True):
 			current = np.array((parsed['x'], parsed['y']))
 			actualDist = actualDist + dist(prevPoint, current)
 
 		prevPoint = np.array((parsed['x'], parsed['y']))
-
-		def dist(a, b):
-			 return np.linalg.norm(a-b)
-
