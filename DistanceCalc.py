@@ -41,7 +41,8 @@ prevPoint = 0
 startTime = 0
 goalTime = 0
 measuring = False
-
+velocities = []
+prevTime = 0
 
 def dist(a, b):
 	return np.linalg.norm(a-b)
@@ -65,17 +66,29 @@ with open(rootdir) as infile:
 			startPoint = np.array((parsed['x'], parsed['y']))
 			prevPoint = np.array((parsed['x'], parsed['y']))
 			startTime = parsed['time']
+			prevTime = parsed['time']
 
 		if((parsed['time'] < (startTime - 2000) or parsed['type'] == "mouseUp") and measuring):
 			measuring = False
 			print "Actual distance: " + str(actualDist)
 			actualDist = 0
+			print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
 			optimalDist = dist(prevPoint, startPoint)
 			print "Optimal Distance: " + str(optimalDist) + "\n"
 			optimalDist = 0
 
 		if(measuring == True):
-			current = np.array((parsed['x'], parsed['y']))
-			actualDist = actualDist + dist(prevPoint, current)
+			currentPos = np.array((parsed['x'], parsed['y']))
+			currentTime = parsed['time']
+			localTime = prevTime - currentTime
+			localDist = dist(prevPoint, currentPos)
+			actualDist = actualDist + localDist
+
+			if(localTime != 0):
+				localVel = (localDist/localTime)
+				velocities.append(localVel)
+
+
 
 		prevPoint = np.array((parsed['x'], parsed['y']))
+		prevTime = parsed['time']
