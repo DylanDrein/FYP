@@ -56,7 +56,7 @@ def dist(a, b):
 
 		#with open(filepath) as infile:
 with open(rootdir) as infile:
-
+	parsed = ""
 	for line in infile:
 	
 		parsed = json.loads(line)
@@ -94,3 +94,11 @@ with open(rootdir) as infile:
 
 		prevPoint = np.array((parsed['x'], parsed['y']))
 		prevTime = parsed['time']
+
+	if(measuring == True):
+		print "Actual distance: " + str(actualDist)
+		print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
+		optimalDist = dist(prevPoint, startPoint)
+		timeTaken = startTime - prevTime
+		print "Time taken: " + str(timeTaken) + "ms"
+		print "Optimal Distance: " + str(optimalDist) + "\n"
