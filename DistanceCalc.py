@@ -74,6 +74,8 @@ with open(rootdir) as infile:
 			actualDist = 0
 			print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
 			optimalDist = dist(prevPoint, startPoint)
+			timeTaken = startTime - prevTime
+			print "Time taken: " + str(timeTaken) + "ms"
 			print "Optimal Distance: " + str(optimalDist) + "\n"
 			optimalDist = 0
 
