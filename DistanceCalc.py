@@ -31,6 +31,8 @@ import os
 from operator import itemgetter, attrgetter, methodcaller
 import json
 import numpy as np
+import matplotlib.pyplot as plt
+import plotly.plotly as py
 
 rootdir ='./UsersReversed/test-user.json'
 
@@ -41,8 +43,9 @@ prevPoint = 0
 startTime = 0
 goalTime = 0
 measuring = False
-velocities = []
 prevTime = 0
+velocities = []
+optOverAct = []
 
 def dist(a, b):
 	return np.linalg.norm(a-b)
@@ -70,14 +73,15 @@ with open(rootdir) as infile:
 
 		if((parsed['time'] < (startTime - 2000) or parsed['type'] == "mouseUp") and measuring):
 			measuring = False
-			print "Actual distance: " + str(actualDist)
-			actualDist = 0
-			print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
 			optimalDist = dist(prevPoint, startPoint)
 			timeTaken = startTime - prevTime
+			optOverAct.append(optimalDist/actualDist)
+			print "Actual distance: " + str(actualDist)
+			print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
 			print "Time taken: " + str(timeTaken) + "ms"
 			print "Optimal Distance: " + str(optimalDist) + "\n"
 			optimalDist = 0
+			actualDist = 0
 
 		if(measuring == True):
 			currentPos = np.array((parsed['x'], parsed['y']))
@@ -90,8 +94,6 @@ with open(rootdir) as infile:
 				localVel = (localDist/localTime)
 				velocities.append(localVel)
 
-
-
 		prevPoint = np.array((parsed['x'], parsed['y']))
 		prevTime = parsed['time']
 
@@ -102,3 +104,15 @@ with open(rootdir) as infile:
 		timeTaken = startTime - prevTime
 		print "Time taken: " + str(timeTaken) + "ms"
 		print "Optimal Distance: " + str(optimalDist) + "\n"
+
+	plotLen = len(optOverAct)
+	plotRange = range(plotLen)
+	width = 1/1.5
+	plt.bar(plotRange, optOverAct, width, color="blue")
+	fig = plt.gcf()
+	plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
+'''
+create histogram comparing efficiency of paths taken
+optimal / actual
+
+'''
