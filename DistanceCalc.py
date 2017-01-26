@@ -33,6 +33,9 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.plotly as py
+import plotly.tools as tls
+tls.set_credentials_file(username='DylanDrein', api_key='ysXKN96SeJ6a6lM1WMKs')
+
 
 rootdir ='./UsersReversed/test-user.json'
 
@@ -46,6 +49,7 @@ measuring = False
 prevTime = 0
 velocities = []
 optOverAct = []
+
 
 def dist(a, b):
 	return np.linalg.norm(a-b)
