@@ -32,9 +32,8 @@ from operator import itemgetter, attrgetter, methodcaller
 import json
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 import plotly.plotly as py
-import plotly.tools as tls
-tls.set_credentials_file(username='DylanDrein', api_key='ysXKN96SeJ6a6lM1WMKs')
 
 
 rootdir ='./UsersReversed/test-user.json'
@@ -48,7 +47,13 @@ goalTime = 0
 measuring = False
 prevTime = 0
 velocities = []
+
+#histogram array
 optOverAct = []
+
+#dot plot array
+actualVals = []
+optimalVals = []
 
 
 def dist(a, b):
@@ -79,7 +84,14 @@ with open(rootdir) as infile:
 			measuring = False
 			optimalDist = dist(prevPoint, startPoint)
 			timeTaken = startTime - prevTime
+
+			#histogram
 			optOverAct.append(optimalDist/actualDist)
+
+			#dot plot
+			actualVals.append(actualDist)
+			optimalVals.append(optimalDist)
+
 			print "Actual distance: " + str(actualDist)
 			print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
 			print "Time taken: " + str(timeTaken) + "ms"
@@ -102,12 +114,37 @@ with open(rootdir) as infile:
 		prevTime = parsed['time']
 
 	if(measuring == True):
-		print "Actual distance: " + str(actualDist)
-		print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
 		optimalDist = dist(prevPoint, startPoint)
 		timeTaken = startTime - prevTime
+
+		#histogram
+		optOverAct.append(optimalDist/actualDist)
+
+		#dot plot
+		actualVals.append(actualDist)
+		optimalVals.append(optimalDist)
+
+		print "Actual distance: " + str(actualDist)
+		print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
 		print "Time taken: " + str(timeTaken) + "ms"
 		print "Optimal Distance: " + str(optimalDist) + "\n"
+
+	#DOT PLOT
+	plt.plot(actualVals, optimalVals, 'ro')
+	#plt.plot([0,0], [max(actualVals), max(optimalVals)], 'k-', lw=2)
+	l = Line2D([0, max(actualVals)], [0, max(optimalVals)])
+	maxVals = [max(optimalVals), max(actualVals)]
+	plt.ylabel("Optimal Mouse Path Lengths")
+	plt.xlabel("Actual Mouse Path Lengths")
+	plt.axis([0, max(actualVals) + 100, 0, max(optimalVals) + 100])
+	for a, b in enumerate(optOverAct):
+		plt.annotate(b, (actualVals[a], optimalVals[a]))
+
+	plt.show()
+
+
+
+''' #HISTOGRAM
 
 	plotLen = len(optOverAct)
 	plotRange = range(plotLen)
@@ -121,7 +158,7 @@ with open(rootdir) as infile:
 	plt.show()
 	#fig = plt.gcf()
 	#plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
-
+'''
 
 '''
 create histogram comparing efficiency of paths taken
