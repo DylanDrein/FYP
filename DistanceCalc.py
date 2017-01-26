@@ -111,10 +111,19 @@ with open(rootdir) as infile:
 
 	plotLen = len(optOverAct)
 	plotRange = range(plotLen)
-	width = 1/1.5
+	print "plotlen" + str(plotLen)
+	print "plotrange" + str(plotRange)
+	print optOverAct
+	width = 1
 	plt.bar(plotRange, optOverAct, width, color="blue")
-	fig = plt.gcf()
-	plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
+	plt.ylabel("Efficiency (Optimal length/Actual length)")
+	plt.xlabel("")
+	plt.show()
+	#fig = plt.gcf()
+	#plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
+	print "plotlen" + str(plotLen)
+	print "plotrange" + str(plotRange)
+	print optOverAct
 '''
 create histogram comparing efficiency of paths taken
 optimal / actual
