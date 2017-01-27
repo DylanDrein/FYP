@@ -33,7 +33,6 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-import plotly.plotly as py
 
 
 rootdir ='./UsersReversed/test-user.json'
@@ -43,7 +42,6 @@ optimalDist = 0
 startPoint = 0
 prevPoint = 0
 startTime = 0
-goalTime = 0
 measuring = False
 prevTime = 0
 velocities = []
@@ -55,6 +53,7 @@ optOverAct = []
 actualVals = []
 optimalVals = []
 
+filename = ""
 
 def dist(a, b):
 	return np.linalg.norm(a-b)
@@ -72,6 +71,8 @@ with open(rootdir) as infile:
 	for line in infile:
 	
 		parsed = json.loads(line)
+
+		filename = parsed['name'].lower().replace(" ", "-")+"-scatter"
 
 		if(parsed['type'] == "mouseDown"):
 			measuring = True
@@ -145,8 +146,8 @@ with open(rootdir) as infile:
 	for a, b in enumerate(optOverAct):
 		plt.annotate(b, (actualVals[a], optimalVals[a]))
 
-	plt.show()
-
+	#plt.show()
+	plt.savefig("./ScatterPlots/" + filename + '.png')
 
 
 ''' #HISTOGRAM
