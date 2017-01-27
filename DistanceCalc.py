@@ -131,11 +131,12 @@ with open(rootdir) as infile:
 
 	#DOT PLOT
 	maxVals = [max(optimalVals), max(actualVals)]
-	plt.plot(actualVals, optimalVals, 'ro', label='Efficiency')
+	plt.plot(actualVals, optimalVals, 'ro')
 	x = max(maxVals)
 	#y = max(maxVals)
 	#plt.plot([0,0], [1400, 1400], 'k-')
-	plt.plot([0, x], [0, x], 'k-', label='Efficiency')
+	plt.plot([0, x], [0, x], 'k-', label='Above = More efficient\nBelow = Less efficient')
+	plt.legend(loc='upper left')
 	#l = Line2D([0, max(actualVals)], [0, max(optimalVals)])
 	plt.title("Graph of Efficiency (Optimal/Actual)")
 	plt.ylabel("Optimal Mouse Path Lengths")
