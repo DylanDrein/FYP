@@ -130,10 +130,14 @@ with open(rootdir) as infile:
 		print "Optimal Distance: " + str(optimalDist) + "\n"
 
 	#DOT PLOT
-	plt.plot(actualVals, optimalVals, 'ro')
-	#plt.plot([0,0], [max(actualVals), max(optimalVals)], 'k-', lw=2)
-	l = Line2D([0, max(actualVals)], [0, max(optimalVals)])
 	maxVals = [max(optimalVals), max(actualVals)]
+	plt.plot(actualVals, optimalVals, 'ro', label='Efficiency')
+	x = max(maxVals)
+	#y = max(maxVals)
+	#plt.plot([0,0], [1400, 1400], 'k-')
+	plt.plot([0, x], [0, x], 'k-', label='Efficiency')
+	#l = Line2D([0, max(actualVals)], [0, max(optimalVals)])
+	plt.title("Graph of Efficiency (Optimal/Actual)")
 	plt.ylabel("Optimal Mouse Path Lengths")
 	plt.xlabel("Actual Mouse Path Lengths")
 	plt.axis([0, max(actualVals) + 100, 0, max(optimalVals) + 100])
