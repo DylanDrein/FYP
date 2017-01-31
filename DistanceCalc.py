@@ -142,76 +142,79 @@ for current_directory, directories, files in os.walk(rootdir):
 				#print optimalnum
 
 
-		'''
-		print filenum
-		print len(actualVals)
-		print len(optimalVals)
+			'''
+			print filenum
+			print len(actualVals)
+			print len(optimalVals)
 
-		#DOT PLOT
-		maxVals = [max(optimalVals), max(actualVals)]
-		plt.plot(actualVals, optimalVals, 'r.')
-		#print "idk1"
-		x = max(maxVals)
-		plt.plot([0, x], [0, x], 'k-', lw=1)
-		plt.legend(loc='upper right')
-		plt.title("$Graph  of  Efficiency  (Optimal/Actual)$")
-		plt.ylabel("$Optimal  Mouse  Path  Lengths$")
-		plt.xlabel("$Actual  Mouse  Path  Lengths$")
-		plt.axis([0, max(actualVals), 0, max(optimalVals)])
-		#for a, b in enumerate(optOverAct):
-		#	plt.annotate(b, (actualVals[a], optimalVals[a]))
+			#DOT PLOT
+			maxVals = [max(optimalVals), max(actualVals)]
+			plt.plot(actualVals, optimalVals, 'r.')
+			#print "idk1"
+			x = max(maxVals)
+			plt.plot([0, x], [0, x], 'k-', lw=1)
+			plt.legend(loc='upper right')
+			plt.title("$Graph  of  Efficiency  (Optimal/Actual)$")
+			plt.ylabel("$Optimal  Mouse  Path  Lengths$")
+			plt.xlabel("$Actual  Mouse  Path  Lengths$")
+			plt.axis([0, max(actualVals), 0, max(optimalVals)])
+			#for a, b in enumerate(optOverAct):
+			#	plt.annotate(b, (actualVals[a], optimalVals[a]))
 
-		#plt.show()
-		#print "idk2"
-		plt.savefig('./ScatterPlots/' + filename + '.png')
-		plt.clf()
+			#plt.show()
+			#print "idk2"
+			plt.savefig('./ScatterPlots/' + filename + '.png')
+			plt.clf()
 
-		print len(actualVals)
-		print len(optimalVals)
-		#print len(optOverAct)
-		del actualVals[:]
-		del optimalVals[:]
-		#del optOverAct[:]
-		print actualVals
-		print optimalVals
+			print len(actualVals)
+			print len(optimalVals)
+			#print len(optOverAct)
+			del actualVals[:]
+			del optimalVals[:]
+			#del optOverAct[:]
+			print actualVals
+			print optimalVals
 
-				
-	    #HISTOGRAM
+					
+		    #HISTOGRAM
 
-		plotLen = len(optOverAct)
-		plotRange = range(plotLen)
-		print "plotlen " + str(plotLen)
-		print "plotrange " + str(plotRange)
-		print optOverAct
-		width = 1
-		plt.bar(plotRange, optOverAct, width, color="blue")
-		plt.ylabel("Efficiency (Optimal length/Actual length)")
-		plt.xlabel("")
-		plt.show()
-		#fig = plt.gcf()
-		#plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
-		
-		x = actualVals
-		y = optimalVals
+			plotLen = len(optOverAct)
+			plotRange = range(plotLen)
+			print "plotlen " + str(plotLen)
+			print "plotrange " + str(plotRange)
+			print optOverAct
+			width = 1
+			plt.bar(plotRange, optOverAct, width, color="blue")
+			plt.ylabel("Efficiency (Optimal length/Actual length)")
+			plt.xlabel("")
+			plt.show()
+			#fig = plt.gcf()
+			#plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
+			
+			x = actualVals
+			y = optimalVals
 
-		print x, y
+			print x, y
 
-		xymax = [max(optimalVals), max(actualVals)]
-		xymin = [min(optimalVals), min(actualVals)]
+			xymax = [max(optimalVals), max(actualVals)]
+			xymin = [min(optimalVals), min(actualVals)]
 
-		bins = np.linspace(1, max(xymax), 25)
+			bins = np.linspace(1, max(xymax), 25)
 
-		plt.hist(x, bins, alpha=0.5, label='x')
-		plt.hist(y, bins, alpha=0.5, label='y')
-		plt.legend(loc='upper right')
-		plt.show()
-		plt.clf()
+			plt.hist(x, bins, alpha=0.5, label='x')
+			plt.hist(y, bins, alpha=0.5, label='y')
+			plt.legend(loc='upper right')
+			plt.show()
+			plt.clf()
 
-		del actualVals[:]
-		del optimalVals[:]
-		'''
-		data = np.array([[actualVals], [optimalVals]])
-		plt.boxplot(data)
-		plt.show()
-		plt.clf()
-		print filenum
+			del actualVals[:]
+			del optimalVals[:]
+			'''
+			data = [actualVals, optimalVals]
+			plt.boxplot(data)
+			plt.show()
+			print filenum
+			plt.clf()
+
+			del actualVals[:]
+			del optimalVals[:]
