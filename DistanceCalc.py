@@ -142,7 +142,7 @@ for current_directory, directories, files in os.walk(rootdir):
 				#print optimalnum
 
 
-
+		'''
 		print filenum
 		print len(actualVals)
 		print len(optimalVals)
@@ -176,21 +176,36 @@ for current_directory, directories, files in os.walk(rootdir):
 		print optimalVals
 
 				
+	    #HISTOGRAM
 
+		plotLen = len(optOverAct)
+		plotRange = range(plotLen)
+		print "plotlen " + str(plotLen)
+		print "plotrange " + str(plotRange)
+		print optOverAct
+		width = 1
+		plt.bar(plotRange, optOverAct, width, color="blue")
+		plt.ylabel("Efficiency (Optimal length/Actual length)")
+		plt.xlabel("")
+		plt.show()
+		#fig = plt.gcf()
+		#plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
+		'''
+		x = actualVals
+		y = optimalVals
 
-	'''
-		    #HISTOGRAM
+		print x, y
 
-			plotLen = len(optOverAct)
-			plotRange = range(plotLen)
-			print "plotlen " + str(plotLen)
-			print "plotrange " + str(plotRange)
-			print optOverAct
-			width = 1
-			plt.bar(plotRange, optOverAct, width, color="blue")
-			plt.ylabel("Efficiency (Optimal length/Actual length)")
-			plt.xlabel("")
-			plt.show()
-			#fig = plt.gcf()
-			#plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
-			'''
+		xymax = [max(optimalVals), max(actualVals)]
+		xymin = [min(optimalVals), min(actualVals)]
+
+		bins = np.linspace(min(xymin), max(xymax), 25)
+
+		plt.hist(x, bins, alpha=0.5, label='x')
+		plt.hist(y, bins, alpha=0.5, label='y')
+		plt.legend(loc='upper right')
+		plt.show()
+		plt.clf()
+
+		del actualVals[:]
+		del optimalVals[:]
