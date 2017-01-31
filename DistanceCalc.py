@@ -190,7 +190,7 @@ for current_directory, directories, files in os.walk(rootdir):
 		plt.show()
 		#fig = plt.gcf()
 		#plot_url = py.plot_mpl(fig, filename='mpl-basic-bar')
-		'''
+		
 		x = actualVals
 		y = optimalVals
 
@@ -199,7 +199,7 @@ for current_directory, directories, files in os.walk(rootdir):
 		xymax = [max(optimalVals), max(actualVals)]
 		xymin = [min(optimalVals), min(actualVals)]
 
-		bins = np.linspace(min(xymin), max(xymax), 25)
+		bins = np.linspace(1, max(xymax), 25)
 
 		plt.hist(x, bins, alpha=0.5, label='x')
 		plt.hist(y, bins, alpha=0.5, label='y')
@@ -209,3 +209,9 @@ for current_directory, directories, files in os.walk(rootdir):
 
 		del actualVals[:]
 		del optimalVals[:]
+		'''
+		data = np.array([[actualVals], [optimalVals]])
+		plt.boxplot(data)
+		plt.show()
+		plt.clf()
+		print filenum
