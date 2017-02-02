@@ -32,8 +32,9 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-rootdir ='./UsersReversed/'
-
+rootdir = './UsersReversed/'
+#rootdir = './ActualVsOptimalCalculator/'
+	
 actualDist = 0
 optimalDist = 0
 startPoint = 0
@@ -41,21 +42,16 @@ startTime = 0
 prevPoint = 0
 prevTime = 0
 measuring = False
-velocities = []
+#velocities = []
 
 filenum = 0
-totalfiles = 0
 
-#histogram array
-#optOverAct = []
-
-#dot plot array
+optOverAct = []
 actualVals = []
 optimalVals = []
-optOverAct = []
 
-actualnum = 0
-optimalnum = 0
+#actualnum = 0
+#optimalnum = 0
 
 filename = ""
 
@@ -89,13 +85,14 @@ for current_directory, directories, files in os.walk(rootdir):
 					timeTaken = startTime - prevTime
 
 					#histogram
-					optOverAct.append(optimalDist/actualDist)
-
+					if(actualDist != 0):
+						optOverAct.append(optimalDist/actualDist)
+					
 					#dot plot
 					actualVals.append(actualDist)
-					actualnum = actualnum + 1
+					#actualnum = actualnum + 1
 					optimalVals.append(optimalDist)
-					optimalnum = optimalnum + 1
+					#optimalnum = optimalnum + 1
 
 					#print "Actual distance: " + str(actualDist)
 					#print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
@@ -123,14 +120,17 @@ for current_directory, directories, files in os.walk(rootdir):
 				#timeTaken = startTime - prevTime
 
 				#histogram
-				optOverAct.append(optimalDist/actualDist)
+				if(actualDist != 0):
+					optOverAct.append(optimalDist/actualDist)
+					
 
 				#dot plot
 				actualVals.append(actualDist)
-				actualnum = actualnum + 1
+				#actualnum = actualnum + 1
 				optimalVals.append(optimalDist)
-				optimalnum = optimalnum + 1
-
+				#optimalnum = optimalnum + 1
+				optimalDist = 0
+				actualDist = 0
 				#print "Actual distance: " + str(actualDist)
 				#print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
 				#print "Time taken: " + str(timeTaken) + "ms"
@@ -139,9 +139,74 @@ for current_directory, directories, files in os.walk(rootdir):
 				#print actualnum
 				#print optimalnum
 
-			data = [actualVals, optimalVals]
-			np.savetxt("./ActualOptimal/" + filename + ".csv", data, delimiter=",")
-			print filenum
+			
+			
+			#data = [actualVals, optimalVals, optOverAct]
+			#np.savetxt("./ActualOptimal2/" + filename + ".csv", data, fmt='%1.6f', delimiter=",")
+			#print filenum
 
 			del actualVals[:]
 			del optimalVals[:]
+			del optOverAct[:]
+			
+
+			#DOT PLOT (WORKS!!!)
+			maxVals = [max(optimalVals), max(actualVals)]
+			plt.plot(actualVals, optimalVals, 'r.')
+			x = max(maxVals)
+			plt.plot([0, x], [0, x], 'k-')
+			plt.legend(loc='upper right')
+			plt.title("$Graph$ $of$ $Efficiency$ $(Optimal/Actual)$")
+			plt.ylabel("$Optimal$ $Mouse$ $Path$ $Lengths$")
+			plt.xlabel("$Actual$ $Mouse$ $Path$ $Lengths$")
+			plt.axis([0, max(actualVals) + 100, 0, max(optimalVals) + 100])
+			#for a, b in enumerate(optOverAct):
+			#	plt.annotate(b, (actualVals[a], optimalVals[a]))
+
+			plt.show()
+			plt.clf()
+			print filenum
+
+
+			del actualVals[:]
+			del optimalVals[:]
+			del optOverAct[:]
+
+			
+			
+			plt.savefig('./ScatterPlots/' + filename + '.png')
+			plt.clf()
+
+
+
+			#HISTOGRAM (WORKS!!)
+			plt.hist(optOverAct, 200, normed = 1, facecolor='green', alpha = 1)
+			plt.title("$Histogram$ $of$ $Optimal/Actual$ $path$ $lengths$")
+			plt.xlabel("$Value$")
+			plt.ylabel("$Frequency$")
+			plt.legend(loc='upper right')
+			plt.show()
+			plt.clf()
+
+			del actualVals[:]
+			del optimalVals[:]
+			del optOverAct[:]
+			
+			'''
+
+
+
+			#BOXPLOT
+			data = [actualVals, optimalVals]
+			labels = ["Actual", "Optimal"]
+			plt.xticks([actualVals],['Actual', 'Optimal'])
+			plt.boxplot(data, labels = labels, showfliers = True)
+			plt.ylabel('Optimal/Actual path length')
+			plt.xlabel('Actual vs. Optimal paths')
+			plt.show()
+			print filenum
+			plt.clf()
+
+			del actualVals[:]
+			del optimalVals[:]
+			
