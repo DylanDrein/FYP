@@ -144,10 +144,6 @@ for current_directory, directories, files in os.walk(rootdir):
 			#data = [actualVals, optimalVals, optOverAct]
 			#np.savetxt("./ActualOptimal2/" + filename + ".csv", data, fmt='%1.6f', delimiter=",")
 			#print filenum
-
-			del actualVals[:]
-			del optimalVals[:]
-			del optOverAct[:]
 			
 
 			#DOT PLOT (WORKS!!!)
@@ -157,23 +153,9 @@ for current_directory, directories, files in os.walk(rootdir):
 			plt.plot([0, x], [0, x], 'k-')
 			plt.legend(loc='upper right')
 			plt.title("$Graph$ $of$ $Efficiency$ $(Optimal/Actual)$")
-			plt.ylabel("$Optimal$ $Mouse$ $Path$ $Lengths$")
-			plt.xlabel("$Actual$ $Mouse$ $Path$ $Lengths$")
+			plt.ylabel("$Optimal$ $Mouse$ $Path$ $Lengths$ $(px)$")
+			plt.xlabel("$Actual$ $Mouse$ $Path$ $Lengths$ $(px)$")
 			plt.axis([0, max(actualVals) + 100, 0, max(optimalVals) + 100])
-			#for a, b in enumerate(optOverAct):
-			#	plt.annotate(b, (actualVals[a], optimalVals[a]))
-
-			plt.show()
-			plt.clf()
-			print filenum
-
-
-			del actualVals[:]
-			del optimalVals[:]
-			del optOverAct[:]
-
-			
-			
 			plt.savefig('./ScatterPlots/' + filename + '.png')
 			plt.clf()
 
@@ -185,28 +167,30 @@ for current_directory, directories, files in os.walk(rootdir):
 			plt.xlabel("$Value$")
 			plt.ylabel("$Frequency$")
 			plt.legend(loc='upper right')
-			plt.show()
+			plt.savefig('./Histograms/' + filename + '.png')
 			plt.clf()
 
-			del actualVals[:]
-			del optimalVals[:]
-			del optOverAct[:]
-			
-			'''
 
 
-
-			#BOXPLOT
+			#BOXPLOT 1
 			data = [actualVals, optimalVals]
 			labels = ["Actual", "Optimal"]
-			plt.xticks([actualVals],['Actual', 'Optimal'])
 			plt.boxplot(data, labels = labels, showfliers = True)
-			plt.ylabel('Optimal/Actual path length')
-			plt.xlabel('Actual vs. Optimal paths')
-			plt.show()
+			plt.title("$Box$ $plot$ $of$ $Actual$ $(left)$ $vs.$ $Optimal$ $(right)$ $paths$ $(Including$ $outliers)$")
+			plt.ylabel('$Path$ $length$ $(px)$')
+			plt.savefig('./BoxPlots/' + filename + '.png')
+			print filenum
+			plt.clf()
+
+			data = [actualVals, optimalVals]
+			labels = ["Actual", "Optimal"]
+			plt.boxplot(data, 0, '')
+			plt.title("$Box$ $plot$ $of$ $Actual$ $(left)$ $vs.$ $Optimal$ $(right)$ $paths$ $(Excluding$ $outliers)$")
+			plt.ylabel('$Path$ $length$ $(px)$')
+			plt.savefig('./BoxPlots/' + filename + '.png')
 			print filenum
 			plt.clf()
 
 			del actualVals[:]
 			del optimalVals[:]
-			
+			del optOverAct[:]
