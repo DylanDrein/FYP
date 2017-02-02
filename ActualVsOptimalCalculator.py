@@ -33,7 +33,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 rootdir = './UsersReversed/'
-#rootdir = './ActualVsOptimalCalculator/'
 	
 actualDist = 0
 optimalDist = 0
@@ -131,13 +130,15 @@ for current_directory, directories, files in os.walk(rootdir):
 				#optimalnum = optimalnum + 1
 				optimalDist = 0
 				actualDist = 0
-				#print "Actual distance: " + str(actualDist)
-				#print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
-				#print "Time taken: " + str(timeTaken) + "ms"
-				#print "Optimal Distance: " + str(optimalDist) + "\n"
-				#print filenum
-				#print actualnum
-				#print optimalnum
+				'''
+				print "Actual distance: " + str(actualDist)
+				print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
+				print "Time taken: " + str(timeTaken) + "ms"
+				print "Optimal Distance: " + str(optimalDist) + "\n"
+				print filenum
+				print actualnum
+				print optimalnum
+				'''
 
 			
 			
@@ -146,12 +147,11 @@ for current_directory, directories, files in os.walk(rootdir):
 			#print filenum
 			
 
-			#DOT PLOT (WORKS!!!)
+			#DOT PLOT (WORKS!!)
 			maxVals = [max(optimalVals), max(actualVals)]
 			plt.plot(actualVals, optimalVals, 'r.')
 			x = max(maxVals)
 			plt.plot([0, x], [0, x], 'k-')
-			plt.legend(loc='upper right')
 			plt.title("$Graph$ $of$ $Efficiency$ $(Optimal/Actual)$")
 			plt.ylabel("$Optimal$ $Mouse$ $Path$ $Lengths$ $(px)$")
 			plt.xlabel("$Actual$ $Mouse$ $Path$ $Lengths$ $(px)$")
@@ -160,35 +160,30 @@ for current_directory, directories, files in os.walk(rootdir):
 			plt.clf()
 
 
-
-			#HISTOGRAM (WORKS!!)
+			#HISTOGRAM (WORKS!!!)
 			plt.hist(optOverAct, 200, normed = 1, facecolor='green', alpha = 1)
 			plt.title("$Histogram$ $of$ $Optimal/Actual$ $path$ $lengths$")
 			plt.xlabel("$Value$")
 			plt.ylabel("$Frequency$")
-			plt.legend(loc='upper right')
 			plt.savefig('./Histograms/' + filename + '.png')
 			plt.clf()
 
 
-
-			#BOXPLOT 1
+			#BOXPLOT 1 (WORKS!)
 			data = [actualVals, optimalVals]
-			labels = ["Actual", "Optimal"]
-			plt.boxplot(data, labels = labels, showfliers = True)
+			plt.boxplot(data, showfliers = True)
 			plt.title("$Box$ $plot$ $of$ $Actual$ $(left)$ $vs.$ $Optimal$ $(right)$ $paths$ $(Including$ $outliers)$")
 			plt.ylabel('$Path$ $length$ $(px)$')
-			plt.savefig('./BoxPlots/' + filename + '.png')
-			print filenum
+			plt.savefig('./BoxPlotsOutliers/' + filename + '.png')
 			plt.clf()
 
+
+			#BOXPLOT 2 (WORKS!!)
 			data = [actualVals, optimalVals]
-			labels = ["Actual", "Optimal"]
 			plt.boxplot(data, 0, '')
 			plt.title("$Box$ $plot$ $of$ $Actual$ $(left)$ $vs.$ $Optimal$ $(right)$ $paths$ $(Excluding$ $outliers)$")
 			plt.ylabel('$Path$ $length$ $(px)$')
 			plt.savefig('./BoxPlots/' + filename + '.png')
-			print filenum
 			plt.clf()
 
 			del actualVals[:]
