@@ -28,15 +28,14 @@ with open(filepath) as infile:
 	for row in parsed:
 		times = np.array(list(row)).astype(np.float)
 
-bins = np.arange(firstMidnight, max(times), 86400)
 
-print max(bins) - min(bins) % daySeconds
+bins = np.arange(firstMidnight, np.amax(times), 86400)
 
-'''
+#print max(bins) - min(bins) % daySeconds
+
 plt.hist(times, bins, facecolor='green')
 plt.title("$Histogram$ $of$ $Optimal/Actual$ $path$ $lengths$")
 plt.xlabel("$Value$")
 plt.ylabel("$Frequency$")
-plt.show()
+plt.savefig('./Histograms/' + "SemesterTimeWrite" + '.png')
 plt.clf()
-'''
