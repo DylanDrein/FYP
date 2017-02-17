@@ -42,4 +42,4 @@ for current_directory, directories, files in os.walk(rootdir):
 
 c = csv.writer(handle, delimiter = ',')
 times.sort()
-c.writerow(list(times))
+c.writerow(sort(list(times)))
