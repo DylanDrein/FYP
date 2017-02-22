@@ -6,7 +6,6 @@ Anthony Coleman 1.42021E+12 137 375 mouseDown
       Name          time     y   x    type
 '''
 
-
 import json
 import csv
 import os
@@ -25,10 +24,8 @@ firstlabmidnight = 1415318400000 # 7th of november
 secondlabmidnight = 1417132800000 # 28th of november
 daymilliseconds = 86400000
 
-
         
 with open(filepath) as infile:
-    
     parsed=csv.reader(infile)
     for row in parsed:
         for pos in row:
