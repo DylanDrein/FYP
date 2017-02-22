@@ -63,7 +63,9 @@ for current_directory, directories, files in os.walk(rootdir):
 
 				filename = row[0].lower().replace(" ", "-")
 
-				if(int(row[1]) > lab1start and int(row[1]) < lab1end)
+
+				# LAB ONE
+				if(int(row[1]) > lab1start and int(row[1]) < lab1end):
 					if(row[4] == "mouseDown"):
 						measuring = True
 						startPoint = np.array((int(row[3]), int(row[2])))
@@ -75,18 +77,17 @@ for current_directory, directories, files in os.walk(rootdir):
 					if((int(row[1]) < (startTime - 1500) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						optimalDist = dist(prevPoint, startPoint)
-						timeTaken = startTime - prevTime
 
 						#histogram
 						if(actualDist != 0):
-							efficiency.append(optimalDist/actualDist)
+							efficiency1.append(optimalDist/actualDist)
 						
-						#dot plot
-						actualVals.append(actualDist)
-						#actualnum = actualnum + 1
-						optimalVals.append(optimalDist)
-						#optimalnum = optimalnum + 1
-						times.append(startTime)
+							#dot plot
+							actualVals1.append(actualDist)
+							#actualnum = actualnum + 1
+							optimalVals1.append(optimalDist)
+							#optimalnum = optimalnum + 1
+							times1.append(startTime)
 
 						#print "Actual distance: " + str(actualDist)
 						#print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
@@ -98,50 +99,106 @@ for current_directory, directories, files in os.walk(rootdir):
 					if(measuring == True):
 						currentPos = np.array((int(row[3]), int(row[2])))
 						currentTime = int(row[1])
-						localTime = prevTime - currentTime
 						localDist = dist(prevPoint, currentPos)
 						actualDist = actualDist + localDist
 
-						if(localTime != 0):
-							localVel = (localDist/localTime)
-							velocities.append(localVel)
+
+					prevPoint = np.array((int(row[3]), int(row[2])))
+					prevTime = int(row[1])
+
+				# LAB TWO
+				if(int(row[1]) > lab2start and int(row[1]) < lab2end):
+					if(row[4] == "mouseDown"):
+						measuring = True
+						startPoint = np.array((int(row[3]), int(row[2])))
+						prevPoint = np.array((int(row[3]), int(row[2])))
+						startTime = int(row[1])
+						prevTime = int(row[1])
+						
+
+					if((int(row[1]) < (startTime - 1500) or row[4] == "mouseUp") and measuring):
+						measuring = False
+						optimalDist = dist(prevPoint, startPoint)
+
+						#histogram
+						if(actualDist != 0):
+							efficiency2.append(optimalDist/actualDist)
+						
+							#dot plot
+							actualVals2.append(actualDist)
+							#actualnum = actualnum + 1
+							optimalVals2.append(optimalDist)
+							#optimalnum = optimalnum + 1
+							times2.append(startTime)
+
+						#print "Actual distance: " + str(actualDist)
+						#print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
+						#print "Time taken: " + str(timeTaken) + "ms"
+						#print "Optimal Distance: " + str(optimalDist) + "\n"
+						optimalDist = 0
+						actualDist = 0
+
+					if(measuring == True):
+						currentPos = np.array((int(row[3]), int(row[2])))
+						currentTime = int(row[1])
+						localDist = dist(prevPoint, currentPos)
+						actualDist = actualDist + localDist
+
 
 					prevPoint = np.array((int(row[3]), int(row[2])))
 					prevTime = int(row[1])
 				
-			if(measuring == True):
-				optimalDist = dist(prevPoint, startPoint)
-				#timeTaken = startTime - prevTime
+			if(int(row[1]) > lab1start and int(row[1]) < lab1end):
+				if(measuring == True):
+					optimalDist = dist(prevPoint, startPoint)
+					#timeTaken = startTime - prevTime
 
-				#histogram
-				if(actualDist != 0):
-					efficiency.append(optimalDist/actualDist)
+					#histogram
+					if(actualDist != 0):
+						efficiency1.append(optimalDist/actualDist)
 
-				#dot plot
-				actualVals.append(actualDist)
-				#actualnum = actualnum + 1
-				optimalVals.append(optimalDist)
-				#optimalnum = optimalnum + 1
-				times.append(startTime)
+						#dot plot
+						actualVals1.append(actualDist)
+						#actualnum = actualnum + 1
+						optimalVals1.append(optimalDist)
+						#optimalnum = optimalnum + 1
+						times1.append(startTime)
 
-				optimalDist = 0
-				actualDist = 0
-				'''
-				print "Actual distance: " + str(actualDist)
-				print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
-				print "Time taken: " + str(timeTaken) + "ms"
-				print "Optimal Distance: " + str(optimalDist) + "\n"
-				print filenum
-				print actualnum
-				print optimalnum
-				'''			
+					optimalDist = 0
+					actualDist = 0
+
+			if(int(row[1]) > lab2start and int(row[1]) < lab2end):
+				if(measuring == True):
+					optimalDist = dist(prevPoint, startPoint)
+					#timeTaken = startTime - prevTime
+
+					#histogram
+					if(actualDist != 0):
+						efficiency2.append(optimalDist/actualDist)
+
+						#dot plot
+						actualVals2.append(actualDist)
+						#actualnum = actualnum + 1
+						optimalVals2.append(optimalDist)
+						#optimalnum = optimalnum + 1
+						times2.append(startTime)
+
+					optimalDist = 0
+					actualDist = 0
+					'''
+					print "Actual distance: " + str(actualDist)
+					print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
+					print "Time taken: " + str(timeTaken) + "ms"
+					print "Optimal Distance: " + str(optimalDist) + "\n"
+					print filenum
+					print actualnum
+					print optimalnum
+					'''			
 		
-		times = np.array(times)
+		times1 = np.array(times1)
+		times2 = np.array(times2)
 
-		times = (times/max(times)).astype(np.float)
-		print len(times)
-		print len(optimalVals)
-		print len(actualVals)
+		
 
 		'''
 		#DOT PLOT (WORKS!!)
@@ -155,10 +212,32 @@ for current_directory, directories, files in os.walk(rootdir):
 		plt.axis([0, max(actualVals) + 100, 0, max(optimalVals) + 100])
 		plt.savefig('./ScatterPlots2/' + filename + '.png')
 		plt.clf()
-		'''
-		del actualVals[:]
-		del optimalVals[:]
-		del efficiency[:]
+		
 
-		times = []
-		del times[:]
+		print len(times1)
+		print len(times2)
+		print len(efficiency1)
+		print len(efficiency2)
+		'''
+		
+		plt.title("Graph of efficiency over time")
+		f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
+		ax1.scatter(times1, efficiency1)
+		ax2.scatter(times2, efficiency2)
+		ax1.set_title("Lab 1: 11:00-13:00 7/11/14")
+		ax2.set_title("Lab 2: 11:00-13:00 28/11/14")
+		plt.show()
+		plt.clf()
+		
+
+		del actualVals1[:]
+		del optimalVals1[:]
+		del efficiency1[:]
+		del actualVals2[:]
+		del optimalVals2[:]
+		del efficiency2[:]
+
+		times1 = []
+		times2 = []
+		del times1[:]
+		del times2[:]
