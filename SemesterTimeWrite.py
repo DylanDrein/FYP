@@ -13,7 +13,7 @@ import os
 import numpy as np
 
 
-handle = open("./MouseDownEvents/MouseClicktimes.csv", 'w')
+handle = open("./AllMouseDownEvents/MouseClicktimes.csv", 'wb')
 
 filenum = 0
 
