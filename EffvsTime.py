@@ -2,8 +2,17 @@ import os, sys
 import json
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
+'''
+CSV FORMAT
 
-rootdir = './UsersReversed/'
+Anthony Coleman	1.42021E+12	137	375	mouseDown
+[      0             1       2   3     4]
+      Name			time 	 y   x    type
+'''
+
+
+rootdir = './CSVSeparated/'
 	
 actualDist = 0
 optimalDist = 0
@@ -12,20 +21,30 @@ startTime = 0
 prevPoint = []
 prevTime = 0
 measuring = False
-#velocities = []
 
 filenum = 0
 graphindex = 0
 
-optOverAct = []
-actualVals = []
-optimalVals = []
-velocities = []
+efficiency1 = []
+actualVals1 = []
+optimalVals1 = []
 
-times = []
+efficiency2 = []
+actualVals2 = []
+optimalVals2 = []
 
-#actualnum = 0
-#optimalnum = 0
+times1 = []
+times2 = []
+
+hourmilliseconds = 3600000
+
+firstlabmidnight = 1415318400000 # 7th of november
+lab1start = 1415358000000 # 11am
+lab1end = 1415365200000 # 1pm
+
+secondlabmidnight = 1417132800000 # 28th of november
+lab2start = 1417172400000 # 11am
+lab2end = 1417179600000 # 1pm
 
 filename = ""
 
@@ -39,57 +58,56 @@ for current_directory, directories, files in os.walk(rootdir):
 		filepath = os.path.join(current_directory,file)
 		
 		with open(filepath) as infile:
-			parsed = ""
-			for line in infile:
-				
-				parsed = json.loads(line)
+			parsed = csv.reader(infile)
+			for row in parsed:
 
-				filename = parsed['name'].lower().replace(" ", "-")
+				filename = row[0].lower().replace(" ", "-")
 
-				if(parsed['type'] == "mouseDown"):
-					measuring = True
-					startPoint = np.array((parsed['x'], parsed['y']))
-					prevPoint = np.array((parsed['x'], parsed['y']))
-					startTime = parsed['time']
-					prevTime = parsed['time']
-					
+				if(int(row[1]) > lab1start and int(row[1]) < lab1end)
+					if(row[4] == "mouseDown"):
+						measuring = True
+						startPoint = np.array((int(row[3]), int(row[2])))
+						prevPoint = np.array((int(row[3]), int(row[2])))
+						startTime = int(row[1])
+						prevTime = int(row[1])
+						
 
-				if((parsed['time'] < (startTime - 1500) or parsed['type'] == "mouseUp") and measuring):
-					measuring = False
-					optimalDist = dist(prevPoint, startPoint)
-					timeTaken = startTime - prevTime
+					if((int(row[1]) < (startTime - 1500) or row[4] == "mouseUp") and measuring):
+						measuring = False
+						optimalDist = dist(prevPoint, startPoint)
+						timeTaken = startTime - prevTime
 
-					#histogram
-					if(actualDist != 0):
-						optOverAct.append(optimalDist/actualDist)
-					
-					#dot plot
-					actualVals.append(actualDist)
-					#actualnum = actualnum + 1
-					optimalVals.append(optimalDist)
-					#optimalnum = optimalnum + 1
-					times.append(startTime)
+						#histogram
+						if(actualDist != 0):
+							efficiency.append(optimalDist/actualDist)
+						
+						#dot plot
+						actualVals.append(actualDist)
+						#actualnum = actualnum + 1
+						optimalVals.append(optimalDist)
+						#optimalnum = optimalnum + 1
+						times.append(startTime)
 
-					#print "Actual distance: " + str(actualDist)
-					#print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
-					#print "Time taken: " + str(timeTaken) + "ms"
-					#print "Optimal Distance: " + str(optimalDist) + "\n"
-					optimalDist = 0
-					actualDist = 0
+						#print "Actual distance: " + str(actualDist)
+						#print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
+						#print "Time taken: " + str(timeTaken) + "ms"
+						#print "Optimal Distance: " + str(optimalDist) + "\n"
+						optimalDist = 0
+						actualDist = 0
 
-				if(measuring == True):
-					currentPos = np.array((parsed['x'], parsed['y']))
-					currentTime = parsed['time']
-					localTime = prevTime - currentTime
-					localDist = dist(prevPoint, currentPos)
-					actualDist = actualDist + localDist
+					if(measuring == True):
+						currentPos = np.array((int(row[3]), int(row[2])))
+						currentTime = int(row[1])
+						localTime = prevTime - currentTime
+						localDist = dist(prevPoint, currentPos)
+						actualDist = actualDist + localDist
 
-					if(localTime != 0):
-						localVel = (localDist/localTime)
-						velocities.append(localVel)
+						if(localTime != 0):
+							localVel = (localDist/localTime)
+							velocities.append(localVel)
 
-				prevPoint = np.array((parsed['x'], parsed['y']))
-				prevTime = parsed['time']
+					prevPoint = np.array((int(row[3]), int(row[2])))
+					prevTime = int(row[1])
 				
 			if(measuring == True):
 				optimalDist = dist(prevPoint, startPoint)
@@ -97,7 +115,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 				#histogram
 				if(actualDist != 0):
-					optOverAct.append(optimalDist/actualDist)
+					efficiency.append(optimalDist/actualDist)
 
 				#dot plot
 				actualVals.append(actualDist)
@@ -140,7 +158,7 @@ for current_directory, directories, files in os.walk(rootdir):
 		'''
 		del actualVals[:]
 		del optimalVals[:]
-		del optOverAct[:]
+		del efficiency[:]
 
 		times = []
 		del times[:]
