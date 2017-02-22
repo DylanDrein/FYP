@@ -8,6 +8,7 @@ rootdir = './UsersReversed/'
 actualDist = 0
 optimalDist = 0
 startPoint = []
+endPoint = []
 startTime = 0
 prevPoint = []
 prevTime = 0
@@ -59,6 +60,7 @@ for current_directory, directories, files in os.walk(rootdir):
 					measuring = False
 					optimalDist = dist(prevPoint, startPoint)
 					timeTaken = startTime - prevTime
+					endPoint = [parsed['x'], parsed['y']]
 
 					#histogram
 					if(actualDist != 0):
@@ -81,11 +83,15 @@ for current_directory, directories, files in os.walk(rootdir):
 					            raise
 
 					plt.plot(xvalues, yvalues, 'r.')
-					plt.plot(startPoint[0], startPoint[1], 'b*')
+					plt.plot(startPoint[0], startPoint[1], 'bo', label = "Start point")
+					plt.plot(endPoint[0], endPoint[1], 'go', label="End point")
+
+					
 					plt.title("$Mouse$ $Path$")
 					plt.xlabel("$x-coordinates$")
 					plt.ylabel("$y-coordinates$")
 					plt.axis([0, max(xvalues) + 100, 0, max(yvalues) + 100])
+					plt.legend(loc='best', numpoints=1)
 					plt.savefig("./MousePlots/" + filename + '/' + str(graphindex) + '.png')
 					plt.clf()
 					graphindex += 1
@@ -132,6 +138,32 @@ for current_directory, directories, files in os.walk(rootdir):
 				#actualnum = actualnum + 1
 				optimalVals.append(optimalDist)
 				#optimalnum = optimalnum + 1
+
+				#PLOT MOUSE PATHS (THERES GONNA BE A LOT..)
+				if not os.path.exists("./MousePlots/" + filename):
+				    try:
+				        os.makedirs("./MousePlots/" + filename)
+				        print "created"
+				    except OSError as exc: # Guard against race condition
+				        if exc.errno != errno.EEXIST:
+				            raise
+
+				plt.plot(xvalues, yvalues, 'r.')
+				plt.plot(startPoint[0], startPoint[1], 'bo', label = "Start point")
+				plt.plot(endPoint[0], endPoint[1], 'go', label="End point")
+
+				
+				plt.title("$Mouse$ $Path$")
+				plt.xlabel("$x-coordinates$")
+				plt.ylabel("$y-coordinates$")
+				plt.axis([0, max(xvalues) + 100, 0, max(yvalues) + 100])
+				plt.legend(loc='best', numpoints=1)
+				plt.savefig("./MousePlots/" + filename + '/' + str(graphindex) + '.png')
+				plt.clf()
+				graphindex += 1
+				del xvalues[:]
+				del yvalues[:]
+
 				optimalDist = 0
 				actualDist = 0
 				'''
