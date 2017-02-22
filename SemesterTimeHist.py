@@ -14,7 +14,7 @@ create hist by adding multiples of 86400 onto that unix time
 
 #handle = open("./MouseDownEvents/MouseClicktimes.csv", 'rb')
 
-filepath = "./MouseDownEvents/MouseClicktimes.csv"
+filepath = "./AllMouseDownEvents/MouseClicktimes.csv"
 
 times = []
 
@@ -22,8 +22,8 @@ times = []
 firstMidnight = 1412290800000
 daymilliseconds = 86400000
 
-#firstlabmidnight = 1415232000000 # 6th of november
-firstlabmidnight = 1415318400000 # 7th of november
+firstlabmidnight = 1415232000000 # 6th of november
+#firstlabmidnight = 1415318400000 # 7th of november
 secondlabmidnight = 1417132800000 # 28th of november
 
 with open(filepath) as infile:
@@ -37,7 +37,7 @@ with open(filepath) as infile:
 #print int(max(times))
 
 
-bins = np.arange(firstMidnight, np.amax(times), 86400)
+bins = range(firstMidnight, max(times), daymilliseconds)
 
 #print max(bins) - min(bins) % daySeconds
 plt.clf()
