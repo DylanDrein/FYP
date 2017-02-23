@@ -65,16 +65,16 @@ for current_directory, directories, files in os.walk(rootdir):
 
 
 				# LAB ONE
-				if(int(row[1]) > lab1start and int(row[1]) < lab1end):
+				if(float(row[1]) > lab1start and float(row[1]) < lab1end):
 					if(row[4] == "mouseDown"):
 						measuring = True
-						startPoint = np.array((int(row[3]), int(row[2])))
-						prevPoint = np.array((int(row[3]), int(row[2])))
-						startTime = int(row[1])
-						prevTime = int(row[1])
+						startPoint = np.array((float(row[3]), float(row[2])))
+						prevPoint = np.array((float(row[3]), float(row[2])))
+						startTime = float(row[1])
+						prevTime = float(row[1])
 						
 
-					if((int(row[1]) < (startTime - 1500) or row[4] == "mouseUp") and measuring):
+					if((float(row[1]) < (startTime - 1500) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						optimalDist = dist(prevPoint, startPoint)
 
@@ -82,11 +82,10 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(actualDist != 0):
 							efficiency1.append(optimalDist/actualDist)
 						
-							#dot plot
 							actualVals1.append(actualDist)
-							#actualnum = actualnum + 1
+							
 							optimalVals1.append(optimalDist)
-							#optimalnum = optimalnum + 1
+							
 							times1.append(startTime)
 
 						#print "Actual distance: " + str(actualDist)
@@ -97,26 +96,26 @@ for current_directory, directories, files in os.walk(rootdir):
 						actualDist = 0
 
 					if(measuring == True):
-						currentPos = np.array((int(row[3]), int(row[2])))
-						currentTime = int(row[1])
+						currentPos = np.array((float(row[3]), float(row[2])))
+						currentTime = float(row[1])
 						localDist = dist(prevPoint, currentPos)
 						actualDist = actualDist + localDist
 
 
-					prevPoint = np.array((int(row[3]), int(row[2])))
-					prevTime = int(row[1])
+					prevPoint = np.array((float(row[3]), float(row[2])))
+					prevTime = float(row[1])
 
 				# LAB TWO
-				if(int(row[1]) > lab2start and int(row[1]) < lab2end):
+				if(float(row[1]) > lab2start and float(row[1]) < lab2end):
 					if(row[4] == "mouseDown"):
 						measuring = True
-						startPoint = np.array((int(row[3]), int(row[2])))
-						prevPoint = np.array((int(row[3]), int(row[2])))
-						startTime = int(row[1])
-						prevTime = int(row[1])
+						startPoint = np.array((float(row[3]), float(row[2])))
+						prevPoint = np.array((float(row[3]), float(row[2])))
+						startTime = float(row[1])
+						prevTime = float(row[1])
 						
 
-					if((int(row[1]) < (startTime - 1500) or row[4] == "mouseUp") and measuring):
+					if((float(row[1]) < (startTime - 1500) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						optimalDist = dist(prevPoint, startPoint)
 
@@ -139,48 +138,43 @@ for current_directory, directories, files in os.walk(rootdir):
 						actualDist = 0
 
 					if(measuring == True):
-						currentPos = np.array((int(row[3]), int(row[2])))
-						currentTime = int(row[1])
+						currentPos = np.array((float(row[3]), float(row[2])))
+						currentTime = float(row[1])
 						localDist = dist(prevPoint, currentPos)
 						actualDist = actualDist + localDist
 
 
-					prevPoint = np.array((int(row[3]), int(row[2])))
-					prevTime = int(row[1])
+					prevPoint = np.array((float(row[3]), float(row[2])))
+					prevTime = float(row[1])
 				
-			if(int(row[1]) > lab1start and int(row[1]) < lab1end):
+			if(float(row[1]) > lab1start and float(row[1]) < lab1end):
 				if(measuring == True):
 					optimalDist = dist(prevPoint, startPoint)
-					#timeTaken = startTime - prevTime
 
-					#histogram
 					if(actualDist != 0):
 						efficiency1.append(optimalDist/actualDist)
 
-						#dot plot
 						actualVals1.append(actualDist)
-						#actualnum = actualnum + 1
+						
 						optimalVals1.append(optimalDist)
-						#optimalnum = optimalnum + 1
+						
 						times1.append(startTime)
 
 					optimalDist = 0
 					actualDist = 0
 
-			if(int(row[1]) > lab2start and int(row[1]) < lab2end):
+			if(float(row[1]) > lab2start and float(row[1]) < lab2end):
 				if(measuring == True):
 					optimalDist = dist(prevPoint, startPoint)
-					#timeTaken = startTime - prevTime
+					
 
-					#histogram
 					if(actualDist != 0):
 						efficiency2.append(optimalDist/actualDist)
 
-						#dot plot
 						actualVals2.append(actualDist)
-						#actualnum = actualnum + 1
+						
 						optimalVals2.append(optimalDist)
-						#optimalnum = optimalnum + 1
+						
 						times2.append(startTime)
 
 					optimalDist = 0
@@ -219,16 +213,23 @@ for current_directory, directories, files in os.walk(rootdir):
 		print len(efficiency1)
 		print len(efficiency2)
 		'''
-		
-		plt.title("Graph of efficiency over time")
+
+	
 		f, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
+		#.title("Graph of efficiency over time")
 		ax1.scatter(times1, efficiency1)
 		ax2.scatter(times2, efficiency2)
 		ax1.set_title("Lab 1: 11:00-13:00 7/11/14")
 		ax2.set_title("Lab 2: 11:00-13:00 28/11/14")
-		plt.show()
+		plt.savefig('./ScatterPlots2/' + filename + '.png')
 		plt.clf()
 		
+
+		print len(times1)
+		print len(times2)
+		print len(optimalVals1)
+		print len(optimalVals2)
+		print filenum
 
 		del actualVals1[:]
 		del optimalVals1[:]
