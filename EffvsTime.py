@@ -199,7 +199,7 @@ for current_directory, directories, files in os.walk(rootdir):
 		
 
 
-		'''
+		
 		times1 = np.array(times1)
 		times2 = np.array(times2)
 
@@ -218,7 +218,7 @@ for current_directory, directories, files in os.walk(rootdir):
 		plt.subplots_adjust(bottom=0.2)
 		plt.savefig('./ScatterPlots2/' + filename + '.png')
 		plt.clf()
-		'''
+		
 		
 
 		del actualVals1[:]
@@ -235,6 +235,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 		print filenum
 
+'''
 m1, b1 = np.polyfit(totaltimes1, totalefficiency1, 1)
 m2, b2 = np.polyfit(totaltimes2, totalefficiency2, 1)
 
@@ -250,3 +251,4 @@ plt.xticks(rotation = 'vertical')
 plt.subplots_adjust(bottom=0.2)
 plt.savefig('./ScatterPlots2/' + "xtotallabs" + '.png')
 plt.clf()
+'''
