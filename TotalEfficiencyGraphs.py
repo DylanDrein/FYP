@@ -47,7 +47,7 @@ sdvoutlab = np.std(outlabeff)
 meanoutlab = np.mean(outlabeff)
 label2 = ["SD: " + str(sdvoutlab) + "\n" + "Mean: " + str(meanoutlab)]
 plt.hist(outlabeff, bins, normed=True, label = label2)
-plt.title("Probability Density Function of out-lab mousepath efficiency")
+plt.title("Probability Density Function of out-of-lab mousepath efficiency")
 plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length")
 plt.ylabel("Probability density")
 plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
