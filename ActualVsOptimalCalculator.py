@@ -27,7 +27,7 @@ compare current time with start time and
 
 '''
 
-import os
+import os, sys
 import json
 import numpy as np
 import matplotlib.pyplot as plt
@@ -36,21 +36,21 @@ rootdir = './UsersReversed/'
 	
 actualDist = 0
 optimalDist = 0
-startPoint = 0
+startPoint = []
 startTime = 0
-prevPoint = 0
+prevPoint = []
 prevTime = 0
 measuring = False
 #velocities = []
 
 filenum = 0
+graphindex = 0
 
-optOverAct = []
+efficiency = []
 actualVals = []
 optimalVals = []
+velocities = []
 
-#actualnum = 0
-#optimalnum = 0
 
 filename = ""
 
@@ -61,7 +61,7 @@ for current_directory, directories, files in os.walk(rootdir):
 	
 	for file in files:
 		filenum += 1
-		filepath = os.path.join(current_directory,file)
+		filepath = os.path.join(current_directory, file)
 		
 		with open(filepath) as infile:
 			parsed = ""
@@ -78,14 +78,14 @@ for current_directory, directories, files in os.walk(rootdir):
 					startTime = parsed['time']
 					prevTime = parsed['time']
 
-				if((parsed['time'] < (startTime - 2000) or parsed['type'] == "mouseUp") and measuring):
+				if((parsed['time'] < (startTime - 1500) or parsed['type'] == "mouseUp") and measuring):
 					measuring = False
 					optimalDist = dist(prevPoint, startPoint)
 					timeTaken = startTime - prevTime
 
 					#histogram
 					if(actualDist != 0):
-						optOverAct.append(optimalDist/actualDist)
+						efficiency.append(optimalDist/actualDist)
 					
 					#dot plot
 					actualVals.append(actualDist)
@@ -93,10 +93,6 @@ for current_directory, directories, files in os.walk(rootdir):
 					optimalVals.append(optimalDist)
 					#optimalnum = optimalnum + 1
 
-					#print "Actual distance: " + str(actualDist)
-					#print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
-					#print "Time taken: " + str(timeTaken) + "ms"
-					#print "Optimal Distance: " + str(optimalDist) + "\n"
 					optimalDist = 0
 					actualDist = 0
 
@@ -107,9 +103,9 @@ for current_directory, directories, files in os.walk(rootdir):
 					localDist = dist(prevPoint, currentPos)
 					actualDist = actualDist + localDist
 
-					#if(localTime != 0):
-					#	localVel = (localDist/localTime)
-					#	velocities.append(localVel)
+					if(localTime != 0):
+						localVel = (localDist/localTime)
+						velocities.append(localVel)
 
 				prevPoint = np.array((parsed['x'], parsed['y']))
 				prevTime = parsed['time']
@@ -117,12 +113,13 @@ for current_directory, directories, files in os.walk(rootdir):
 			if(measuring == True):
 				optimalDist = dist(prevPoint, startPoint)
 				#timeTaken = startTime - prevTime
+				xvalues.append(parsed['x'])
+				yvalues.append(parsed['y'])
 
 				#histogram
 				if(actualDist != 0):
-					optOverAct.append(optimalDist/actualDist)
+					efficiency.append(optimalDist/actualDist)
 					
-
 				#dot plot
 				actualVals.append(actualDist)
 				#actualnum = actualnum + 1
@@ -130,62 +127,4 @@ for current_directory, directories, files in os.walk(rootdir):
 				#optimalnum = optimalnum + 1
 				optimalDist = 0
 				actualDist = 0
-				'''
-				print "Actual distance: " + str(actualDist)
-				print "Average actual speed: " + str(np.mean(velocities)) + "px/ms"
-				print "Time taken: " + str(timeTaken) + "ms"
-				print "Optimal Distance: " + str(optimalDist) + "\n"
-				print filenum
-				print actualnum
-				print optimalnum
-				'''
-
-			
-			
-			#data = [actualVals, optimalVals, optOverAct]
-			#np.savetxt("./ActualOptimal2/" + filename + ".csv", data, fmt='%1.6f', delimiter=",")
-			#print filenum
-			
-
-			#DOT PLOT (WORKS!!)
-			maxVals = [max(optimalVals), max(actualVals)]
-			plt.plot(actualVals, optimalVals, 'r.')
-			x = max(maxVals)
-			plt.plot([0, x], [0, x], 'k-')
-			plt.title("$Graph$ $of$ $Efficiency$ $(Optimal/Actual)$")
-			plt.ylabel("$Optimal$ $Mouse$ $Path$ $Lengths$ $(px)$")
-			plt.xlabel("$Actual$ $Mouse$ $Path$ $Lengths$ $(px)$")
-			plt.axis([0, max(actualVals) + 100, 0, max(optimalVals) + 100])
-			plt.savefig('./ScatterPlots/' + filename + '.png')
-			plt.clf()
-
-
-			#HISTOGRAM (WORKS!!!)
-			plt.hist(optOverAct, 200, normed = 1, facecolor='green', alpha = 1)
-			plt.title("$Histogram$ $of$ $Optimal/Actual$ $path$ $lengths$")
-			plt.xlabel("$Value$")
-			plt.ylabel("$Frequency$")
-			plt.savefig('./Histograms/' + filename + '.png')
-			plt.clf()
-
-
-			#BOXPLOT 1 (WORKS!)
-			data = [actualVals, optimalVals]
-			plt.boxplot(data, showfliers = True)
-			plt.title("$Box$ $plot$ $of$ $Actual$ $(left)$ $vs.$ $Optimal$ $(right)$ $paths$ $(Including$ $outliers)$")
-			plt.ylabel('$Path$ $length$ $(px)$')
-			plt.savefig('./BoxPlotsOutliers/' + filename + '.png')
-			plt.clf()
-
-
-			#BOXPLOT 2 (WORKS!!)
-			data = [actualVals, optimalVals]
-			plt.boxplot(data, 0, '')
-			plt.title("$Box$ $plot$ $of$ $Actual$ $(left)$ $vs.$ $Optimal$ $(right)$ $paths$ $(Excluding$ $outliers)$")
-			plt.ylabel('$Path$ $length$ $(px)$')
-			plt.savefig('./BoxPlots/' + filename + '.png')
-			plt.clf()
-
-			del actualVals[:]
-			del optimalVals[:]
-			del optOverAct[:]
+				
