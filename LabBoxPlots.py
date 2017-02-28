@@ -201,10 +201,10 @@ for current_directory, directories, files in os.walk(rootdir):
 
 		print filenum
 
-totalinlabeff = np.array((totalinlabeff))
-totaloutlabeff = np.array((totaloutlabeff))
+totalinlabeff = np.asarray((totalinlabeff))
+totaloutlabeff = np.asarray((totaloutlabeff))
 
-data = [totalinlabeff, totaloutlabeff]
+data = np.array(totalinlabeff, totaloutlabeff)
 plt.boxplot(data, 0, '')
 plt.title("Total in lab efficiency (left) vs. Total out of lab efficiency (right)")
 plt.ylabel('Efficiency (optimal/actual path lengths')
