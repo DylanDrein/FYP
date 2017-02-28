@@ -12,8 +12,8 @@ import os
 import numpy as np
 
 
-handle1 = open("./LabWeekMouseEvents/LabWeek1.csv", 'rb')
-handle2 = open("./LabWeekMouseEvents/LabWeek2.csv", 'rb')
+handle1 = open("./LabWeekMouseEvents/LabWeek1.csv", 'wb')
+handle2 = open("./LabWeekMouseEvents/LabWeek2.csv", 'wb')
 
 filepath = "./AllMouseDownEvents/MouseClicktimes.csv"
 
