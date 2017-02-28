@@ -59,7 +59,7 @@ lab2end = 1417179600000 # 1pm
 filename = ""
 
 def dist(a, b):
-	return np.linalg.norm(a-b)
+	return float(np.linalg.norm(a-b))
 
 for current_directory, directories, files in os.walk(rootdir):
 	
@@ -90,7 +90,8 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						if(actualDist != 0):
-							inlabeff.append(optimalDist/actualDist)
+							inlabeff.append(float(optimalDist/actualDist))
+							totalinlabeff.append(float(optimalDist/actualDist))
 						
 							#actualVals1.append(actualDist)
 							#optimalVals1.append(optimalDist)
@@ -104,7 +105,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						currentTime = float(row[1])
 						localDist = dist(prevPoint, currentPos)
-						actualDist = actualDist + localDist
+						actualDist = float(actualDist + localDist)
 
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
@@ -123,11 +124,12 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if((float(row[1]) < (startTime - 1500) or row[4] == "mouseUp") and measuring):
 						measuring = False
-						optimalDist = dist(prevPoint, startPoint)
+						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
 						if(actualDist != 0):
-							outlabeff.append(optimalDist/actualDist)
+							outlabeff.append(float(optimalDist/actualDist))
+							totaloutlabeff.append(float(optimalDist/actualDist))
 						
 							#actualVals2.append(actualDist)
 							#optimalVals2.append(optimalDist)
@@ -140,8 +142,8 @@ for current_directory, directories, files in os.walk(rootdir):
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						currentTime = float(row[1])
-						localDist = dist(prevPoint, currentPos)
-						actualDist = actualDist + localDist
+						localDist = float(dist(prevPoint, currentPos))
+						actualDist = float(actualDist + localDist)
 
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
@@ -153,7 +155,8 @@ for current_directory, directories, files in os.walk(rootdir):
 					optimalDist = dist(prevPoint, startPoint)
 
 					if(actualDist != 0):
-						inlabeff.append(optimalDist/actualDist)
+						inlabeff.append(float(optimalDist/actualDist))
+						totalinlabeff.append(float(optimalDist/actualDist))
 
 						#actualVals1.append(actualDist)
 						#optimalVals1.append(optimalDist)
@@ -167,7 +170,8 @@ for current_directory, directories, files in os.walk(rootdir):
 					optimalDist = dist(prevPoint, startPoint)
 					
 					if(actualDist != 0):
-						outlabeff.append(optimalDist/actualDist)
+						outlabeff.append(float(optimalDist/actualDist))
+						totaloutlabeff.append(float(optimalDist/actualDist))
 
 						#actualVals2.append(actualDist)
 						#optimalVals2.append(optimalDist)
@@ -176,11 +180,11 @@ for current_directory, directories, files in os.walk(rootdir):
 					optimalDist = 0
 					actualDist = 0
 					startTime = 0
-				measuring = False
+					measuring = False
 
 		
-		totalinlabeff.append(inlabeff)
-		totaloutlabeff.append(outlabeff)
+		#totalinlabeff.append(inlabeff)
+		#totaloutlabeff.append(float(optimalDist/actualDist))
 
 		'''
 		inlabeff = np.array(inlabeff)
@@ -201,12 +205,24 @@ for current_directory, directories, files in os.walk(rootdir):
 
 		print filenum
 
-totalinlabeff = np.asarray((totalinlabeff))
-totaloutlabeff = np.asarray((totaloutlabeff))
+#totalinlabeff = np.asarray((totalinlabeff)).astype(float)
+#totaloutlabeff = np.asarray((totaloutlabeff)).astype(float)
 
-data = np.array(totalinlabeff, totaloutlabeff)
+#print totaloutlabeff
+
+totaloutlabeff = np.array(totaloutlabeff)
+totalinlabeff = np.array(totalinlabeff)
+
+print len(totalinlabeff)
+print len(totaloutlabeff)
+print np.mean(totalinlabeff, dtype=np.float64)
+print np.mean(totaloutlabeff, dtype=np.float64)
+#print totaloutlabeff
+'''
+data = [totalinlabeff, totaloutlabeff]
 plt.boxplot(data, 0, '')
 plt.title("Total in lab efficiency (left) vs. Total out of lab efficiency (right)")
 plt.ylabel('Efficiency (optimal/actual path lengths')
 plt.savefig('./LabBoxPlots/' + "xtotal" + '.png')
 plt.clf()
+'''
