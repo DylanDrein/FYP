@@ -22,42 +22,46 @@ with handleout as infile:
 	for row in parsed:
 		outlabeff = np.array(list(row)).astype(np.float)
 
-bins = np.arange(0, 1.01, 0.01)
+
+bins = np.arange(0, 1.005, 0.005)
 
 sdvinlab = np.std(inlabeff)
 meaninlab = np.mean(inlabeff)
-label1 = ["SD: " + str(sdvinlab) + "\n" + "Mean: " + str(meaninlab)]
-plt.hist(inlabeff, bins, normed=True, label = label1)
+label1 = ["$\mu$: " + str(meaninlab) + "\n" + "$\sigma$: " + str(sdvinlab)]
+plt.hist(inlabeff, bins, normed = True, label = label1)
+#plt.hist(inlabeff, bins, label = label1)
 plt.title("Probability Density Function of in-lab mousepath efficiency")
-plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length")
-plt.ylabel("Probability density")
+#plt.title("Histogram of in-lab mousepath efficiency")
+plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length)")
+#plt.ylabel("# of mouse path sequences")
+plt.ylabel("Density $f(x)$")
 plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
-#plt.xticks(bins1, ["{:d}".format(int(v)) for v in hours], rotation = 'vertical')
-#plt.xticklabels(["{:d}".format(int(v)) for v in hours]) 
-#plt.subplots_adjust(bottom=0.15)
-#xposition = range(firstlabmidnight - 3*(daymilliseconds), firstlabmidnight + 3*(daymilliseconds), daymilliseconds)
-#for xc in xposition:
-#    plt.axvline(x=xc, color='r', linestyle='solid', linewidth = 0.5)
-plt.legend()
-plt.show()
-#plt.savefig('./Histograms/' + "LabWeek1" + '.png')
+plt.legend(loc="best")
+#plt.savefig('./EfficiencyGraphs/' + "inLabPDFexcl" + '.png')
+plt.savefig('./EfficiencyGraphs/' + "PDFinLab" + '.png')
+#plt.savefig('./EfficiencyGraphs/' + "inLabHist" + '.png')
 plt.clf()
 
 sdvoutlab = np.std(outlabeff)
 meanoutlab = np.mean(outlabeff)
-label2 = ["SD: " + str(sdvoutlab) + "\n" + "Mean: " + str(meanoutlab)]
-plt.hist(outlabeff, bins, normed=True, label = label2)
+label2 = ["$\mu$: " + str(meanoutlab) + "\n" + "$\sigma$: " + str(sdvoutlab)]
+plt.hist(outlabeff, bins, normed = True, label = label2)
+#plt.hist(outlabeff, bins, label = label2)
 plt.title("Probability Density Function of out-of-lab mousepath efficiency")
-plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length")
-plt.ylabel("Probability density")
+#plt.title("Histogram of out-of-lab mousepath efficiency")
+plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length)")
+#plt.ylabel("# of mouse path sequences")
+plt.ylabel("Density $f(x)$")
 plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
-#plt.xticks(bins1, ["{:d}".format(int(v)) for v in hours], rotation = 'vertical')
-#plt.xticklabels(["{:d}".format(int(v)) for v in hours]) 
-#plt.subplots_adjust(bottom=0.15)
-#xposition = range(firstlabmidnight - 3*(daymilliseconds), firstlabmidnight + 3*(daymilliseconds), daymilliseconds)
-#for xc in xposition:
-#    plt.axvline(x=xc, color='r', linestyle='solid', linewidth = 0.5)
-plt.legend()
-plt.show()
-#plt.savefig('./Histograms/' + "LabWeek1" + '.png')
+plt.legend(loc="best")
+#plt.savefig('./EfficiencyGraphs/' + "OutOfLabPDFexcl" + '.png')
+plt.savefig('./EfficiencyGraphs/' + "PDFOutOfLab" + '.png')
+#plt.savefig('./EfficiencyGraphs/' + "OutOfLabHist" + '.png')
+plt.clf()
+
+data = [inlabeff, outlabeff]
+plt.boxplot(data, 0, '')
+plt.title("Total in lab efficiency (left) vs. Total out of lab efficiency (right)")
+plt.ylabel('Efficiency (optimal/actual path lengths')
+plt.savefig('./EfficiencyGraphs/' + "TotalBoxPlot" + '.png')
 plt.clf()
