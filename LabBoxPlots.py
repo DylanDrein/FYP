@@ -56,6 +56,9 @@ lab1end = 1415365200000 # 1pm
 lab2start = 1417172400000 # 11am 28th of november
 lab2end = 1417179600000 # 1pm
 
+handle1 = open("./Efficiencies/inlab.csv", 'wb')
+handle2 = open("./Efficiencies/outlab.csv", 'wb')
+
 filename = ""
 
 def dist(a, b):
@@ -210,19 +213,20 @@ for current_directory, directories, files in os.walk(rootdir):
 
 #print totaloutlabeff
 
-totaloutlabeff = np.array(totaloutlabeff)
 totalinlabeff = np.array(totalinlabeff)
+totaloutlabeff = np.array(totaloutlabeff)
 
+c1 = csv.writer(handle1, delimiter = ',')
+c2 = csv.writer(handle2, delimiter = ',')
+
+c1.writerow(totalinlabeff)
+c2.writerow(totaloutlabeff)
+
+
+'''
 print len(totalinlabeff)
 print len(totaloutlabeff)
 print np.mean(totalinlabeff, dtype=np.float64)
 print np.mean(totaloutlabeff, dtype=np.float64)
-#print totaloutlabeff
-'''
-data = [totalinlabeff, totaloutlabeff]
-plt.boxplot(data, 0, '')
-plt.title("Total in lab efficiency (left) vs. Total out of lab efficiency (right)")
-plt.ylabel('Efficiency (optimal/actual path lengths')
-plt.savefig('./LabBoxPlots/' + "xtotal" + '.png')
-plt.clf()
+print totaloutlabeff
 '''
