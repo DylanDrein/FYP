@@ -60,6 +60,8 @@ lab2end = 1417179600000 # 1pm
 
 handle1 = open("./Efficiencies/inlab.csv", 'wb')
 handle2 = open("./Efficiencies/outlab.csv", 'wb')
+handle3 = open("./Efficiencies/inlabtimes.csv", 'wb')
+handle4 = open("./Efficiencies/outlabtimes.csv", 'wb')
 
 filename = ""
 
@@ -97,6 +99,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(actualDist != 0):
 							inlabeff.append(float(optimalDist/actualDist))
 							totalinlabeff.append(float(optimalDist/actualDist))
+							totalinlabtimes.append(startTime - prevTime)
 						
 							#actualVals1.append(actualDist)
 							#optimalVals1.append(optimalDist)
@@ -135,6 +138,8 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(actualDist != 0):
 							outlabeff.append(float(optimalDist/actualDist))
 							totaloutlabeff.append(float(optimalDist/actualDist))
+							totaloutlabtimes.append(startTime - prevTime)
+
 						
 							#actualVals2.append(actualDist)
 							#optimalVals2.append(optimalDist)
@@ -162,6 +167,7 @@ for current_directory, directories, files in os.walk(rootdir):
 					if(actualDist != 0):
 						inlabeff.append(float(optimalDist/actualDist))
 						totalinlabeff.append(float(optimalDist/actualDist))
+						totalinlabtimes.append(startTime - prevTime)
 
 						#actualVals1.append(actualDist)
 						#optimalVals1.append(optimalDist)
@@ -177,6 +183,7 @@ for current_directory, directories, files in os.walk(rootdir):
 					if(actualDist != 0):
 						outlabeff.append(float(optimalDist/actualDist))
 						totaloutlabeff.append(float(optimalDist/actualDist))
+						totaloutlabtimes.append(startTime - prevTime)
 
 						#actualVals2.append(actualDist)
 						#optimalVals2.append(optimalDist)
@@ -209,26 +216,3 @@ for current_directory, directories, files in os.walk(rootdir):
 		del outlabeff[:]
 
 		print filenum
-
-#totalinlabeff = np.asarray((totalinlabeff)).astype(float)
-#totaloutlabeff = np.asarray((totaloutlabeff)).astype(float)
-
-#print totaloutlabeff
-
-totalinlabeff = np.array(totalinlabeff)
-totaloutlabeff = np.array(totaloutlabeff)
-
-c1 = csv.writer(handle1, delimiter = ',')
-c2 = csv.writer(handle2, delimiter = ',')
-
-c1.writerow(totalinlabeff)
-c2.writerow(totaloutlabeff)
-
-
-'''
-print len(totalinlabeff)
-print len(totaloutlabeff)
-print np.mean(totalinlabeff, dtype=np.float64)
-print np.mean(totaloutlabeff, dtype=np.float64)
-print totaloutlabeff
-'''
