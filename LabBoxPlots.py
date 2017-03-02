@@ -98,12 +98,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						#histogram
 						if(actualDist != 0):
 							inlabeff.append(float(optimalDist/actualDist))
-							totalinlabeff.append(float(optimalDist/actualDist))
-							totalinlabtimes.append(startTime - prevTime)
-						
-							#actualVals1.append(actualDist)
-							#optimalVals1.append(optimalDist)
-							#times1.append(startTime)
+
 
 						optimalDist = 0
 						actualDist = 0
@@ -137,13 +132,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						#histogram
 						if(actualDist != 0):
 							outlabeff.append(float(optimalDist/actualDist))
-							totaloutlabeff.append(float(optimalDist/actualDist))
-							totaloutlabtimes.append(startTime - prevTime)
-
-						
-							#actualVals2.append(actualDist)
-							#optimalVals2.append(optimalDist)
-							#times2.append(startTime)
+				
 
 						optimalDist = 0
 						actualDist = 0
@@ -166,12 +155,8 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if(actualDist != 0):
 						inlabeff.append(float(optimalDist/actualDist))
-						totalinlabeff.append(float(optimalDist/actualDist))
-						totalinlabtimes.append(startTime - prevTime)
+						
 
-						#actualVals1.append(actualDist)
-						#optimalVals1.append(optimalDist)
-						#times1.append(startTime)
 
 					optimalDist = 0
 					actualDist = 0
@@ -182,12 +167,8 @@ for current_directory, directories, files in os.walk(rootdir):
 					
 					if(actualDist != 0):
 						outlabeff.append(float(optimalDist/actualDist))
-						totaloutlabeff.append(float(optimalDist/actualDist))
-						totaloutlabtimes.append(startTime - prevTime)
+						
 
-						#actualVals2.append(actualDist)
-						#optimalVals2.append(optimalDist)
-						#times2.append(startTime)
 
 					optimalDist = 0
 					actualDist = 0
@@ -195,10 +176,7 @@ for current_directory, directories, files in os.walk(rootdir):
 					measuring = False
 
 		
-		#totalinlabeff.append(inlabeff)
-		#totaloutlabeff.append(float(optimalDist/actualDist))
-
-		'''
+		
 		inlabeff = np.array(inlabeff)
 		outlabeff = np.array(outlabeff)
 
@@ -208,7 +186,7 @@ for current_directory, directories, files in os.walk(rootdir):
 		plt.ylabel('Efficiency (optimal/actual path lengths')
 		plt.savefig('./LabBoxPlots/' + filename + '.png')
 		plt.clf()
-		'''
+		
 
 		inlabeff = []
 		outlabeff = []
