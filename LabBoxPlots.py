@@ -13,7 +13,7 @@ Anthony Coleman	1.42021E+12	137	375	mouseDown
 
 
 rootdir = './CSVSeparated/'
-	
+
 actualDist = 0
 optimalDist = 0
 startPoint = []
@@ -47,6 +47,8 @@ outlabeff = []
 
 totalinlabeff = []
 totaloutlabeff = []
+totalinlabtimes = []
+totaloutlabtimes = []
 
 hourmilliseconds = 3600000
 
