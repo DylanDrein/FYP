@@ -58,7 +58,7 @@ lab2end = 1417179600000 # 1pm
 handle1 = open("./Efficiencies/inlab.csv", 'wb')
 handle2 = open("./Efficiencies/outlab.csv", 'wb')
 handle3 = open("./Efficiencies/inlabtimes.csv", 'wb')
-handle4 = open("./Efficiencies/outlabtimes.csv", 'wb')
+handle4 = open("./Efficiencies/outlabtimes1.csv", 'wb')
 
 filename = ""
 
@@ -70,6 +70,11 @@ for current_directory, directories, files in os.walk(rootdir):
 	for file in files:
 		filenum += 1
 		filepath = os.path.join(current_directory,file)
+		
+		optimalDist = 0
+		actualDist = 0
+		startTime = 0
+		prevTime = 0
 		measuring = False
 
 		with open(filepath) as infile:
@@ -93,14 +98,15 @@ for current_directory, directories, files in os.walk(rootdir):
 						optimalDist = dist(prevPoint, startPoint)
 
 						#histogram
-						if(actualDist != 0):
+						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+						if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 							totalinlabeff.append(float(optimalDist/actualDist))
 							totalinlabtimes.append(startTime - prevTime)
-
 
 						optimalDist = 0
 						actualDist = 0
 						startTime = 0
+						prevTime = 0
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
@@ -126,7 +132,8 @@ for current_directory, directories, files in os.walk(rootdir):
 						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
-						if(actualDist != 0):
+						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+						if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 							totaloutlabeff.append(float(optimalDist/actualDist))
 							totaloutlabtimes.append(startTime - prevTime)
 
@@ -134,6 +141,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						optimalDist = 0
 						actualDist = 0
 						startTime = 0
+						prevTime = 0
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
@@ -149,19 +157,22 @@ for current_directory, directories, files in os.walk(rootdir):
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
 					optimalDist = dist(prevPoint, startPoint)
 
-					if(actualDist != 0):
+					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 						totalinlabeff.append(float(optimalDist/actualDist))
 						totalinlabtimes.append(startTime - prevTime)
-
 
 					optimalDist = 0
 					actualDist = 0
 					startTime = 0
+					prevTime = 0
+					measuring = False
 
 				else:
 					optimalDist = dist(prevPoint, startPoint)
 					
-					if(actualDist != 0):
+					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 						totaloutlabeff.append(float(optimalDist/actualDist))
 						totaloutlabtimes.append(startTime - prevTime)
 
@@ -170,6 +181,13 @@ for current_directory, directories, files in os.walk(rootdir):
 					actualDist = 0
 					startTime = 0
 					measuring = False
+					prevTime = 0
+
+		optimalDist = 0
+		actualDist = 0
+		startTime = 0
+		prevTime = 0
+		measuring = False
 
 
 		print filenum
@@ -181,12 +199,12 @@ totaloutlabeff = np.array(totaloutlabeff)
 totalinlabtimes = np.array(totalinlabtimes)
 totaloutlabtimes = np.array(totaloutlabtimes)
 
-'''
+
 print len(totalinlabeff)
 print len(totalinlabtimes)
 print len(totaloutlabeff)
 print len(totaloutlabtimes)
-'''
+
 
 
 
