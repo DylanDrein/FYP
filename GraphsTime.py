@@ -32,6 +32,8 @@ with handleouttimes as infile:
 inlabtimes = np.log(inlabtimes)
 outlabtimes = np.log(outlabtimes)
 
+
+
 print inlabtimes
 print outlabtimes
 
