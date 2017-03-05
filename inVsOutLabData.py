@@ -96,7 +96,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						startTime = float(row[1])
 						prevTime = float(row[1])
 						
-					if((float(row[1]) < (startTime - 1470) or row[4] == "mouseUp") and measuring):
+					if((float(row[1]) < (startTime - 1460) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						optimalDist = dist(prevPoint, startPoint)
 
@@ -131,7 +131,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						prevTime = float(row[1])
 						
 
-					if((float(row[1]) < (startTime - 1470) or row[4] == "mouseUp") and measuring):
+					if((float(row[1]) < (startTime - 1460) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						optimalDist = float(dist(prevPoint, startPoint))
 
