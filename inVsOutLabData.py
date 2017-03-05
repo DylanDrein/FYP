@@ -107,7 +107,7 @@ for current_directory, directories, files in os.walk(rootdir):
 							totalinlabtimes.append(startTime - prevTime)
 							totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
 
-						#optimalDist = 0
+						optimalDist = 0
 						actualDist = 0
 						startTime = 0
 						prevTime = 0
@@ -215,8 +215,6 @@ print len(totaloutlabeff)
 print len(totaloutlabtimes)
 print len(totalinlabspeeds)
 print len(totaloutlabspeeds)
-
-
 
 
 c1 = csv.writer(handle1, delimiter = ',')
