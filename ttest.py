@@ -7,13 +7,13 @@ import scipy
 from scipy import stats
 
 
-handleineff = open("./Efficienciestest/inlabeff.csv", 'rb')
-handleouteff = open("./Efficienciestest/outlabeff.csv", 'rb')
-handleintimes = open("./Efficienciestest/inlabtimes.csv", 'rb')
-handleouttimes = open("./Efficienciestest/outlabtimes.csv", 'rb')
+handleineff = open("./Metricstest/inlabeff.csv", 'rb')
+handleouteff = open("./Metricstest/outlabeff.csv", 'rb')
+handleintimes = open("./Metricstest/inlabtimes.csv", 'rb')
+handleouttimes = open("./Metricstest/outlabtimes.csv", 'rb')
 
-handle5 = open("./Efficienciestest/inlabspeed.csv", 'rb')
-handle6 = open("./Efficienciestest/outlabspeed.csv", 'rb')
+handle5 = open("./Metricstest/inlabspeed.csv", 'rb')
+handle6 = open("./Metricstest/outlabspeed.csv", 'rb')
 
 inlabeff = []
 outlabeff = []
