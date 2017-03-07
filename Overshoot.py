@@ -16,6 +16,7 @@ rootdir = './CSVSeparated/'
 
 actualDist = 0
 startPoint = []
+startTime = 0
 prevPoint = []
 measuring = False
 
@@ -30,9 +31,8 @@ lab1end = 1415365200000 # 1pm
 lab2start = 1417172400000 # 11am 28th of november
 lab2end = 1417179600000 # 1pm
 
-handle1 = open("./Metricstest/inlabeff.csv", 'wb')
-handle2 = open("./Metricstest/outlabeff.csv", 'wb')
-
+handle1 = open("./Metricstest/inlabovershoot.csv", 'wb')
+handle2 = open("./Metricstest/outlabovershoot.csv", 'wb')
 
 filename = ""
 
@@ -63,16 +63,19 @@ for current_directory, directories, files in os.walk(rootdir):
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						actualDist = 0
+						startTime = 0
+						
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						localDist = dist(prevPoint, currentPos)
 						actualDist = float(actualDist + localDist)
-						
+
 						if(row[4] != "mouseDown" and (np.array(row[3], row[2]) == startPoint)):
 							inlabovershoot.append(actualDist)
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
+					
 					
 
 				# OUT OF LAB
@@ -81,41 +84,49 @@ for current_directory, directories, files in os.walk(rootdir):
 						measuring = True
 						startPoint = np.array((float(row[3]), float(row[2])))
 						prevPoint = np.array((float(row[3]), float(row[2])))
+						startTime = float(row[1])
+						
+						
 
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						actualDist = 0
+						startTime = 0
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						localDist = float(dist(prevPoint, currentPos))
 						actualDist = float(actualDist + localDist)
+
 						if(row[4] != "mouseDown" and (np.array(row[3], row[2]) == startPoint)):
 							outlabovershoot.append(actualDist)
 						
 					prevPoint = np.array((float(row[3]), float(row[2])))
 			
-			
 			if(measuring == True):	
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
 					if(row[4] != "mouseDown" and (np.array(row[3], row[2]) == startPoint)):
 						inlabovershoot.append(actualDist)
+
 					actualDist = 0
+					startTime = 0
 					measuring = False
 
 				else:
 					if(row[4] != "mouseDown" and (np.array(row[3], row[2]) == startPoint)):
-						outlabovershoot.append(actualDist)
+							inlabovershoot.append(actualDist)
+
 					actualDist = 0
+					startTime = 0
 					measuring = False
 
-		actualDist = 0
-		measuring = False
-
+			else:
+				actualDist = 0
+				startTime = 0
+				measuring = False
+	
 		print filenum
 
-print len(inlabovershoot)
-print len(outlabovershoot)
 
 '''
 totalinlabeff = np.array(totalinlabeff)
@@ -148,8 +159,6 @@ c3.writerow(totalinlabtimes)
 c4.writerow(totaloutlabtimes)
 c5.writerow(totalinlabspeeds)
 c6.writerow(totaloutlabspeeds)
-
-
 
 print len(totalinlabeff)
 print len(totaloutlabeff)
