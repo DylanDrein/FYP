@@ -4,24 +4,29 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-#handle1 = open("./Metrics/outlabtimes.csv", 'rb')
+#handle1 = open("./metricstest/outlabtimes.csv", 'rb')
 
-handle1 = open("./Metrics/outlab.csv", 'rb')
-handle2 = open("./Metrics/inlab.csv", 'rb')
+handle1 = open("./metricstest/outlabeff.csv", 'rb')
+handle2 = open("./metricstest/inlabeff.csv", 'rb')
 
-handle3 = open("./Metrics/outlabtimes1.csv", 'rb')
-handle4 = open("./Metrics/inlabtimes.csv", 'rb')
+handle3 = open("./metricstest/outlabtimes.csv", 'rb')
+handle4 = open("./metricstest/inlabtimes.csv", 'rb')
 
-handle5 = open("./Metrics/outlabspeed.csv", 'rb')
-handle6 = open("./Metrics/inlabspeed.csv", 'rb')
+handle5 = open("./metricstest/outlabspeed.csv", 'rb')
+handle6 = open("./metricstest/inlabspeed.csv", 'rb')
+
+handle7 = open("./metricstest/outlabovershoot", 'rb')
+handle8 = open("./metricstest/inlabovershoot", 'rb')
 
 
-inlab = []
-outlab = []
+inlabeff = []
+outlabeff = []
 inlabtimes = []
 outlabtimes = []
 inlabspeed = []
 outlabspeed = []
+inlabover = []
+outlabover = []
 
 '''
 with handle1 as infile:
@@ -64,6 +69,16 @@ with handle5 as infile:
 		print len(row)
 
 with handle6 as infile:
+	parsed=csv.reader(infile)
+	for row in parsed:
+		print len(row)
+
+with handle7 as infile:
+	parsed=csv.reader(infile)
+	for row in parsed:
+		print len(row)
+
+with handle8 as infile:
 	parsed=csv.reader(infile)
 	for row in parsed:
 		print len(row)
