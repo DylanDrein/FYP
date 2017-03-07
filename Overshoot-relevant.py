@@ -102,7 +102,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
-						optimalDist = dist(prevPoint, startPoint)
+						#optimalDist = dist(prevPoint, startPoint)
 
 						#histogram
 						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
@@ -113,7 +113,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 							inlabovershoot.append(overshoot)
 
-						optimalDist = 0
+						#optimalDist = 0
 						actualDist = 0
 						startTime = 0
 						prevTime = 0
@@ -142,7 +142,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
-						optimalDist = float(dist(prevPoint, startPoint))
+						#optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
 						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
@@ -153,7 +153,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 							outlabovershoot.append(overshoot)
 
-						optimalDist = 0
+						#optimalDist = 0
 						actualDist = 0
 						startTime = 0
 						prevTime = 0
@@ -172,7 +172,7 @@ for current_directory, directories, files in os.walk(rootdir):
 			
 			if(measuring == True):	
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
-					optimalDist = dist(prevPoint, startPoint)
+					#optimalDist = dist(prevPoint, startPoint)
 
 					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
@@ -183,14 +183,14 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0):
 							inlabovershoot.append(actualDist)
 
-					optimalDist = 0
+					#optimalDist = 0
 					actualDist = 0
 					startTime = 0
 					prevTime = 0
 					measuring = False
 
 				else:
-					optimalDist = dist(prevPoint, startPoint)
+					#optimalDist = dist(prevPoint, startPoint)
 					
 					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
@@ -201,13 +201,13 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0 ):
 							outlabovershoot.append(actualDist)
 
-					optimalDist = 0
+					#optimalDist = 0
 					actualDist = 0
 					startTime = 0
 					measuring = False
 					prevTime = 0
 
-		optimalDist = 0
+		#optimalDist = 0
 		actualDist = 0
 		startTime = 0
 		prevTime = 0
@@ -223,12 +223,13 @@ for current_directory, directories, files in os.walk(rootdir):
 #totaloutlabtimes = np.array(totaloutlabtimes)
 #totalinlabspeeds = np.array(totalinlabspeeds)
 #totaloutlabspeeds = np.array(totaloutlabspeeds)
+inlabovershoot = np.array(inlabovershoot)
+outlabovershoot = np.array(outlabovershoot)
 
 
-
-print len(totalinlabeff)
+print len(inlabovershoot)
+print len(outlabovershoot)
 #print len(totalinlabtimes)
-print len(totaloutlabeff)
 #print len(totaloutlabtimes)
 #print len(totalinlabspeeds)
 #print len(totaloutlabspeeds)
