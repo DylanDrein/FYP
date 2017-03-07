@@ -111,7 +111,7 @@ for current_directory, directories, files in os.walk(rootdir):
 							#totalinlabtimes.append(float(startTime - prevTime))
 							#totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
 
-							inlabovershoot.append(overshoot)
+							inlabovershoot.append(float(overshoot))
 
 						#optimalDist = 0
 						actualDist = 0
@@ -151,7 +151,7 @@ for current_directory, directories, files in os.walk(rootdir):
 							#totaloutlabtimes.append(float(startTime - prevTime))
 							#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
 
-							outlabovershoot.append(overshoot)
+							outlabovershoot.append(float(overshoot))
 
 						#optimalDist = 0
 						actualDist = 0
@@ -164,7 +164,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						actualDist = float(actualDist + localDist)
 
 						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0 ):
-							outlabovershoot = actualDist
+							overshoot = actualDist
 					
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
