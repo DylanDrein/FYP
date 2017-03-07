@@ -65,7 +65,7 @@ lab2end = 1417179600000 # 1pm
 #handle5 = open("./Metricstest/inlabspeed.csv", 'wb')
 #handle6 = open("./Metricstest/outlabspeed.csv", 'wb')
 handle7 = open("./Metricstest/inlabovershoot.csv", 'wb')
-handle8 = open("./Metricstestoutlabovershoot.csv", 'wb')
+handle8 = open("./Metricstest/outlabovershoot.csv", 'wb')
 
 filename = ""
 
