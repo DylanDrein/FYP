@@ -230,13 +230,14 @@ c5.writerow(totalinlabspeeds)
 c6.writerow(totaloutlabspeeds)
 
 
-
+'''
 print len(totalinlabeff)
 print len(totaloutlabeff)
 print np.mean(totalinlabeff, dtype=np.float64)
 print np.mean(totaloutlabeff, dtype=np.float64)
 print totaloutlabeff
-					'''
+				
 
-print inmouseclicks
+##print inmouseclicks
 print outmouseclicks
+'''
