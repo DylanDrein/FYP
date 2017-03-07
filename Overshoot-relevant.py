@@ -106,12 +106,13 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+						if(overshoot != 0 and actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 							#totalinlabeff.append(float(optimalDist/actualDist))
 							#totalinlabtimes.append(float(startTime - prevTime))
 							#totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
 
 							inlabovershoot.append(float(overshoot))
+							overshoot = 0
 
 						#optimalDist = 0
 						actualDist = 0
@@ -146,12 +147,13 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+						if(overshoot != 0 and actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 							#totaloutlabeff.append(float(optimalDist/actualDist))
 							#totaloutlabtimes.append(float(startTime - prevTime))
 							#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
 
 							outlabovershoot.append(float(overshoot))
+							overshoot = 0
 
 						#optimalDist = 0
 						actualDist = 0
@@ -175,13 +177,14 @@ for current_directory, directories, files in os.walk(rootdir):
 					#optimalDist = dist(prevPoint, startPoint)
 
 					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+					if(overshoot != 0 and actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 						#totalinlabeff.append(float(optimalDist/actualDist))
 						#totalinlabtimes.append(float(startTime - prevTime))
 						#totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
 
 						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0):
 							inlabovershoot.append(actualDist)
+							overshoot = 0
 
 					#optimalDist = 0
 					actualDist = 0
@@ -193,13 +196,14 @@ for current_directory, directories, files in os.walk(rootdir):
 					#optimalDist = dist(prevPoint, startPoint)
 					
 					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+					if(overshoot != 0 and actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 						#totaloutlabeff.append(float(optimalDist/actualDist))
 						#totaloutlabtimes.append(float(startTime - prevTime))
 						#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
 
 						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0 ):
 							outlabovershoot.append(actualDist)
+							overshoot = 0
 
 					#optimalDist = 0
 					actualDist = 0
