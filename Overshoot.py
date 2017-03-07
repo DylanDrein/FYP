@@ -128,6 +128,9 @@ for current_directory, directories, files in os.walk(rootdir):
 		print filenum
 
 
+
+print len(inlabovershoot)
+print len(outlabovershoot)
 '''
 totalinlabeff = np.array(totalinlabeff)
 totaloutlabeff = np.array(totaloutlabeff)
