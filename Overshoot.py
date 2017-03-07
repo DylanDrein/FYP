@@ -15,40 +15,15 @@ Anthony Coleman	1.42021E+12	137	375	mouseDown
 rootdir = './CSVSeparated/'
 
 actualDist = 0
-#optimalDist = 0
+optimalDist = 0
 startPoint = []
-startTime = 0
 prevPoint = []
-prevTime = 0
 measuring = False
 
 filenum = 0
 
-'''
-efficiency1 = []
-actualVals1 = []
-optimalVals1 = []
-
-efficiency2 = []
-actualVals2 = []
-optimalVals2 = []
-
-times1 = []
-times2 = []
-
-totaltimes1 = []
-totaltimes2 = []
-totalefficiency1 = []
-totalefficiency2 = []
-'''
-
-
-totalinlabeff = []
-totaloutlabeff = []
-totalinlabtimes = []
-totaloutlabtimes = []
-totalinlabspeeds = []
-totaloutlabspeeds = []
+inlabovershoot = []
+outlabovershoot = []
 
 lab1start = 1415358000000 # 11am 7th november
 lab1end = 1415365200000 # 1pm
@@ -58,10 +33,7 @@ lab2end = 1417179600000 # 1pm
 
 handle1 = open("./Metricstest/inlabeff.csv", 'wb')
 handle2 = open("./Metricstest/outlabeff.csv", 'wb')
-handle3 = open("./Metricstest/inlabtimes.csv", 'wb')
-handle4 = open("./Metricstest/outlabtimes.csv", 'wb')
-handle5 = open("./Metricstest/inlabspeed.csv", 'wb')
-handle6 = open("./Metricstest/outlabspeed.csv", 'wb')
+
 
 filename = ""
 
@@ -76,39 +48,30 @@ for current_directory, directories, files in os.walk(rootdir):
 	for file in files:
 		filenum += 1
 		filepath = os.path.join(current_directory,file)
-		
+
 		with open(filepath) as infile:
 			parsed = csv.reader(infile)
 
 			for row in parsed:
-
-				#if( row[4] == "mouseDown"):
-				#	mouseclicks += 1
 
 				filename = row[0].lower().replace(" ", "-")
 
 				# IN LAB
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
 					
-					#if(row[4] == "mouseDown"):
-					#	inmouseclicks += 1
-					
-					measuring = True
-					startPoint = np.array((float(row[3]), float(row[2])))
-					prevPoint = np.array((float(row[3]), float(row[2])))
-					
+					if(row[4] == "mouseDown"):					
+						measuring = True
+						startPoint = np.array((float(row[3]), float(row[2])))
+						prevPoint = np.array((float(row[3]), float(row[2])))
 						
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						optimalDist = dist(prevPoint, startPoint)
 
-						#histogram
-						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-							
+
 						optimalDist = 0
 						actualDist = 0
-					
+
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
@@ -116,48 +79,38 @@ for current_directory, directories, files in os.walk(rootdir):
 						actualDist = float(actualDist + localDist)
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
-					#prevTime = float(row[1])
 					
 
 				# OUT OF LAB
 				else:
-					#if(row[4] == "mouseDown"):
-					#	outmouseclicks += 1
-						
-					measuring = True
-					startPoint = np.array((float(row[3]), float(row[2])))
-					prevPoint = np.array((float(row[3]), float(row[2])))
+					if(row[4] == "mouseDown"):
+						measuring = True
+						startPoint = np.array((float(row[3]), float(row[2])))
+						prevPoint = np.array((float(row[3]), float(row[2])))
 						
 
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						optimalDist = float(dist(prevPoint, startPoint))
 
-						#histogram
-						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-							
-
 
 						optimalDist = 0
 						actualDist = 0
-						
+
+
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						localDist = float(dist(prevPoint, currentPos))
 						actualDist = float(actualDist + localDist)
 						
-
 					
 					prevPoint = np.array((float(row[3]), float(row[2])))
+			
 			
 			if(measuring == True):	
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
 					optimalDist = dist(prevPoint, startPoint)
 
-					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						
 					optimalDist = 0
 					actualDist = 0
 					measuring = False
@@ -165,9 +118,6 @@ for current_directory, directories, files in os.walk(rootdir):
 				else:
 					optimalDist = dist(prevPoint, startPoint)
 					
-					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-
 					optimalDist = 0
 					actualDist = 0
 					measuring = False
@@ -178,9 +128,6 @@ for current_directory, directories, files in os.walk(rootdir):
 
 				
 		print filenum
-				
-
-#print mouseclicks
 
 '''
 totalinlabeff = np.array(totalinlabeff)
@@ -221,7 +168,8 @@ print len(totaloutlabeff)
 print np.mean(totalinlabeff, dtype=np.float64)
 print np.mean(totaloutlabeff, dtype=np.float64)
 print totaloutlabeff
-'''
+				
 
-print inmouseclicks
+##print inmouseclicks
 print outmouseclicks
+'''
