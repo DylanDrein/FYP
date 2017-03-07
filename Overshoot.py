@@ -71,7 +71,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						localDist = dist(prevPoint, currentPos)
 						actualDist = float(actualDist + localDist)
 
-						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint))):
+						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0):
 							inlabovershoot.append(actualDist)
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
@@ -95,14 +95,14 @@ for current_directory, directories, files in os.walk(rootdir):
 						localDist = float(dist(prevPoint, currentPos))
 						actualDist = float(actualDist + localDist)
 
-						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint))):
+						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0 ):
 							outlabovershoot.append(actualDist)
 						
 					prevPoint = np.array((float(row[3]), float(row[2])))
 			
 			if(measuring == True):	
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
-					if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint))):
+					if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0):
 						inlabovershoot.append(actualDist)
 
 					actualDist = 0
@@ -110,7 +110,7 @@ for current_directory, directories, files in os.walk(rootdir):
 					measuring = False
 
 				else:
-					if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint))):
+					if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0):
 						outlabovershoot.append(actualDist)
 
 					actualDist = 0
