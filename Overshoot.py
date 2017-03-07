@@ -31,8 +31,8 @@ lab1end = 1415365200000 # 1pm
 lab2start = 1417172400000 # 11am 28th of november
 lab2end = 1417179600000 # 1pm
 
-handle1 = open("./Metricstest/inlabovershoot.csv", 'wb')
-handle2 = open("./Metricstest/outlabovershoot.csv", 'wb')
+handle1 = open("./Metrics/inlabovershoot.csv", 'wb')
+handle2 = open("./Metrics/outlabovershoot.csv", 'wb')
 
 filename = ""
 
@@ -76,7 +76,6 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					
-					
 
 				# OUT OF LAB
 				else:
@@ -86,8 +85,6 @@ for current_directory, directories, files in os.walk(rootdir):
 						prevPoint = np.array((float(row[3]), float(row[2])))
 						startTime = float(row[1])
 						
-						
-
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
 						actualDist = 0
@@ -128,48 +125,11 @@ for current_directory, directories, files in os.walk(rootdir):
 		print filenum
 
 
-
 print len(inlabovershoot)
 print len(outlabovershoot)
-'''
-totalinlabeff = np.array(totalinlabeff)
-totaloutlabeff = np.array(totaloutlabeff)
-totalinlabtimes = np.array(totalinlabtimes)
-totaloutlabtimes = np.array(totaloutlabtimes)
-totalinlabspeeds = np.array(totalinlabspeeds)
-totaloutlabspeeds = np.array(totaloutlabspeeds)
 
+c1 = csv.writer(handle7, delimiter = ',')
+c2 = csv.writer(handle8, delimiter = ',')
 
-print len(totalinlabeff)
-print len(totalinlabtimes)
-print len(totaloutlabeff)
-print len(totaloutlabtimes)
-print len(totalinlabspeeds)
-print len(totaloutlabspeeds)
-
-
-c1 = csv.writer(handle1, delimiter = ',')
-c2 = csv.writer(handle2, delimiter = ',')
-c3 = csv.writer(handle3, delimiter = ',')
-c4 = csv.writer(handle4, delimiter = ',')
-c5 = csv.writer(handle5, delimiter = ',')
-c6 = csv.writer(handle6, delimiter = ',')
-
-
-c1.writerow(totalinlabeff)
-c2.writerow(totaloutlabeff)
-c3.writerow(totalinlabtimes)
-c4.writerow(totaloutlabtimes)
-c5.writerow(totalinlabspeeds)
-c6.writerow(totaloutlabspeeds)
-
-print len(totalinlabeff)
-print len(totaloutlabeff)
-print np.mean(totalinlabeff, dtype=np.float64)
-print np.mean(totaloutlabeff, dtype=np.float64)
-print totaloutlabeff
-				
-
-##print inmouseclicks
-print outmouseclicks
-'''
+c1.writerow(inlabovershoot)
+c2.writerow(outlabovershoot)
