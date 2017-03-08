@@ -71,7 +71,7 @@ plt.clf()
 sdvoutlab = np.std(outlabeff)
 meanoutlab = np.mean(outlabeff)
 varoutlab = np.var(outlabeff)
-label1 = ["$\overline{x}$ = " + str(meanoutlab) + "\n" + "$s$ = " + str(sdvoutlab) + "\n" + "$s^2$ = " + str(varoutlab)]
+label2 = ["$\overline{x}$ = " + str(meanoutlab) + "\n" + "$s$ = " + str(sdvoutlab) + "\n" + "$s^2$ = " + str(varoutlab)]
 plt.hist(outlabeff, bins, label = label2)
 #plt.hist(outlabeff, bins, label = label2)
 #plt.title("Probability density $f(x)$ of out-of-lab mousepath efficiency \n weighted by duration of mouse sequence")
