@@ -47,6 +47,7 @@ print len(outlabtimes)
 
 sdvinlab = np.std(inlabeff)
 meaninlab = np.mean(inlabeff)
+varinlab = np.var(inlabeff)
 label1 = ["$\mu$: " + str(meaninlab) + "\n" + "$\sigma$: " + str(sdvinlab)]
 plt.hist(inlabeff, bins, label = label1)
 #plt.hist(inlabeff, bins, label = label1)
@@ -57,15 +58,14 @@ plt.ylabel("Frequency (# mouse path sequences)")
 #plt.ylabel("Weighted probability density $f(x)$")
 #plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
 plt.legend(loc="best")
-plt.show()
+#plt.show()
 plt.savefig('./FinalGraphs/InLabEfficiencyHist.png')
-#plt.savefig('./Metricgraphs/' + "PDFinLab" + '.png')
 #plt.savefig('./Metricgraphs/' + "WeightedinLabHist" + '.png')
-#plt.savefig('./Metricgraphs/' + "WeightedinLabPDF" + '.png')
 plt.clf()
 
 sdvoutlab = np.std(outlabeff)
 meanoutlab = np.mean(outlabeff)
+varoutlab = np.var(outlabeff)
 label2 = ["$\mu$: " + str(meanoutlab) + "\n" + "$\sigma$: " + str(sdvoutlab)]
 plt.hist(outlabeff, bins, label = label2)
 #plt.hist(outlabeff, bins, label = label2)
@@ -73,22 +73,20 @@ plt.hist(outlabeff, bins, label = label2)
 plt.title("Histogram of out-of-lab mousepath efficiency")
 plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length)")
 plt.ylabel("Frequency (# mouse path sequences)")
-#plt.ylabel("Weighted probability density $f(x)$")
 #plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
 plt.legend(loc="best")
-plt.show()
+#plt.show()
 plt.savefig('./FinalGraphs/OutLabEfficiencyHist.png')
-#plt.savefig('./Metricgraphs/' + "PDFOutOfLab" + '.png')
 #plt.savefig('./Metricgraphs/' + "WeightedOutOfLabHist" + '.png')
-#plt.savefig('./Metricgraphs/' + "WeightedOutOfLabPDF" + '.png')
 plt.clf()
 
 
 print sdvinlab
 print meaninlab
+print varinlab
 print sdvoutlab
 print meanoutlab
-
+print varoutlab
 
 '''
 data = [inlabeff, outlabeff]
