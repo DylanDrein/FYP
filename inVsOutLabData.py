@@ -49,6 +49,8 @@ totalinlabtimes = []
 totaloutlabtimes = []
 totalinlabspeeds = []
 totaloutlabspeeds = []
+inlabovershoot = []
+outlabovershoot = []
 
 lab1start = 1415358000000 # 11am 7th november
 lab1end = 1415365200000 # 1pm
@@ -56,14 +58,18 @@ lab1end = 1415365200000 # 1pm
 lab2start = 1417172400000 # 11am 28th of november
 lab2end = 1417179600000 # 1pm
 
-handle1 = open("./Metricstest/inlabeff.csv", 'wb')
-handle2 = open("./Metricstest/outlabeff.csv", 'wb')
+#handle1 = open("./Metricstest/inlabeff.csv", 'wb')
+#handle2 = open("./Metricstest/outlabeff.csv", 'wb')
 #handle3 = open("./Metricstest/inlabtimes.csv", 'wb')
 #handle4 = open("./Metricstest/outlabtimes.csv", 'wb')
 #handle5 = open("./Metricstest/inlabspeed.csv", 'wb')
 #handle6 = open("./Metricstest/outlabspeed.csv", 'wb')
+handle7 = open("./Metricstest/inlabovershoot.csv", 'wb')
+handle8 = open("./Metricstest/outlabovershoot.csv", 'wb')
 
 filename = ""
+
+overshoot = 0
 
 #inmouseclicks = 0
 #outmouseclicks = 0
@@ -101,9 +107,11 @@ for current_directory, directories, files in os.walk(rootdir):
 						#histogram
 						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 						if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-							totalinlabeff.append(float(optimalDist/actualDist))
+							#totalinlabeff.append(float(optimalDist/actualDist))
 							#totalinlabtimes.append(float(startTime - prevTime))
 							#totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
+
+							inlabovershoot.append(overshoot)
 
 						optimalDist = 0
 						actualDist = 0
@@ -114,6 +122,9 @@ for current_directory, directories, files in os.walk(rootdir):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						localDist = dist(prevPoint, currentPos)
 						actualDist = float(actualDist + localDist)
+
+						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0 ):
+							overshoot = actualDist
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
@@ -136,9 +147,11 @@ for current_directory, directories, files in os.walk(rootdir):
 						#histogram
 						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 						if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-							totaloutlabeff.append(float(optimalDist/actualDist))
+							#totaloutlabeff.append(float(optimalDist/actualDist))
 							#totaloutlabtimes.append(float(startTime - prevTime))
 							#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
+
+							outlabovershoot.append(overshoot)
 
 						optimalDist = 0
 						actualDist = 0
@@ -149,7 +162,9 @@ for current_directory, directories, files in os.walk(rootdir):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						localDist = float(dist(prevPoint, currentPos))
 						actualDist = float(actualDist + localDist)
-						
+
+						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0 ):
+							outlabovershoot = actualDist
 					
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
@@ -161,9 +176,12 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						totalinlabeff.append(float(optimalDist/actualDist))
+						#totalinlabeff.append(float(optimalDist/actualDist))
 						#totalinlabtimes.append(float(startTime - prevTime))
 						#totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
+
+						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0):
+							inlabovershoot.append(actualDist)
 
 					optimalDist = 0
 					actualDist = 0
@@ -176,9 +194,12 @@ for current_directory, directories, files in os.walk(rootdir):
 					
 					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
 					if(actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						totaloutlabeff.append(float(optimalDist/actualDist))
+						#totaloutlabeff.append(float(optimalDist/actualDist))
 						#totaloutlabtimes.append(float(startTime - prevTime))
 						#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
+
+						if(row[4] != "mouseDown" and (np.array_equal(currentPos, startPoint)) and actualDist != 0 ):
+							outlabovershoot.append(actualDist)
 
 					optimalDist = 0
 					actualDist = 0
@@ -196,12 +217,13 @@ for current_directory, directories, files in os.walk(rootdir):
 		print filenum
 
 
-totalinlabeff = np.array(totalinlabeff)
-totaloutlabeff = np.array(totaloutlabeff)
+#totalinlabeff = np.array(totalinlabeff)
+#totaloutlabeff = np.array(totaloutlabeff)
 #totalinlabtimes = np.array(totalinlabtimes)
 #totaloutlabtimes = np.array(totaloutlabtimes)
 #totalinlabspeeds = np.array(totalinlabspeeds)
 #totaloutlabspeeds = np.array(totaloutlabspeeds)
+
 
 
 print len(totalinlabeff)
@@ -211,21 +233,24 @@ print len(totaloutlabeff)
 #print len(totalinlabspeeds)
 #print len(totaloutlabspeeds)
 
-
-c1 = csv.writer(handle1, delimiter = ',')
-c2 = csv.writer(handle2, delimiter = ',')
+#c1 = csv.writer(handle1, delimiter = ',')
+#c2 = csv.writer(handle2, delimiter = ',')
 #c3 = csv.writer(handle3, delimiter = ',')
 #c4 = csv.writer(handle4, delimiter = ',')
 #c5 = csv.writer(handle5, delimiter = ',')
 #c6 = csv.writer(handle6, delimiter = ',')
+c7 = csv.writer(handle7, delimiter = ',')
+c8 = csv.writer(handle8, delimiter = ',')
 
 
-c1.writerow(totalinlabeff)
-c2.writerow(totaloutlabeff)
+#c1.writerow(totalinlabeff)
+#c2.writerow(totaloutlabeff)
 #c3.writerow(totalinlabtimes)
 #c4.writerow(totaloutlabtimes)
 #c5.writerow(totalinlabspeeds)
 #c6.writerow(totaloutlabspeeds)
+c7.writerow(inlabovershoot)
+c8.writerow(outlabovershoot)
 
 
 '''
