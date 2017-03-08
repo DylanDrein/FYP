@@ -35,8 +35,9 @@ with handle4 as infile:
 	for row in parsed:
 		outlabtimes = np.array(list(row)).astype(np.float)
 
-bins = np.arange(0, 1.01, 0.01)
 
+#bins = np.arange(0, 1.01, 0.01)
+'''
 print len(inlabeff)
 print len(outlabeff)
 print len(inlabtimes)
@@ -80,20 +81,18 @@ plt.savefig('./FinalGraphs/OutLabEfficiencyHist.png')
 #plt.savefig('./Metricgraphs/' + "WeightedOutOfLabHist" + '.png')
 plt.clf()
 
-
 print sdvinlab
 print meaninlab
 print varinlab
 print sdvoutlab
 print meanoutlab
 print varoutlab
+'''
 
-'''
 data = [inlabeff, outlabeff]
-plt.boxplot(data, 1)
-plt.title("Total in lab efficiency (left) vs. Total out of lab efficiency (right)")
-plt.ylabel('Efficiency (optimal/actual path lengths')
-#plt.savefig('./Metricgraphs/' + "TotalBoxPlot" + '.png')
-plt.show()
+plt.boxplot(data, 1, '', labels=["In lab", "Out of lab"])
+plt.title("Efficiency boxplot")
+plt.ylabel('Efficiency (optimal/actual path lengths)')
+plt.savefig('./FinalGraphs/TotalEfficiencyBoxPlot.png')
+#plt.show()
 plt.clf()
-'''
