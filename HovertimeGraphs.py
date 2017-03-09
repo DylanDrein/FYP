@@ -39,7 +39,7 @@ varinlab = np.var(inlabhover)
 sdvoutlab = np.std(outlabhover)
 meanoutlab = np.mean(outlabhover)
 varoutlab = np.var(outlabhover)
-'''
+
 label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab) + "\n" + "$s^2$ = " + str(varinlab)]
 plt.hist(inlabhover, bins, label = label1)
 #plt.hist(inlabhover, bins, label = label1)
@@ -72,7 +72,7 @@ plt.show()
 #plt.savefig('./Metricgraphs/' + "WeightedOutOfLabHist" + '.png')
 #plt.savefig('./Metricgraphs/' + "WeightedOutOfLabPDF" + '.png')
 plt.clf()
-'''
+
 
 print meaninlab
 print sdvinlab
@@ -83,7 +83,7 @@ print varoutlab
 
 
 data = [inlabhover, outlabhover]
-plt.boxplot(data, 1, labels=["In lab", "Out of lab"])
+plt.boxplot(data, 0, '', labels=["In lab", "Out of lab"])
 plt.title("Mouse hover time before click event")
 plt.ylabel('Hover time (ms)')
 #plt.savefig('./Metricgraphs/' + "TotalBoxPlot" + '.png')
