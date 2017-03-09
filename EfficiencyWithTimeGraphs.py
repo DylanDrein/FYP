@@ -57,14 +57,14 @@ label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab)
 plt.hist(inlabeff, bins, label = label1)
 #plt.hist(inlabeff, bins, label = label1)
 #plt.title("Probability density $f(x)$ of in-lab mousepath efficiency \n weighted by duration of mouse sequence")
-plt.title("Histogram of in-lab mousepath efficiency")
+plt.title("Histogram of mousepath efficiency in lab environment")
 plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length)")
 plt.ylabel("Frequency (# mouse path sequences)")
 #plt.ylabel("Weighted probability density $f(x)$")
 #plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
 plt.legend(loc="best")
-plt.show()
-#plt.savefig('./FinalGraphs/InLabEfficiencyHist.png')
+#plt.show()
+plt.savefig('./FinalGraphs/InLabEfficiencyHist.png')
 #plt.savefig('./Metricgraphs/' + "WeightedinLabHist" + '.png')
 plt.clf()
 
@@ -75,13 +75,13 @@ label2 = ["$\overline{x}$ = " + str(meanoutlab) + "\n" + "$s$ = " + str(sdvoutla
 plt.hist(outlabeff, bins, label = label2)
 #plt.hist(outlabeff, bins, label = label2)
 #plt.title("Probability density $f(x)$ of out-of-lab mousepath efficiency \n weighted by duration of mouse sequence")
-plt.title("Histogram of out-of-lab mousepath efficiency")
+plt.title("Histogram of mousepath efficiency out of lab environment")
 plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length)")
 plt.ylabel("Frequency (# mouse path sequences)")
 #plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
 plt.legend(loc="best")
-plt.show()
-#plt.savefig('./FinalGraphs/OutLabEfficiencyHist.png')
+#plt.show()
+plt.savefig('./FinalGraphs/OutLabEfficiencyHist.png')
 #plt.savefig('./Metricgraphs/' + "WeightedOutOfLabHist" + '.png')
 plt.clf()
 
@@ -91,7 +91,7 @@ print varinlab
 print sdvoutlab
 print meanoutlab
 print varoutlab
-'''
+
 data = [inlabeff, outlabeff]
 plt.boxplot(data, 0, '', labels=["In lab", "Out of lab"])
 plt.title("Efficiency boxplot")
@@ -99,4 +99,3 @@ plt.ylabel('Efficiency (optimal/actual path lengths)')
 #plt.savefig('./FinalGraphs/TotalEfficiencyBoxPlotNoNotchesNoOutliers.png')
 plt.show()
 plt.clf()
-'''
