@@ -22,7 +22,7 @@ with handle10 as infile:
 	for row in parsed:
 		outlabhover = np.array(list(row)).astype(np.float)
 
-bins = np.arange(0, 1500, 20)
+bins = np.arange(0, 1500, 10)
 
 #print len(inlabhover)
 #print len(outlabhover)
