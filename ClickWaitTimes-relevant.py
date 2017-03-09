@@ -119,7 +119,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						if(hovertime != 0 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
+						if(hovertime != 0 and hovertime <= 1450 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
 							inlabhovertime.append(float(hovertime))
 							hovertime = 0
 							nextOne = False
@@ -161,7 +161,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						if(hovertime != 0 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
+						if(hovertime != 0 and hovertime <= 1450 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
 							#totaloutlabeff.append(float(optimalDist/actualDist))
 							#totaloutlabtimes.append(float(startTime - prevTime))
 							#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
@@ -194,7 +194,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						nextOne = False
 
 					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-					if(hovertime != 0 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
+					if(hovertime != 0 and hovertime <= 1450 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
 						#totalinlabeff.append(float(optimalDist/actualDist))
 						#totalinlabtimes.append(float(startTime - prevTime))
 						#totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
@@ -215,7 +215,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						nextOne = False
 
 					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-					if(hovertime != 0 and actualDist != 0 and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
+					if(hovertime != 0 and hovertime <= 1450 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
 						#totaloutlabeff.append(float(optimalDist/actualDist))
 						#totaloutlabtimes.append(float(startTime - prevTime))
 						#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
@@ -231,8 +231,16 @@ for current_directory, directories, files in os.walk(rootdir):
 					nextOne = False
 
 
-					
+			#optimalDist = 0
+			actualDist = 0
+			startTime = 0
+			prevTime = 0
+			measuring = False
+			nextOne = False
+			hovertime = 0	
+		
 		print filenum
+
 
 
 #totalinlabeff = np.array(totalinlabeff)
