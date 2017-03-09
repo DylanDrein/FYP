@@ -47,7 +47,7 @@ plt.title("Histogram of mouse hover time duration before mouse click \n in lab e
 #plt.title("Histogram of in-lab mousepath efficiency")
 plt.xlabel("Hover time duration (ms)")
 plt.ylabel("Frequency (# of mouse path sequences)")
-#plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
+plt.xticks(np.arange(0, 1500, 100), rotation = 'vertical')
 plt.legend(loc="best")
 #plt.show()
 plt.savefig('./finalgraphs/In_Lab_Hover_Time_Histogram_Unweighted.png')
@@ -64,13 +64,10 @@ plt.title("Histogram of mouse hover time duration before mouse click \n out of l
 #plt.title("Histogram of out-of-lab mousepath efficiency")
 plt.xlabel("Hover time duration (ms)")
 plt.ylabel("Frequency (# of mouse path sequences)")
-#plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
+plt.xticks(np.arange(0, 1500, 100), rotation = 'vertical')
 plt.legend(loc="best")
 #plt.show()
 plt.savefig('./finalgraphs/Out_Lab_Hover_Time_Histogram_Unweighted.png')
-#plt.savefig('./finalgraphs/' + "PDFOutOfLab" + '.png')
-#plt.savefig('./finalgraphs/' + "WeightedOutOfLabHist" + '.png')
-#plt.savefig('./finalgraphs/' + "WeightedOutOfLabPDF" + '.png')
 plt.clf()
 
 
