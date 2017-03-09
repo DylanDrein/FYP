@@ -39,13 +39,12 @@ sdvinlab = np.std(inlabtimes)
 meaninlab = np.mean(inlabtimes)
 varinlab = np.var(inlabtimes)
 label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab) + "\n" + "$s^2$ = " + str(varinlab)]
-plt.hist(inlabtimes, bins, label = label1)
+plt.hist(inlabtimes, label = label1)
 #plt.hist(inlabtimes, bins, label = label1)
-plt.title("Probability density $f(x)$ of in-lab mousepath efficiency \n weighted by duration of mouse sequence")
+plt.title("Histogram of mouse path sequence time lengths in lab")
 #plt.title("Histogram of in-lab mousepath efficiency")
-plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length)")
-#plt.ylabel("# of mouse path sequences")
-plt.ylabel("Weighted probability density $f(x)$")
+plt.xlabel("Time (ms)")
+plt.ylabel("Frequency (# of mouse path sequences)")
 #plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
 plt.legend(loc="best")
 plt.show()
@@ -59,13 +58,12 @@ sdvoutlab = np.std(outlabtimes)
 meanoutlab = np.mean(outlabtimes)
 varoutlab = np.var(outlabtimes)
 label2 = ["$\overline{x}$ = " + str(meanoutlab) + "\n" + "$s$ = " + str(sdvoutlab) + "\n" + "$s^2$ = " + str(varoutlab)]
-plt.hist(outlabtimes, bins, label = label2)
+plt.hist(outlabtimes, label = label2)
 #plt.hist(outlabtimes, bins, label = label2)
-plt.title("Probability density $f(x)$ of out-of-lab mousepath efficiency \n weighted by duration of mouse sequence")
+plt.title("Histogram of mouse path sequence time lengths out of lab")
 #plt.title("Histogram of out-of-lab mousepath efficiency")
-plt.xlabel("Efficiency (Optimal mousepath length / Actual mousepath length)")
-#plt.ylabel("# of mouse path sequences")
-plt.ylabel("Weighted probability density $f(x)$")
+plt.xlabel("Time (ms)")
+plt.ylabel("Frequency (# of mouse path sequences)")
 #plt.xticks(np.arange(0, 1.1, 0.1), rotation = 'vertical')
 plt.legend(loc="best")
 plt.show()
@@ -83,12 +81,11 @@ print sdvoutlab
 print meanoutlab
 
 
-'''
+
 data = [inlabtimes, outlabtimes]
-plt.boxplot(data, 1)
-plt.title("Total in lab efficiency (left) vs. Total out of lab efficiency (right)")
-plt.ylabel('Efficiency (optimal/actual path lengths')
+plt.boxplot(data, 0, '', labels=["In lab", "Out of lab"])
+plt.title("Mouse path sequence time length")
+plt.ylabel('Time (ms)')
 #plt.savefig('./finalgraphs/' + "TotalBoxPlot" + '.png')
 plt.show()
 plt.clf()
-'''
