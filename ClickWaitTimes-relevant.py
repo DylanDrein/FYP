@@ -145,6 +145,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if(row[4] == "mouseDown"):
 						measuring = True
+						nextOne = True
 						startPoint = np.array((float(row[3]), float(row[2])))
 						prevPoint = np.array((float(row[3]), float(row[2])))
 						startTime = float(row[1])
@@ -179,6 +180,8 @@ for current_directory, directories, files in os.walk(rootdir):
 					
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
+
+				nextOne = False
 			
 			
 			if(measuring == True):	
