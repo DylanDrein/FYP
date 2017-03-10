@@ -128,8 +128,8 @@ for current_directory, directories, files in os.walk(rootdir):
 print len(inlabovershoot)
 print len(outlabovershoot)
 
-c1 = csv.writer(handle7, delimiter = ',')
-c2 = csv.writer(handle8, delimiter = ',')
+c1 = csv.writer(handle1, delimiter = ',')
+c2 = csv.writer(handle2, delimiter = ',')
 
 c1.writerow(inlabovershoot)
 c2.writerow(outlabovershoot)
