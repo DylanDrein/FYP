@@ -62,7 +62,7 @@ plt.ylabel("Frequency (# of mouse path sequences)")
 plt.xticks(np.arange(0, 225, 25), rotation = 'vertical')
 plt.legend(loc="best")
 #plt.show()
-plt.savefig('./finalgraphs/In_Lab_Histogram_Unweighted.png')
+plt.savefig('./finalgraphs/In_Lab_Overshoot_Histogram_Unweighted.png')
 plt.clf()
 
 label2 = ["$\overline{x}$ = " + str(meanoutlab) + "\n" + "$s$ = " + str(sdvoutlab) + "\n" + "$s^2$ = " + str(varoutlab)]
@@ -73,7 +73,7 @@ plt.ylabel("Frequency (# of mouse path sequences)")
 plt.xticks(np.arange(0, 225, 25), rotation = 'vertical')
 plt.legend(loc="best")
 #plt.show()
-plt.savefig('./finalgraphs/Out_Of_Lab_Histogram_Unweighted.png')
+plt.savefig('./finalgraphs/Out_Of_Lab_Overshoot_Histogram_Unweighted.png')
 plt.clf()
 
 print meaninlab
