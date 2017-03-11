@@ -42,16 +42,14 @@ totalefficiency1 = []
 totalefficiency2 = []
 '''
 
-
-totalinlabeff = []
-totaloutlabeff = []
-totalinlabtimes = []
-totaloutlabtimes = []
-totalinlabspeeds = []
-totaloutlabspeeds = []
-
-inlabhovertime = []
-outlabhovertime = []
+inlabxactual = []
+inlabxoptimal = []
+outlabxactual = []
+outlabxoptimal = []
+inlabyactual = []
+inlabyoptimal = []
+outlabyactual = []
+outlabyoptimal = []
 
 lab1start = 1415358000000 # 11am 7th november
 lab1end = 1415365200000 # 1pm
@@ -59,20 +57,8 @@ lab1end = 1415365200000 # 1pm
 lab2start = 1417172400000 # 11am 28th of november
 lab2end = 1417179600000 # 1pm
 
-#handle1 = open("./Metricstest/inlabeff.csv", 'wb')
-#handle2 = open("./Metricstest/outlabeff.csv", 'wb')
-#handle3 = open("./Metricstest/inlabtimes.csv", 'wb')
-#handle4 = open("./Metricstest/outlabtimes.csv", 'wb')
-#handle5 = open("./Metricstest/inlabspeed.csv", 'wb')
-#handle6 = open("./Metricstest/outlabspeed.csv", 'wb')
-#handle7 = open("./Metricstest/inlabhovertime.csv", 'wb')
-#handle8 = open("./Metricstest/outlabhovertime.csv", 'wb')
-handle9 = open("./Metricstest/inlabhovertime.csv", 'wb')
-handle10 = open("./Metricstest/outlabhovertime.csv", 'wb')
-
 filename = ""
 
-nextOne = False
 hovertime = 0
 
 def dist(a, b):
@@ -101,13 +87,9 @@ for current_directory, directories, files in os.walk(rootdir):
 
 				# IN LAB
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
-					if(nextOne == True):
-						hovertime = float(startTime)-float(row[1])
-						nextOne = False
 
 					if(row[4] == "mouseDown"):					
 						measuring = True
-						nextOne = True
 						startPoint = np.array((float(row[3]), float(row[2])))
 						prevPoint = np.array((float(row[3]), float(row[2])))
 						startTime = float(row[1])
@@ -115,66 +97,49 @@ for current_directory, directories, files in os.walk(rootdir):
 						
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
-						#optimalDist = dist(prevPoint, startPoint)
+						optimalDist = dist(prevPoint, startPoint)
 
 						#histogram
-						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						if(hovertime != 0 and hovertime <= 1450 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
+						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
 							inlabhovertime.append(float(hovertime))
 							hovertime = 0
-							nextOne = False
 
-						#optimalDist = 0
+						optimalDist = 0
 						actualDist = 0
 						startTime = 0
 						prevTime = 0
-						nextOne = False
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						localDist = dist(prevPoint, currentPos)
 						actualDist = float(actualDist + localDist)
 
-
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
 					
-
 				# OUT OF LAB
 				else:
-					if(nextOne == True):
-						hovertime = float(startTime)-float(row[1])
-						nextOne = False
 
 					if(row[4] == "mouseDown"):
 						measuring = True
-						nextOne = True
 						startPoint = np.array((float(row[3]), float(row[2])))
 						prevPoint = np.array((float(row[3]), float(row[2])))
 						startTime = float(row[1])
 						prevTime = float(row[1])
 						
-
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
-						#optimalDist = float(dist(prevPoint, startPoint))
+						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
-						#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-						if(hovertime != 0 and hovertime <= 1450 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
-							#totaloutlabeff.append(float(optimalDist/actualDist))
-							#totaloutlabtimes.append(float(startTime - prevTime))
-							#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
-
+						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0))):
 							outlabhovertime.append(float(hovertime))
 							hovertime = 0
-							nextOne = False
 
-						#optimalDist = 0
+						optimalDist = 0
 						actualDist = 0
 						startTime = 0
 						prevTime = 0
-						nextOne = False
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
@@ -187,43 +152,26 @@ for current_directory, directories, files in os.walk(rootdir):
 			
 			if(measuring == True):	
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
-					#optimalDist = dist(prevPoint, startPoint)
+					optimalDist = dist(prevPoint, startPoint)
 
-					if(nextOne == True):
-						hovertime = float(startTime)-float(row[1])
-						nextOne = False
-
-					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-					if(hovertime != 0 and hovertime <= 1450 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
-						#totalinlabeff.append(float(optimalDist/actualDist))
-						#totalinlabtimes.append(float(startTime - prevTime))
-						#totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
+					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0))):
 
 							inlabhovertime.append(hovertime)
 							hovertime = 0
 
-					#optimalDist = 0
+					optimalDist = 0
 					actualDist = 0
 					startTime = 0
 					prevTime = 0
 					measuring = False
-					nextOne = False
 
 				else:					
-					if(nextOne == True):
-						hovertime = float(startTime)-float(row[1])
-						nextOne = False
 
-					#if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0)) and (startTime - prevTime >= float(0.0))):
-					if(hovertime != 0 and hovertime <= 1450 and actualDist != 0 and (startTime - prevTime >= float(0.0))):
-						#totaloutlabeff.append(float(optimalDist/actualDist))
-						#totaloutlabtimes.append(float(startTime - prevTime))
-						#totaloutlabspeeds.append(float(actualDist/(startTime - prevTime)))
-
+					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0))):
 							outlabhovertime.append(hovertime)
 							hovertime = 0
 
-					#optimalDist = 0
+					optimalDist = 0
 					actualDist = 0
 					startTime = 0
 					measuring = False
@@ -231,7 +179,7 @@ for current_directory, directories, files in os.walk(rootdir):
 					nextOne = False
 
 
-			#optimalDist = 0
+			optimalDist = 0
 			actualDist = 0
 			startTime = 0
 			prevTime = 0
