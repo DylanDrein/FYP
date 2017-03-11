@@ -15,7 +15,7 @@ Anthony Coleman	1.42021E+12	137	375	mouseDown
 rootdir = './CSVSeparated/'
 
 actualDist = 0
-#optimalDist = 0
+optimalDist = 0
 startPoint = []
 startTime = 0
 prevPoint = []
@@ -59,7 +59,11 @@ lab2end = 1417179600000 # 1pm
 
 filename = ""
 
-hovertime = 0
+inlabactx = 0
+inlabacty = 0
+outlabactx = 0
+outlabacty = 0
+
 
 def dist(a, b):
 	return float(np.linalg.norm(a-b))
@@ -75,8 +79,6 @@ for current_directory, directories, files in os.walk(rootdir):
 		startTime = 0
 		prevTime = 0
 		measuring = False
-		nextOne = False
-		hovertime = 0
 
 		with open(filepath) as infile:
 			parsed = csv.reader(infile)
@@ -97,12 +99,12 @@ for current_directory, directories, files in os.walk(rootdir):
 						
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
-						optimalDist = dist(prevPoint, startPoint)
 
 						#histogram
 						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
-							inlabhovertime.append(float(hovertime))
-							hovertime = 0
+							inlaboptimalDistX = dist(np.array(prevPoint[0], 0), np.array(startPoint[0], 0))
+							inlaboptimalDistY = dist(np.array(0, prevPoint[1]), np.array(0, startPoint[1]))
+							
 
 						optimalDist = 0
 						actualDist = 0
@@ -111,8 +113,10 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
-						localDist = dist(prevPoint, currentPos)
-						actualDist = float(actualDist + localDist)
+						localDistX = dist(np.array(prevPoint[0], 0), np.array(currentPos[0], 0))
+						localDistY = dist(np.array(0, prevPoint[1]), np.array(0, currentpos[1]))
+						inlabactX = float(inlabactX + localDistX)
+						inlabactY = float(inlabactY + localDistY)
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
@@ -132,9 +136,10 @@ for current_directory, directories, files in os.walk(rootdir):
 						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
-						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0))):
-							outlabhovertime.append(float(hovertime))
-							hovertime = 0
+						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
+							outlaboptimalDistX = dist(np.array(prevPoint[0], 0), np.array(startPoint[0], 0))
+							outlaboptimalDistY = dist(np.array(0, prevPoint[1]), np.array(0, startPoint[1]))
+
 
 						optimalDist = 0
 						actualDist = 0
@@ -143,8 +148,10 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
-						localDist = float(dist(prevPoint, currentPos))
-						actualDist = float(actualDist + localDist)
+						localDistX = dist(np.array(prevPoint[0], 0), np.array(currentPos[0], 0))
+						localDistY = dist(np.array(0, prevPoint[1]), np.array(0, currentpos[1]))
+						outlabactX = float(outlabactX + localDistX)
+						outlabactY = float(outlabactY + localDistY)
 					
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
@@ -154,11 +161,9 @@ for current_directory, directories, files in os.walk(rootdir):
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
 					optimalDist = dist(prevPoint, startPoint)
 
-					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0))):
+					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
 
-							inlabhovertime.append(hovertime)
-							hovertime = 0
-
+				
 					optimalDist = 0
 					actualDist = 0
 					startTime = 0
@@ -167,25 +172,21 @@ for current_directory, directories, files in os.walk(rootdir):
 
 				else:					
 
-					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime != float(0.0))):
-							outlabhovertime.append(hovertime)
-							hovertime = 0
+					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
+							
 
 					optimalDist = 0
 					actualDist = 0
 					startTime = 0
 					measuring = False
 					prevTime = 0
-					nextOne = False
 
 
 			optimalDist = 0
 			actualDist = 0
 			startTime = 0
 			prevTime = 0
-			measuring = False
-			nextOne = False
-			hovertime = 0	
+			measuring = False	
 		
 		print filenum
 
@@ -195,12 +196,6 @@ for current_directory, directories, files in os.walk(rootdir):
 #totaloutlabeff = np.array(totaloutlabeff)
 #totalinlabtimes = np.array(totalinlabtimes)
 #totaloutlabtimes = np.array(totaloutlabtimes)
-
-
-print len(inlabhovertime)
-print len(outlabhovertime)
-#print len(totalinlabtimes)
-#print len(totaloutlabtimes)
 
 
 #c1 = csv.writer(handle1, delimiter = ',')
