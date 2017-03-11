@@ -102,9 +102,10 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
-							inlaboptimalDistX = dist(np.array(prevPoint[0], 0), np.array(startPoint[0], 0))
-							inlaboptimalDistY = dist(np.array(0, prevPoint[1]), np.array(0, startPoint[1]))
-							
+							inlabxoptimal.append(dist(np.array(prevPoint[0], 0), np.array(startPoint[0], 0))) #inlaboptimalDistX
+							inlabyoptimal.append(dist(np.array(0, prevPoint[1]), np.array(0, startPoint[1])))
+							inlabxactual.append(inlabactx)
+							inlabyactual.append(inlabacty)
 
 						optimalDist = 0
 						actualDist = 0
@@ -137,9 +138,10 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
-							outlaboptimalDistX = dist(np.array(prevPoint[0], 0), np.array(startPoint[0], 0))
-							outlaboptimalDistY = dist(np.array(0, prevPoint[1]), np.array(0, startPoint[1]))
-
+							outlabxoptimal.append(dist(np.array(prevPoint[0], 0), np.array(startPoint[0], 0))) #outlaboptimalDistX
+							outlabyoptimal.append(dist(np.array(0, prevPoint[1]), np.array(0, startPoint[1])))
+							outlabxactual.append(outlabactx)
+							outlabyactual.append(outlabacty)
 
 						optimalDist = 0
 						actualDist = 0
