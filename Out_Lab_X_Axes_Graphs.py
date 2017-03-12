@@ -7,12 +7,15 @@ import matplotlib.pyplot as plt
 handle1 = open("./metricstest/outlabxactual.csv", 'rb')
 handle2 = open("./metricstest/outlabxoptimal.csv", 'rb')
 
+outlabxact = []
+outlabxopt = []
+
 with handle1 as infile:
 	parsed=csv.reader(infile)
 	for row in parsed:
-		print len(row)
+		outlabxact.append(np.array(list(row)).astype(np.float))
 
 with handle2 as infile:
 	parsed=csv.reader(infile)
 	for row in parsed:
-		print len(row)
+		outlabxopt.append(np.array(list(row)).astype(np.float))
