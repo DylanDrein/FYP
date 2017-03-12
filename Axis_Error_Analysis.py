@@ -50,10 +50,10 @@ handle6 = open("./Metricstest/outlabxoptimal.csv", 'wb')
 handle7 = open("./Metricstest/outlabyactual.csv", 'wb')
 handle8 = open("./Metricstest/outlabyoptimal.csv", 'wb')
 
-inlabactx = 0
-inlabacty = 0
-outlabactx = 0
-outlabacty = 0
+inlabactX = 0
+inlabactY = 0
+outlabactX = 0
+outlabactY = 0
 
 
 def dist(a, b):
@@ -70,10 +70,10 @@ for current_directory, directories, files in os.walk(rootdir):
 		startTime = 0
 		prevTime = 0
 		measuring = False
-		inlabactx = 0
-		inlabacty = 0
-		outlabactx = 0
-		outlabacty = 0
+		inlabactX = 0
+		inlabactY = 0
+		outlabactX = 0
+		outlabactY = 0
 
 		with open(filepath) as infile:
 			parsed = csv.reader(infile)
@@ -98,22 +98,22 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
 							inlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startpoint[0]), 0)))) #inlaboptimalDistX
 							inlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startpoint[1]))))) #inlaboptimalDistX
-							inlabXactual.append(inlabactx)
-							inlabYactual.append(inlabacty)
+							inlabXactual.append(inlabactX)
+							inlabYactual.append(inlabactY)
 
 						optimalDist = 0
 						actualDist = 0
 						startTime = 0
 						prevTime = 0
-						inlabactx = 0
-						inlabacty = 0
+						inlabactX = 0
+						inlabactY = 0
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						localDistX = dist(np.array((float(prevPoint[0]), 0)), np.array((float(currentPos[0]), 0)))
 						localDistY = dist(np.array((0, float(prevPoint[1]))), np.array((0, float(currentPos[1]))))
-						inlabactx = float(inlabactx + localDistX)
-						inlabacty = float(inlabacty + localDistY)
+						inlabactX = float(inlabactX + localDistX)
+						inlabactY = float(inlabactY + localDistY)
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
@@ -135,22 +135,22 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
 							outlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startpoint[0]), 0)))) #outlaboptimalDistX
 							outlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startpoint[1]))))) #outlaboptimalDistY
-							outlabXactual.append(outlabactx)
-							outlabYactual.append(outlabacty)
+							outlabXactual.append(outlabactX)
+							outlabYactual.append(outlabactY)
 
 						optimalDist = 0
 						actualDist = 0
 						startTime = 0
 						prevTime = 0
-						outlabactx = 0
-						outlabacty = 0
+						outlabactX = 0
+						outlabactY = 0
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
 						localDistX = dist(np.array((float(prevPoint[0]), 0)), np.array((float(currentPos[0]), 0)))
 						localDistY = dist(np.array((0, float(prevPoint[1]))), np.array((0.0, float(currentPos[1]))))
-						outlabactx = float(outlabactx + localDistX)
-						outlabacty = float(outlabacty + localDistY)
+						outlabactX = float(outlabactX + localDistX)
+						outlabactY = float(outlabactY + localDistY)
 					
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
@@ -163,16 +163,16 @@ for current_directory, directories, files in os.walk(rootdir):
 					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
 						inlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startpoint[0]), 0)))) #inlaboptimalDistX
 						inlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startpoint[1]))))) #inlaboptimalDistY
-						inlabXactual.append(inlabactx)
-						inlabYactual.append(inlabacty)
+						inlabXactual.append(inlabactX)
+						inlabYactual.append(inlabactY)
 				
 					optimalDist = 0
 					actualDist = 0
 					startTime = 0
 					prevTime = 0
 					measuring = False
-					inlabactx = 0
-					inlabacty = 0
+					inlabactX = 0
+					inlabactY = 0
 
 
 				else:					
@@ -180,16 +180,16 @@ for current_directory, directories, files in os.walk(rootdir):
 					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
 						outlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startpoint[0]), 0)))) #outlaboptimalDistX
 						outlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startpoint[1]))))) #outlaboptimalDistY
-						outlabXactual.append(outlabactx)
-						outlabYactual.append(outlabacty)
+						outlabXactual.append(outlabactX)
+						outlabYactual.append(outlabactY)
 
 					optimalDist = 0
 					actualDist = 0
 					startTime = 0
 					measuring = False
 					prevTime = 0
-					outlabactx = 0
-					outlabacty = 0
+					outlabactX = 0
+					outlabactY = 0
 
 
 			optimalDist = 0
@@ -197,10 +197,10 @@ for current_directory, directories, files in os.walk(rootdir):
 			startTime = 0
 			prevTime = 0
 			measuring = False	
-			inlabactx = 0
-			inlabacty = 0
-			outlabactx = 0
-			outlabacty = 0
+			inlabactX = 0
+			inlabactY = 0
+			outlabactX = 0
+			outlabactY = 0
 		
 		print filenum
 
