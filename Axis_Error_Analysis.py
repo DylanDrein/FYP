@@ -84,6 +84,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 				# IN LAB
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end))):
+
 					if(row[4] == "mouseDown"):					
 						measuring = True
 						startPoint = np.array((float(row[3]), float(row[2])))
@@ -96,7 +97,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
-						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
+						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0)) and (startTime - prevTime != float(0.0))):
 							prevoptx = np.array((float(prevPoint[0]), float(5)))
 							startoptx = np.array((float(startPoint[0]), float(5))) #inlaboptimalDistX
 							optx = float(dist(prevoptx, startoptx))
@@ -149,7 +150,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
-						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
+						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0)) and (startTime - prevTime != float(0.0))):
 							prevoptx = np.array((float(prevPoint[0]), float(0)))
 							startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
 							optx = float(dist(prevoptx, startoptx))
@@ -189,7 +190,7 @@ for current_directory, directories, files in os.walk(rootdir):
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end))):
 					optimalDist = dist(prevPoint, startPoint)
 
-					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
+					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0)) and (startTime - prevTime != float(0.0))):
 						prevoptx = np.array((float(prevPoint[0]), float(0)))
 						startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
 						optx = float(dist(prevoptx, startoptx))
@@ -211,8 +212,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 
 				else:					
-
-					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
+					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0)) and (startTime - prevTime != float(0.0))):
 						prevoptx = np.array((float(prevPoint[0]), float(0)))
 						startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
 						optx = float(dist(prevoptx, startoptx))
