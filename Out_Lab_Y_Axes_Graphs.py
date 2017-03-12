@@ -4,10 +4,8 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-#handle1 = open("./metricstest/outlabtimes.csv", 'rb')
-
-handle1 = open("./metricstest/outlabeff.csv", 'rb')
-handle2 = open("./metricstest/inlabeff.csv", 'rb')
+handle1 = open("./metricstest/outlabyactual.csv", 'rb')
+handle2 = open("./metricstest/outlabyoptimal.csv", 'rb')
 
 with handle1 as infile:
 	parsed=csv.reader(infile)
