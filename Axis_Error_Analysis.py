@@ -65,7 +65,7 @@ for current_directory, directories, files in os.walk(rootdir):
 		filenum += 1
 		filepath = os.path.join(current_directory,file)
 
-		#optimalDist = 0
+		optimalDist = 0
 		actualDist = 0
 		startTime = 0
 		prevTime = 0
@@ -93,16 +93,19 @@ for current_directory, directories, files in os.walk(rootdir):
 						
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
+						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
 						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
-							prevoptx = np.array((float(prevPoint[0]), float(0)))
-							startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
+							prevoptx = np.array((float(prevPoint[0]), float(5)))
+							startoptx = np.array((float(startPoint[0]), float(5))) #inlaboptimalDistX
 							optx = float(dist(prevoptx, startoptx))
+							#print optx
 							inlabXoptimal.append(optx)
-							prevopty = np.array((0, float(prevPoint[1])))
-							startopty = np.array((0, float(startPoint[1]))) #inlaboptimalDistX
-							opty = dist(prevopty, startopty)
+							prevopty = np.array((5, float(prevPoint[1])))
+							startopty = np.array((5, float(startPoint[1]))) #inlaboptimalDistX
+							opty = float(dist(prevopty, startopty))
+							#	print opty
 							inlabYoptimal.append(opty)
 							inlabXactual.append(inlabactX)
 							inlabYactual.append(inlabactY)
@@ -116,14 +119,18 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
-						prevlocalX = np.array((float(prevPoint[0]), float(0)))
-						currentlocalX = np.array((float(currentPos[0]), float(0)))
+						localDist = dist(prevPoint, currentPos)
+						actualDist = float(actualDist + localDist)
+						prevlocalX = np.array((float(prevPoint[0]), float(5)))
+						currentlocalX = np.array((float(currentPos[0]), float(5)))
 						localDistX = dist(prevlocalX, currentlocalX)
-						prevlocalY = np.array((float(0), float(prevPoint[1])))
-						currentlocalY = np.array((float(0), float(currentPos[1])))
+						prevlocalY = np.array((float(5), float(prevPoint[1])))
+						currentlocalY = np.array((float(6), float(currentPos[1])))
 						localDistY = dist(prevlocalY, currentlocalY)
 						inlabactX = float(inlabactX + localDistX)
+						#print inlabactX
 						inlabactY = float(inlabactY + localDistY)
+						#print inlabactY
 
 					prevPoint = np.array((float(row[3]), float(row[2])))
 					prevTime = float(row[1])
@@ -163,6 +170,8 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if(measuring == True):
 						currentPos = np.array((float(row[3]), float(row[2])))
+						localDist = dist(prevPoint, currentPos)
+						actualDist = float(actualDist + localDist)
 						prevlocalX = np.array((float(prevPoint[0]), float(0)))
 						currentlocalX = np.array((float(currentPos[0]), float(0)))
 						localDistX = dist(prevlocalX, currentlocalX)
