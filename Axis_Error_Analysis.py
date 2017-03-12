@@ -26,10 +26,10 @@ filenum = 0
 
 inlabXactual = []
 inlabXoptimal = []
-outlabXactual = []
-outlabXoptimal = []
 inlabYactual = []
 inlabYoptimal = []
+outlabXactual = []
+outlabXoptimal = []
 outlabYactual = []
 outlabYoptimal = []
 
@@ -40,6 +40,15 @@ lab2start = 1417172400000 # 11am 28th of november
 lab2end = 1417179600000 # 1pm
 
 filename = ""
+
+handle1 = open("./Metricstest/inlabxactual.csv", 'wb')
+handle2 = open("./Metricstest/inlabxoptimal.csv", 'wb')
+handle3 = open("./Metricstest/inlabyactual.csv", 'wb')
+handle4 = open("./Metricstest/inlabyoptimal.csv", 'wb')
+handle5 = open("./Metricstest/outlabxactual.csv", 'wb')
+handle6 = open("./Metricstest/outlabxoptimal.csv", 'wb')
+handle7 = open("./Metricstest/outlabyactual.csv", 'wb')
+handle8 = open("./Metricstest/outlabyoptimal.csv", 'wb')
 
 inlabactx = 0
 inlabacty = 0
@@ -197,22 +206,42 @@ for current_directory, directories, files in os.walk(rootdir):
 
 
 
-#totalinlabeff = np.array(totalinlabeff)
-#totaloutlabeff = np.array(totaloutlabeff)
-#totalinlabtimes = np.array(totalinlabtimes)
-#totaloutlabtimes = np.array(totaloutlabtimes)
+inlabXactual = np.array(inlabXactual)
+inlabXoptimal = np.array(inlabXoptimal)
+inlabYactual = np.array(inlabyactual)
+inlabYoptimal = np.array(inlabyoptimal)
+outlabXactual = np.array(outlabxactual)
+outlabXoptimal = np.array(outlabxoptimal)
+outlabYactual = no.array(outlabyactual)
+outlabYoptimal = np.array(outlabyoptimal)
+
+print len(inlabXactual)
+print len(inlabXoptimal)
+print len(inlabYactual)
+print len(inlabYoptimal)
+print len(outlabXactual)
+print len(outlabXoptimal)
+print len(outlabYactual)
+print len(outlabYoptimal)
+
+c1 = csv.writer(handle1, delimiter = ',')
+c2 = csv.writer(handle2, delimiter = ',')
+c3 = csv.writer(handle3, delimiter = ',')
+c4 = csv.writer(handle4, delimiter = ',')
+c5 = csv.writer(handle5, delimiter = ',')
+c6 = csv.writer(handle6, delimiter = ',')
+c7 = csv.writer(handle7, delimiter = ',')
+c8 = csv.writer(handle8, delimiter = ',')
 
 
-#c1 = csv.writer(handle1, delimiter = ',')
-#c2 = csv.writer(handle2, delimiter = ',')
-#c3 = csv.writer(handle3, delimiter = ',')
-#c4 = csv.writer(handle4, delimiter = ',')
-
-
-#c1.writerow(totalinlabeff)
-#c2.writerow(totaloutlabeff)
-#c3.writerow(totalinlabtimes)
-#c4.writerow(totaloutlabtimes)
+c1.writerow(inlabxactual)
+c2.writerow(inlabXoptimal)
+c3.writerow(inlabyactual)
+c4.writerow(inlabyoptimal)
+c5.writerow(outlabxactual)
+c6.writerow(outlabxoptimal)
+c7.writerow(outlabyactual)
+c8.writerow(outlabyoptimal)
 
 '''
 print len(totalinlabeff)
