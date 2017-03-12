@@ -83,7 +83,7 @@ for current_directory, directories, files in os.walk(rootdir):
 				filename = row[0].lower().replace(" ", "-")
 
 				# IN LAB
-				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
+				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end))):
 					if(row[4] == "mouseDown"):					
 						measuring = True
 						startPoint = np.array((float(row[3]), float(row[2])))
@@ -96,8 +96,8 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
-							inlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startpoint[0]), 0)))) #inlaboptimalDistX
-							inlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startpoint[1]))))) #inlaboptimalDistX
+							inlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startPoint[0]), 0)))) #inlaboptimalDistX
+							inlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startPoint[1]))))) #inlaboptimalDistX
 							inlabXactual.append(inlabactX)
 							inlabYactual.append(inlabactY)
 
@@ -133,8 +133,8 @@ for current_directory, directories, files in os.walk(rootdir):
 
 						#histogram
 						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
-							outlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startpoint[0]), 0)))) #outlaboptimalDistX
-							outlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startpoint[1]))))) #outlaboptimalDistY
+							outlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startPoint[0]), 0)))) #outlaboptimalDistX
+							outlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startPoint[1]))))) #outlaboptimalDistY
 							outlabXactual.append(outlabactX)
 							outlabYactual.append(outlabactY)
 
@@ -157,12 +157,12 @@ for current_directory, directories, files in os.walk(rootdir):
 			
 			
 			if(measuring == True):	
-				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
+				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end))):
 					optimalDist = dist(prevPoint, startPoint)
 
 					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
-						inlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startpoint[0]), 0)))) #inlaboptimalDistX
-						inlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startpoint[1]))))) #inlaboptimalDistY
+						inlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startPoint[0]), 0)))) #inlaboptimalDistX
+						inlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startPoint[1]))))) #inlaboptimalDistY
 						inlabXactual.append(inlabactX)
 						inlabYactual.append(inlabactY)
 				
@@ -178,8 +178,8 @@ for current_directory, directories, files in os.walk(rootdir):
 				else:					
 
 					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0))):
-						outlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startpoint[0]), 0)))) #outlaboptimalDistX
-						outlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startpoint[1]))))) #outlaboptimalDistY
+						outlabXoptimal.append(dist(np.array((float(prevPoint[0]), 0)), np.array((float(startPoint[0]), 0)))) #outlaboptimalDistX
+						outlabYoptimal.append(dist(np.array((0, float(prevPoint[1]))), np.array((0, float(startPoint[1]))))) #outlaboptimalDistY
 						outlabXactual.append(outlabactX)
 						outlabYactual.append(outlabactY)
 
@@ -212,7 +212,7 @@ inlabYactual = np.array(inlabYactual)
 inlabYoptimal = np.array(inlabYoptimal)
 outlabXactual = np.array(outlabXactual)
 outlabXoptimal = np.array(outlabXoptimal)
-outlabYactual = no.array(outlabYactual)
+outlabYactual = np.array(outlabYactual)
 outlabYoptimal = np.array(outlabYoptimal)
 
 print len(inlabXactual)
