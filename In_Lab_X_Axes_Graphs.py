@@ -38,11 +38,11 @@ varinlab = np.var(absoluteerror)
 
 
 
-bins = np.arange(0, 1000, 1)
-label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab) + "\n" + "$s^2$ = " + str(varinlab)]
+bins = np.arange(0, 250, 1)
+label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab) + "\n" + "$s^2$ = " + str(varinlab) + "\n" + "Max value: " + str(max(absoluteerror)) + "\n" + "Min value: " + str(min(absoluteerror))]
 plt.hist(absoluteerror, bins, label = label1)
-plt.title("absoluteerror")
-plt.xlabel("error")
+plt.title("Absolute error in x-axis movement in lab environment")
+plt.xlabel("Error (px)")
 plt.ylabel("Frequency (# of mouse path sequences)")
 plt.legend(loc="best")
 plt.show()
