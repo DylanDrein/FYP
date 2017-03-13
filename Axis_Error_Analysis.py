@@ -87,25 +87,25 @@ for current_directory, directories, files in os.walk(rootdir):
 
 					if(row[4] == "mouseDown"):					
 						measuring = True
-						startPoint = np.array((float(row[3]), float(row[2])))
-						prevPoint = np.array((float(row[3]), float(row[2])))
+						startPoint = np.array((row[3], row[2])).astype(np.float64)
+						prevPoint = np.array((row[3], row[2])).astype(np.float64)
 						startTime = float(row[1])
 						prevTime = float(row[1])
 						
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
-						optimalDist = float(dist(prevPoint, startPoint))
+						optimalDist = dist(prevPoint, startPoint)
 
 						#histogram
-						if(actualDist != 0 and optimalDist !=0 and (startTime - prevTime > float(0.0))):
-							prevoptx = np.array((float(prevPoint[0]), float(5)))
-							startoptx = np.array((float(startPoint[0]), float(5))) #inlaboptimalDistX
-							optx = float(dist(prevoptx, startoptx))
+						if(actualDist != 0 and optimalDist !=0 and (optimalDist !=  actualDist) and (startTime - prevTime > float(0.0))):
+							prevoptx = np.array((prevPoint[0], 0)).astype(np.float64)
+							startoptx = np.array((startPoint[0], 0)).astype(np.float64) #inlaboptimalDistX
+							optx = dist(prevoptx, startoptx)
 							#print optx
 							inlabXoptimal.append(optx)
-							prevopty = np.array((5, float(prevPoint[1])))
-							startopty = np.array((5, float(startPoint[1]))) #inlaboptimalDistX
-							opty = float(dist(prevopty, startopty))
+							prevopty = np.array((0, prevPoint[1])).astype(np.float64)
+							startopty = np.array((0, startPoint[1])).astype(np.float64) #inlaboptimalDistX
+							opty = dist(prevopty, startopty)
 							#	print opty
 							inlabYoptimal.append(opty)
 							inlabXactual.append(inlabactX)
@@ -119,48 +119,48 @@ for current_directory, directories, files in os.walk(rootdir):
 						inlabactY = 0
 
 					if(measuring == True):
-						currentPos = np.array((float(row[3]), float(row[2])))
+						currentPos = np.array((row[3], row[2])).astype(np.float64)
 						localDist = dist(prevPoint, currentPos)
 						actualDist = float(actualDist + localDist)
-						prevlocalX = np.array((float(prevPoint[0]), float(5)))
-						currentlocalX = np.array((float(currentPos[0]), float(5)))
+						prevlocalX = np.array((prevPoint[0], 0)).astype(np.float64)
+						currentlocalX = np.array((currentPos[0], 0)).astype(np.float64)
 						localDistX = dist(prevlocalX, currentlocalX)
-						prevlocalY = np.array((float(5), float(prevPoint[1])))
-						currentlocalY = np.array((float(6), float(currentPos[1])))
+						prevlocalY = np.array((0, prevPoint[1])).astype(np.float64)
+						currentlocalY = np.array((0, currentPos[1])).astype(np.float64)
 						localDistY = dist(prevlocalY, currentlocalY)
 						inlabactX = float(inlabactX + localDistX)
 						#print inlabactX
 						inlabactY = float(inlabactY + localDistY)
 						#print inlabactY
 
-					prevPoint = np.array((float(row[3]), float(row[2])))
+					prevPoint = np.array((row[3], row[2])).astype(np.float64)
 					prevTime = float(row[1])
 					
 				# OUT OF LAB
 				else:
 					if(row[4] == "mouseDown"):
 						measuring = True
-						startPoint = np.array((float(row[3]), float(row[2])))
-						prevPoint = np.array((float(row[3]), float(row[2])))
+						startPoint = np.array((row[3], row[2])).astype(np.float64)
+						prevPoint = np.array((row[3], row[2])).astype(np.float64)
 						startTime = float(row[1])
 						prevTime = float(row[1])
 						
 					if((float(row[1]) < (startTime - 1450) or row[4] == "mouseUp") and measuring):
 						measuring = False
-						optimalDist = float(dist(prevPoint, startPoint))
+						optimalDist = dist(prevPoint, startPoint)
 
 						#histogram
-						if(actualDist != 0 and optimalDist !=0 and (startTime - prevTime > float(0.0))):
-							prevoptx = np.array((float(prevPoint[0]), float(0)))
-							startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
-							optx = float(dist(prevoptx, startoptx))
+						if(actualDist != 0 and optimalDist !=0 and (optimalDist !=  actualDist) and (startTime - prevTime > float(0.0))):
+							prevoptx = np.array((prevPoint[0], 0)).astype(np.float64)
+							startoptx = np.array((startPoint[0], 0)).astype(np.float64) #inlaboptimalDistX
+							optx = dist(prevoptx, startoptx)
 							outlabXoptimal.append(optx)
-							prevopty = np.array((0, float(prevPoint[1])))
-							startopty = np.array((0, float(startPoint[1]))) #inlaboptimalDistX
+							prevopty = np.array((0, prevPoint[1])).astype(np.float64)
+							startopty = np.array((0, startPoint[1])).astype(np.float64) #inlaboptimalDistX
 							opty = dist(prevopty, startopty)
 							outlabYoptimal.append(opty)
-							outlabXactual.append(inlabactX)
-							outlabYactual.append(inlabactY)
+							outlabXactual.append(outlabactX)
+							outlabYactual.append(outlabactY)
 
 						optimalDist = 0
 						actualDist = 0
@@ -170,19 +170,19 @@ for current_directory, directories, files in os.walk(rootdir):
 						outlabactY = 0
 
 					if(measuring == True):
-						currentPos = np.array((float(row[3]), float(row[2])))
+						currentPos = np.array((row[3], row[2])).astype(np.float64)
 						localDist = dist(prevPoint, currentPos)
 						actualDist = float(actualDist + localDist)
-						prevlocalX = np.array((float(prevPoint[0]), float(0)))
-						currentlocalX = np.array((float(currentPos[0]), float(0)))
+						prevlocalX = np.array((prevPoint[0], 0)).astype(np.float64)
+						currentlocalX = np.array((currentPos[0], 0)).astype(np.float64)
 						localDistX = dist(prevlocalX, currentlocalX)
-						prevlocalY = np.array((float(0), float(prevPoint[1])))
-						currentlocalY = np.array((float(0), float(currentPos[1])))
+						prevlocalY = np.array((0, prevPoint[1])).astype(np.float64)
+						currentlocalY = np.array((0, currentPos[1])).astype(np.float64)
 						localDistY = dist(prevlocalY, currentlocalY)
-						inlabactX = float(inlabactX + localDistX)
-						inlabactY = float(inlabactY + localDistY)
+						outlabactX = float(outlabactX + localDistX)
+						outlabactY = float(outlabactY + localDistY)
 					
-					prevPoint = np.array((float(row[3]), float(row[2])))
+					prevPoint = np.array((row[3], row[2])).astype(np.float64)
 					prevTime = float(row[1])
 			
 			
@@ -190,13 +190,13 @@ for current_directory, directories, files in os.walk(rootdir):
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end))):
 					optimalDist = dist(prevPoint, startPoint)
 
-					if(actualDist != 0 and optimalDist !=0 and (startTime - prevTime > float(0.0))):
-						prevoptx = np.array((float(prevPoint[0]), float(0)))
-						startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
-						optx = float(dist(prevoptx, startoptx))
+					if(actualDist != 0 and optimalDist !=0 and (optimalDist !=  actualDist) and (startTime - prevTime > float(0.0))):
+						prevoptx = np.array((prevPoint[0], 0)).astype(np.float64)
+						startoptx = np.array((startPoint[0], 0)).astype(np.float64) #inlaboptimalDistX
+						optx = dist(prevoptx, startoptx)
 						inlabXoptimal.append(optx)
-						prevopty = np.array((0, float(prevPoint[1])))
-						startopty = np.array((0, float(startPoint[1]))) #inlaboptimalDistX
+						prevopty = np.array((0, prevPoint[1])).astype(np.float64)
+						startopty = np.array((0, startPoint[1])).astype(np.float64) #inlaboptimalDistX
 						opty = dist(prevopty, startopty)
 						inlabYoptimal.append(opty)
 						inlabXactual.append(inlabactX)
@@ -210,19 +210,18 @@ for current_directory, directories, files in os.walk(rootdir):
 					inlabactX = 0
 					inlabactY = 0
 
-
 				else:					
-					if(actualDist != 0 and optimalDist !=0 and (startTime - prevTime > float(0.0))):
-						prevoptx = np.array((float(prevPoint[0]), float(0)))
-						startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
-						optx = float(dist(prevoptx, startoptx))
+					if(actualDist != 0 and optimalDist !=0 and (optimalDist !=  actualDist) and (startTime - prevTime > float(0.0))):
+						prevoptx = np.array((prevPoint[0], 0)).astype(np.float64)
+						startoptx = np.array((startPoint[0], 0)).astype(np.float64) #inlaboptimalDistX
+						optx = dist(prevoptx, startoptx)
 						outlabXoptimal.append(optx)
-						prevopty = np.array((0, float(prevPoint[1])))
-						startopty = np.array((0, float(startPoint[1]))) #inlaboptimalDistX
+						prevopty = np.array((0, prevPoint[1])).astype(np.float64)
+						startopty = np.array((0, startPoint[1])).astype(np.float64) #inlaboptimalDistX
 						opty = dist(prevopty, startopty)
 						outlabYoptimal.append(opty)
-						outlabXactual.append(inlabactX)
-						outlabYactual.append(inlabactY)
+						outlabXactual.append(outlabactX)
+						outlabYactual.append(outlabactY)
 
 					optimalDist = 0
 					actualDist = 0
@@ -255,14 +254,14 @@ print len(outlabXoptimal)
 print len(outlabYactual)
 print len(outlabYoptimal)
 
-inlabXactual = np.array(inlabXactual)
-inlabXoptimal = np.array(inlabXoptimal)
-inlabYactual = np.array(inlabYactual)
-inlabYoptimal = np.array(inlabYoptimal)
-outlabXactual = np.array(outlabXactual)
-outlabXoptimal = np.array(outlabXoptimal)
-outlabYactual = np.array(outlabYactual)
-outlabYoptimal = np.array(outlabYoptimal)
+inlabXactual = np.array(inlabXactual).astype(np.float64)
+inlabXoptimal = np.array(inlabXoptimal).astype(np.float64)
+inlabYactual = np.array(inlabYactual).astype(np.float64)
+inlabYoptimal = np.array(inlabYoptimal).astype(np.float64)
+outlabXactual = np.array(outlabXactual).astype(np.float64)
+outlabXoptimal = np.array(outlabXoptimal).astype(np.float64)
+outlabYactual = np.array(outlabYactual).astype(np.float64)
+outlabYoptimal = np.array(outlabYoptimal).astype(np.float64)
 
 c1 = csv.writer(handle1, delimiter = ',')
 c2 = csv.writer(handle2, delimiter = ',')
