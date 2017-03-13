@@ -41,14 +41,14 @@ lab2end = 1417179600000 # 1pm
 
 filename = ""
 
-handle1 = open("./Metricstest/inlabxactual.csv", 'wb')
-handle2 = open("./Metricstest/inlabxoptimal.csv", 'wb')
-handle3 = open("./Metricstest/inlabyactual.csv", 'wb')
-handle4 = open("./Metricstest/inlabyoptimal.csv", 'wb')
-handle5 = open("./Metricstest/outlabxactual.csv", 'wb')
-handle6 = open("./Metricstest/outlabxoptimal.csv", 'wb')
-handle7 = open("./Metricstest/outlabyactual.csv", 'wb')
-handle8 = open("./Metricstest/outlabyoptimal.csv", 'wb')
+handle1 = open("./Metricstest/inlabxactual - copy.csv", 'wb')
+handle2 = open("./Metricstest/inlabxoptimal - copy.csv", 'wb')
+handle3 = open("./Metricstest/inlabyactual - copy.csv", 'wb')
+handle4 = open("./Metricstest/inlabyoptimal - copy.csv", 'wb')
+handle5 = open("./Metricstest/outlabxactual - copy.csv", 'wb')
+handle6 = open("./Metricstest/outlabxoptimal - copy.csv", 'wb')
+handle7 = open("./Metricstest/outlabyactual - copy.csv", 'wb')
+handle8 = open("./Metricstest/outlabyoptimal - copy.csv", 'wb')
 
 inlabactX = 0
 inlabactY = 0
@@ -97,7 +97,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
-						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0)) and (startTime - prevTime != float(0.0))):
+						if(actualDist != 0 and optimalDist !=0 and (startTime - prevTime > float(0.0))):
 							prevoptx = np.array((float(prevPoint[0]), float(5)))
 							startoptx = np.array((float(startPoint[0]), float(5))) #inlaboptimalDistX
 							optx = float(dist(prevoptx, startoptx))
@@ -150,7 +150,7 @@ for current_directory, directories, files in os.walk(rootdir):
 						optimalDist = float(dist(prevPoint, startPoint))
 
 						#histogram
-						if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0)) and (startTime - prevTime != float(0.0))):
+						if(actualDist != 0 and optimalDist !=0 and (startTime - prevTime > float(0.0))):
 							prevoptx = np.array((float(prevPoint[0]), float(0)))
 							startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
 							optx = float(dist(prevoptx, startoptx))
@@ -190,7 +190,7 @@ for current_directory, directories, files in os.walk(rootdir):
 				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end))):
 					optimalDist = dist(prevPoint, startPoint)
 
-					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0)) and (startTime - prevTime != float(0.0))):
+					if(actualDist != 0 and optimalDist !=0 and (startTime - prevTime > float(0.0))):
 						prevoptx = np.array((float(prevPoint[0]), float(0)))
 						startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
 						optx = float(dist(prevoptx, startoptx))
@@ -212,7 +212,7 @@ for current_directory, directories, files in os.walk(rootdir):
 
 
 				else:					
-					if(actualDist != 0 and (float(optimalDist/actualDist) != float(1.0)) and (startTime - prevTime >= float(0.0)) and (startTime - prevTime != float(0.0))):
+					if(actualDist != 0 and optimalDist !=0 and (startTime - prevTime > float(0.0))):
 						prevoptx = np.array((float(prevPoint[0]), float(0)))
 						startoptx = np.array((float(startPoint[0]), float(0))) #inlaboptimalDistX
 						optx = float(dist(prevoptx, startoptx))
@@ -264,15 +264,6 @@ outlabXoptimal = np.array(outlabXoptimal)
 outlabYactual = np.array(outlabYactual)
 outlabYoptimal = np.array(outlabYoptimal)
 
-print len(inlabXactual)
-print len(inlabXoptimal)
-print len(inlabYactual)
-print len(inlabYoptimal)
-print len(outlabXactual)
-print len(outlabXoptimal)
-print len(outlabYactual)
-print len(outlabYoptimal)
-
 c1 = csv.writer(handle1, delimiter = ',')
 c2 = csv.writer(handle2, delimiter = ',')
 c3 = csv.writer(handle3, delimiter = ',')
@@ -281,7 +272,6 @@ c5 = csv.writer(handle5, delimiter = ',')
 c6 = csv.writer(handle6, delimiter = ',')
 c7 = csv.writer(handle7, delimiter = ',')
 c8 = csv.writer(handle8, delimiter = ',')
-
 
 c1.writerow(inlabXactual)
 c2.writerow(inlabXoptimal)
