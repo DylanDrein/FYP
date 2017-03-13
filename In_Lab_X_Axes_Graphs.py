@@ -36,8 +36,6 @@ sdvinlab = np.std(absoluteerror)
 meaninlab = np.mean(absoluteerror)
 varinlab = np.var(absoluteerror)
 
-
-
 bins = np.arange(0, 250, 1)
 label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab) + "\n" + "$s^2$ = " + str(varinlab) + "\n" + "Max value: " + str(max(absoluteerror)) + "\n" + "Min value: " + str(min(absoluteerror))]
 plt.hist(absoluteerror, bins, label = label1)
