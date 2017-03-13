@@ -22,11 +22,11 @@ with handle2 as infile:
 	for row in parsed:
 		outlabyopt = np.array(list(row)).astype(np.float64)
 
-absolutesubtract = np.subtract(outlabxopt, outlabxact)
+absolutesubtract = np.subtract(outlabyopt, outlabyact)
 absoluteerror = np.abs(absolutesubtract)
-#outlabxoptabs = np.abs(outlabxopt)
+#outlabyoptabs = np.abs(outlabyopt)
 
-#absoluteerror = np.true_divide(absoluteerror, outlabxoptabs)
+#absoluteerror = np.true_divide(absoluteerror, outlabyoptabs)
 
 print absoluteerror
 
@@ -39,7 +39,7 @@ varoutlab = np.var(absoluteerror)
 bins = np.arange(0, 250, 1)
 label1 = ["$\overline{x}$ = " + str(meanoutlab) + "\n" + "$s$ = " + str(sdvoutlab) + "\n" + "$s^2$ = " + str(varoutlab) + "\n" + "Max value: " + str(max(absoluteerror)) + "\n" + "Min value: " + str(min(absoluteerror))]
 plt.hist(absoluteerror, bins, label = label1)
-plt.title("Absolute error in x-axis movement in lab environment")
+plt.title("Absolute error in y-axis movement out of lab environment")
 plt.xlabel("Error (px)")
 plt.ylabel("Frequency (# of mouse path sequences)")
 plt.legend(loc="best")
