@@ -165,7 +165,7 @@ for current_directory, directories, files in os.walk(rootdir):
 								outlabXoptimal.append(optx)
 								outlabXactual.append(outlabactX)
 								
-							if(opty != float(o) and outlabactY != float(0)):
+							if(opty != float(0) and outlabactY != float(0)):
 								outlabYoptimal.append(opty)
 								outlabYactual.append(outlabactY)
 
@@ -209,7 +209,7 @@ for current_directory, directories, files in os.walk(rootdir):
 							inlabXoptimal.append(optx)
 							inlabXactual.append(inlabactX)
 							
-						if(opty != float(o) and inlabactY != float(0)):
+						if(opty != float(0) and inlabactY != float(0)):
 							inlabYoptimal.append(opty)
 							inlabYactual.append(inlabactY)
 				
@@ -236,7 +236,7 @@ for current_directory, directories, files in os.walk(rootdir):
 							outlabXactual.append(outlabactX)
 							
 
-						if(opty != float(o) and outlabactY != float(0)):
+						if(opty != float(0) and outlabactY != float(0)):
 							outlabYoptimal.append(opty)
 							outlabYactual.append(outlabactY)
 
