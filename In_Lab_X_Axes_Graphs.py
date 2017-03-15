@@ -48,8 +48,14 @@ plt.clf()
 inlabxoptabs = np.abs(inlabxopt)
 
 relativeerror = np.true_divide(absoluteerror, inlabxoptabs)
+sdvinxrel = np.std(relativeerror)
+meaninxrel = np.mean(relativeerror)
+varinxrel = np.var(relativeerror)
 
 print relativeerror
+print sdvinxrel
+print meaninxrel
+print varinxrel
 
 #print absoluteerror
 
