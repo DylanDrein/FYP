@@ -100,16 +100,23 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(actualDist != 0 and optimalDist !=0 and (optimalDist !=  actualDist) and (startTime - prevTime > float(0.0))):
 							prevoptx = np.array((prevPoint[0], 0)).astype(np.float64)
 							startoptx = np.array((startPoint[0], 0)).astype(np.float64) #inlaboptimalDistX
-							optx = dist(prevoptx, startoptx)
 							#print optx
-							inlabXoptimal.append(optx)
 							prevopty = np.array((0, prevPoint[1])).astype(np.float64)
 							startopty = np.array((0, startPoint[1])).astype(np.float64) #inlaboptimalDistX
+							
+							optx = dist(prevoptx, startoptx)
+							if(optx != float(0)):
+								inlabXoptimal.append(optx)
+
 							opty = dist(prevopty, startopty)
-							#	print opty
-							inlabYoptimal.append(opty)
-							inlabXactual.append(inlabactX)
-							inlabYactual.append(inlabactY)
+							if(opty != float(0)):
+								inlabYoptimal.append(opty)
+
+							if(inlabactX != float(0)):
+								inlabXactual.append(inlabactX)
+
+							if(inlabactY != float(0)):
+								inlabYactual.append(inlabactY)
 
 						optimalDist = 0
 						actualDist = 0
@@ -153,14 +160,22 @@ for current_directory, directories, files in os.walk(rootdir):
 						if(actualDist != 0 and optimalDist !=0 and (optimalDist !=  actualDist) and (startTime - prevTime > float(0.0))):
 							prevoptx = np.array((prevPoint[0], 0)).astype(np.float64)
 							startoptx = np.array((startPoint[0], 0)).astype(np.float64) #inlaboptimalDistX
-							optx = dist(prevoptx, startoptx)
-							outlabXoptimal.append(optx)
 							prevopty = np.array((0, prevPoint[1])).astype(np.float64)
 							startopty = np.array((0, startPoint[1])).astype(np.float64) #inlaboptimalDistX
+							
+							optx = dist(prevoptx, startoptx)
+							if(optx != float(0)):
+								outlabXoptimal.append(optx)
+
 							opty = dist(prevopty, startopty)
-							outlabYoptimal.append(opty)
-							outlabXactual.append(outlabactX)
-							outlabYactual.append(outlabactY)
+							if(opty != float(0)):
+								outlabYoptimal.append(opty)
+
+							if(inlabactX != float(0)):
+								outlabXactual.append(outlabactX)
+
+							if(inlabactY != float(0)):
+								outlabYactual.append(outlabactY)
 
 						optimalDist = 0
 						actualDist = 0
@@ -193,14 +208,22 @@ for current_directory, directories, files in os.walk(rootdir):
 					if(actualDist != 0 and optimalDist !=0 and (optimalDist !=  actualDist) and (startTime - prevTime > float(0.0))):
 						prevoptx = np.array((prevPoint[0], 0)).astype(np.float64)
 						startoptx = np.array((startPoint[0], 0)).astype(np.float64) #inlaboptimalDistX
-						optx = dist(prevoptx, startoptx)
-						inlabXoptimal.append(optx)
 						prevopty = np.array((0, prevPoint[1])).astype(np.float64)
 						startopty = np.array((0, startPoint[1])).astype(np.float64) #inlaboptimalDistX
+
+						optx = dist(prevoptx, startoptx)
+						if(optx != float(0)):
+							inlabXoptimal.append(optx)
+
 						opty = dist(prevopty, startopty)
-						inlabYoptimal.append(opty)
-						inlabXactual.append(inlabactX)
-						inlabYactual.append(inlabactY)
+						if(opty != float(0)):
+							inlabYoptimal.append(opty)
+
+						if(inlabactX != float(0)):
+							inlabXactual.append(inlabactX)
+
+						if(inlabactY != float(0)):
+							inlabYactual.append(inlabactY)
 				
 					optimalDist = 0
 					actualDist = 0
@@ -214,14 +237,23 @@ for current_directory, directories, files in os.walk(rootdir):
 					if(actualDist != 0 and optimalDist !=0 and (optimalDist !=  actualDist) and (startTime - prevTime > float(0.0))):
 						prevoptx = np.array((prevPoint[0], 0)).astype(np.float64)
 						startoptx = np.array((startPoint[0], 0)).astype(np.float64) #inlaboptimalDistX
-						optx = dist(prevoptx, startoptx)
-						outlabXoptimal.append(optx)
+						
 						prevopty = np.array((0, prevPoint[1])).astype(np.float64)
 						startopty = np.array((0, startPoint[1])).astype(np.float64) #inlaboptimalDistX
+						
+						optx = dist(prevoptx, startoptx)
+						if(optx != float(0)):
+							outlabXoptimal.append(optx)
+
 						opty = dist(prevopty, startopty)
-						outlabYoptimal.append(opty)
-						outlabXactual.append(outlabactX)
-						outlabYactual.append(outlabactY)
+						if(opty != float(0)):
+							outlabYoptimal.append(opty)
+
+						if(inlabactX != float(0)):
+							outlabXactual.append(outlabactX)
+
+						if(inlabactY != float(0)):
+							outlabYactual.append(outlabactY)
 
 					optimalDist = 0
 					actualDist = 0
