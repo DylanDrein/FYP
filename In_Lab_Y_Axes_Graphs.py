@@ -35,8 +35,15 @@ absoluteerror = np.abs(absolutesubtract)
 inlabyoptabs = np.abs(inlabyopt)
 
 relativeerror = np.true_divide(absoluteerror, inlabyoptabs)
+sdvinxrel = np.std(relativeerror)
+meaninxrel = np.mean(relativeerror)
+varinxrel = np.var(relativeerror)
 
 print relativeerror
+print sdvinxrel
+print meaninxrel
+print varinxrel
+
 
 '''
 sdvinlab = np.std(absoluteerror)
