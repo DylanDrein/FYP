@@ -28,10 +28,17 @@ absoluteerror = np.abs(absolutesubtract)
 
 #absoluteerror = np.true_divide(absoluteerror, inlabyoptabs)
 
-print absoluteerror
+#print absoluteerror
 
 #print absoluteerror
 
+inlabyoptabs = np.abs(inlabyopt)
+
+relativeerror = np.true_divide(absoluteerror, inlabyoptabs)
+
+print relativeerror
+
+'''
 sdvinlab = np.std(absoluteerror)
 meaninlab = np.mean(absoluteerror)
 varinlab = np.var(absoluteerror)
@@ -39,9 +46,10 @@ varinlab = np.var(absoluteerror)
 bins = np.arange(0, 250, 2)
 label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab) + "\n" + "$s^2$ = " + str(varinlab) + "\n" + "Max value: " + str(max(absoluteerror)) + "\n" + "Min value: " + str(min(absoluteerror))]
 plt.hist(absoluteerror, bins, label = label1)
-plt.title("Absolute error in y-axis movement in lab environment")
+plt.title("Absolute error in Click Sequence limited to y-axis movement in lab environment")
 plt.xlabel("Error (px)")
 plt.ylabel("Frequency (# of mouse path sequences)")
 plt.legend(loc="best")
 plt.savefig('./FinalGraphs/In_Lab_Y-Axis_Absolute_Error.png')
 plt.clf()
+'''
