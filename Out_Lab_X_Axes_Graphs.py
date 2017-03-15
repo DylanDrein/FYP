@@ -28,10 +28,18 @@ absoluteerror = np.abs(absolutesubtract)
 
 #absoluteerror = np.true_divide(absoluteerror, outlabxoptabs)
 
-print absoluteerror
+#print absoluteerror
 
 #print absoluteerror
 
+outlabxoptabs = np.abs(outlabxopt)
+
+relativeerror = np.true_divide(absoluteerror, outlabxoptabs)
+
+print relativeerror
+
+
+'''
 sdvoutlab = np.std(absoluteerror)
 meanoutlab = np.mean(absoluteerror)
 varoutlab = np.var(absoluteerror)
@@ -46,3 +54,4 @@ plt.legend(loc="best")
 plt.xticks(np.arange(0, max(bins), 10), rotation = 'vertical')
 plt.savefig('./FinalGraphs/Out_Lab_X-Axis_Absolute_Error.png')
 plt.clf()
+'''
