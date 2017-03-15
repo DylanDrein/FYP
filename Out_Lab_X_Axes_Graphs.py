@@ -36,7 +36,14 @@ outlabxoptabs = np.abs(outlabxopt)
 
 relativeerror = np.true_divide(absoluteerror, outlabxoptabs)
 
+sdvoutxrel = np.std(relativeerror)
+meanoutxrel = np.mean(relativeerror)
+varoutxrel = np.var(relativeerror)
+
 print relativeerror
+print sdvoutxrel
+print meanoutxrel
+print varoutxrel
 
 
 '''
