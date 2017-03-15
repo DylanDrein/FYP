@@ -26,23 +26,11 @@ with handle2 as infile:
 
 absolutesubtract = np.subtract(inlabxopt, inlabxact)
 absoluteerror = np.abs(absolutesubtract)
-#inlabxoptabs = np.abs(inlabxopt)
 
-#absoluteerror = np.true_divide(absoluteerror, inlabxoptabs)
-
-#print absoluteerror
-
-#print absoluteerror
-
-	
-
+'''
 sdvinlab = np.std(absoluteerror)
 meaninlab = np.mean(absoluteerror)
 varinlab = np.var(absoluteerror)
-
-
-
-#eff = np.true_divide(inlabxopt, inlabxact)
 
 bins = np.arange(0, 250, 2)
 label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab) + "\n" + "$s^2$ = " + str(varinlab) + "\n" + "Max value: " + str(max(absoluteerror)) + "\n" + "Min value: " + str(min(absoluteerror))]
@@ -55,6 +43,19 @@ plt.legend(loc="best")
 plt.savefig('./FinalGraphs/In_Lab_X-Axis_Absolute_Error.png')
 #plt.show()
 plt.clf()
+'''
+
+inlabxoptabs = np.abs(inlabxopt)
+
+relativeerror = np.true_divide(absoluteerror, inlabxoptabs)
+
+print relativeerror
+
+#print absoluteerror
+
+
+
+#eff = np.true_divide(inlabxopt, inlabxact)
 
 #print min(eff)
 #print max(eff)
