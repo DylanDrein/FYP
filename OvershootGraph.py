@@ -46,13 +46,13 @@ bins = np.arange(0, 225, 5)
 
 #inlabspeed = np.log(inlabovershoot)
 #outlabspeed = np.log(inlabovershoot)
-
+'''
 sdvinlab = np.std(inlabovershoot)
 meaninlab = np.mean(inlabovershoot)
 varinlab = np.var(inlabovershoot)
 sdvoutlab = np.std(outlabovershoot)
 meanoutlab = np.mean(outlabovershoot)
-varoutlab = np.var(inlabovershoot)
+varoutlab = np.var(outlabovershoot)
 
 label1 = ["$\overline{x}$ = " + str(meaninlab) + "\n" + "$s$ = " + str(sdvinlab) + "\n" + "$s^2$ = " + str(varinlab)]
 plt.hist(inlabovershoot, bins, label = label1)
@@ -62,7 +62,7 @@ plt.ylabel("Frequency (# of mouse path sequences)")
 plt.xticks(np.arange(0, 225, 25), rotation = 'vertical')
 plt.legend(loc="best")
 #plt.show()
-plt.savefig('./finalgraphs/In_Lab_Overshoot_Histogram_Unweighted.png')
+#plt.savefig('./finalgraphs/In_Lab_Overshoot_Histogram_Unweighted.png')
 plt.clf()
 
 label2 = ["$\overline{x}$ = " + str(meanoutlab) + "\n" + "$s$ = " + str(sdvoutlab) + "\n" + "$s^2$ = " + str(varoutlab)]
@@ -73,8 +73,22 @@ plt.ylabel("Frequency (# of mouse path sequences)")
 plt.xticks(np.arange(0, 225, 25), rotation = 'vertical')
 plt.legend(loc="best")
 #plt.show()
-plt.savefig('./finalgraphs/Out_Of_Lab_Overshoot_Histogram_Unweighted.png')
+#plt.savefig('./finalgraphs/Out_Of_Lab_Overshoot_Histogram_Unweighted.png')
 plt.clf()
+
+
+inlabspeed = 1000*(np.array(inlabspeed))
+outlabspeed = 1000*(np.array(outlabspeed))
+
+inlabspeed = np.ma.masked_equal(inlabspeed,0)
+outlabspeed = np.ma.masked_equal(outlabspeed,0)
+
+sdvinlab = np.std(inlabspeed)
+meaninlab = np.mean(inlabspeed)
+varinlab = np.var(inlabspeed)
+sdvoutlab = np.std(outlabspeed)
+meanoutlab = np.mean(outlabspeed)
+varoutlab = np.var(outlabspeed)
 
 print meaninlab
 print sdvinlab
@@ -82,10 +96,34 @@ print varinlab
 print meanoutlab
 print sdvoutlab
 print varoutlab
+print min(inlabspeed)
+print max(inlabspeed)
+print min(outlabspeed)
+print max(outlabspeed)
+'''
+
+inlabovershoot = np.ma.masked_equal(inlabovershoot,0)
+outlabovershoot = np.ma.masked_equal(outlabovershoot,0)
+
+sdvinlab = np.std(inlabovershoot)
+meaninlab = np.mean(inlabovershoot)
+varinlab = np.var(inlabovershoot)
+sdvoutlab = np.std(outlabovershoot)
+meanoutlab = np.mean(outlabovershoot)
+varoutlab = np.var(outlabovershoot)
+
+print meaninlab
+print sdvinlab
+print varinlab
+print meanoutlab
+print sdvoutlab
+print varoutlab
+print min(inlabovershoot)
 print max(inlabovershoot)
+print min(outlabovershoot)
 print max(outlabovershoot)
 
-
+'''
 data = [inlabspeed, outlabspeed]
 plt.boxplot(data, 0, '', labels=["In lab", "Out of lab"])
 plt.title("Total in lab mouse path overshoot")
@@ -93,3 +131,4 @@ plt.ylabel('speediciency (optimal/actual path lengths')
 plt.savefig('./finalgraphs/Total_Overshoot_BoxPlot_No_Outliers_No_Notches.png')
 #plt.show()
 plt.clf()
+'''
