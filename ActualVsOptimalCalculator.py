@@ -127,4 +127,4 @@ for current_directory, directories, files in os.walk(rootdir):
 				#optimalnum = optimalnum + 1
 				optimalDist = 0
 				actualDist = 0
-				
+
