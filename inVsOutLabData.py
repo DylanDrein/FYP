@@ -64,8 +64,8 @@ lab2end = 1417179600000 # 1pm
 #handle4 = open("./Metricstest/outlabtimes.csv", 'wb')
 #handle5 = open("./Metricstest/inlabspeed.csv", 'wb')
 #handle6 = open("./Metricstest/outlabspeed.csv", 'wb')
-handle7 = open("./Metricstest/inlabovershoot.csv", 'wb')
-handle8 = open("./Metricstest/outlabovershoot.csv", 'wb')
+#handle7 = open("./Metricstest/inlabovershoot.csv", 'wb')
+#handle8 = open("./Metricstest/outlabovershoot.csv", 'wb')
 
 filename = ""
 
@@ -75,7 +75,7 @@ overshoot = 0
 #outmouseclicks = 0
 
 def dist(a, b):
-	return float(np.linalg.norm(a-b))
+	return float(np.linalg.norm(a - b))
 
 for current_directory, directories, files in os.walk(rootdir):
 	
@@ -91,7 +91,7 @@ for current_directory, directories, files in os.walk(rootdir):
 				filename = row[0].lower().replace(" ", "-")
 
 				# IN LAB
-				if( ((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end)) ):
+				if(((float(row[1]) > lab1start) and (float(row[1]) < lab1end)) or ((float(row[1]) > lab2start) and (float(row[1]) < lab2end))):
 					
 					if(row[4] == "mouseDown"):					
 						measuring = True
@@ -110,8 +110,8 @@ for current_directory, directories, files in os.walk(rootdir):
 							#totalinlabeff.append(float(optimalDist/actualDist))
 							#totalinlabtimes.append(float(startTime - prevTime))
 							#totalinlabspeeds.append(float(actualDist/(startTime - prevTime)))
+							#inlabovershoot.append(overshoot)
 
-							inlabovershoot.append(overshoot)
 
 						optimalDist = 0
 						actualDist = 0
