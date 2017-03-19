@@ -27,3 +27,5 @@
 + from scipy.special import stdtr
 + from statsmodels import +
 + from decimal import Decimal
+
+__The data used for this project is saved in a file over 19.6GB in size before cleaning, ~9GB after cleaning. Not possible to include here.__
