@@ -105,7 +105,7 @@ for current_directory, directories, files in os.walk(rootdir):
 				optimalVals.append(optimalDist)
 				#optimalnum = optimalnum + 1
 				times.append(startTime)
-				
+
 				optimalDist = 0
 				actualDist = 0
 				'''
@@ -117,10 +117,8 @@ for current_directory, directories, files in os.walk(rootdir):
 				print actualnum
 				print optimalnum
 				'''			
-
 		
 		times = np.array(times)
-		#print len(times)
 
 		times = (times/max(times)).astype(np.float)
 		print len(times)
@@ -132,7 +130,7 @@ for current_directory, directories, files in os.walk(rootdir):
 		maxVals = [max(optimalVals), max(actualVals)]
 		plt.scatter(actualVals, optimalVals, c=times, cmap=plt.cm.winter)
 		x = max(maxVals)
-		plt.plot([0, x], [0, x], 'k-')
+		plt.plot([0, x], [0, x]	, 'k-')
 		plt.title("$Graph$ $of$ $Efficiency$ $(Optimal/Actual)$")
 		plt.ylabel("$Optimal$ $Mouse$ $Path$ $Lengths$ $(px)$")
 		plt.xlabel("$Actual$ $Mouse$ $Path$ $Lengths$ $(px)$")
