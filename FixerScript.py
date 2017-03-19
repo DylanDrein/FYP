@@ -18,6 +18,9 @@ handle6 = open("./metricstest/inlabspeed.csv", 'rb')
 handle7 = open("./metricstest/outlabovershoot.csv", 'rb')
 handle8 = open("./metricstest/inlabovershoot.csv", 'rb')
 
+#handle7 = open("./metrics/outlabclickwaittimes.csv", 'rb')
+#handle8 = open("./metrics/inlabclickwaittimes.csv", 'rb')
+
 
 inlabeff = []
 outlabeff = []
