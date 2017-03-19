@@ -44,6 +44,9 @@ handle=None
 
 hovertimesarray = []
 
+handle1 = open("./metrics/inlabclickwaittimes.csv", 'wb')
+handle2 = open("./metrics/outlabclickwaittimes.csv", 'wb')
+
 '''
 CSV FORMAT
 
@@ -113,10 +116,6 @@ for current_directory, directories, files in os.walk(rootdir):
 						hoverTime = 0
 						clickTime = 0
 
-			c = csv.writer(handle, delimiter = ',')
-			
-			c.writerow(hovertimesarray)
-
 			hoverTime = 0
 			initialTime = 0
 			clickTime = 0
@@ -126,3 +125,12 @@ for current_directory, directories, files in os.walk(rootdir):
 			hovertimesarray = []
 
 			print filenum
+
+c1 = csv.writer(handle1, delimiter = ',')
+c2 = csv.writer(handle2, delimiter = ',')
+			
+c1.writerow(totalhovertimesinlab)
+c2.writerow(totalhovertimesoutlab)
+
+print len(totalhovertimesinlab)
+print len(totalhovertimesoutlab)
