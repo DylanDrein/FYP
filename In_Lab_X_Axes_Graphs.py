@@ -9,7 +9,11 @@ from scipy import stats
 handle1 = open("./metricstest/inlabxactual - copy.csv", 'rb')
 handle2 = open("./metricstest/inlabxoptimal - copy.csv", 'rb')
 
+handle3 = open("./metricstest/outlabxactual - copy.csv", 'rb')
+handle4 = open("./metricstest/outlabxoptimal - copy.csv", 'rb')
+
 #np.seterr(divide="raise")
+
 
 inlabxact = []
 inlabxopt = []
@@ -24,8 +28,26 @@ with handle2 as infile:
 	for row in parsed:
 		inlabxopt = np.array(list(row)).astype(np.float64)
 
-absolutesubtract = np.subtract(inlabxopt, inlabxact)
-absoluteerror = np.abs(absolutesubtract)
+inabsolutesubtract = np.subtract(inlabxopt, inlabxact)
+inabsoluteerror = np.abs(inabsolutesubtract)
+
+outlabxact = []
+outlabxopt = []
+
+with handle3 as infile:
+	parsed=csv.reader(infile)
+	for row in parsed:
+		outlabxact = np.array(list(row)).astype(np.float64)
+ 
+with handle4 as infile:
+	parsed=csv.reader(infile)
+	for row in parsed:
+		outlabxopt = np.array(list(row)).astype(np.float64)
+
+outabsolutesubtract = np.subtract(outlabxopt, outlabxact)
+outabsoluteerror = np.abs(outabsolutesubtract)
+
+#print absoluteerror
 
 '''
 sdvinlab = np.std(absoluteerror)
@@ -45,20 +67,70 @@ plt.savefig('./FinalGraphs/In_Lab_X-Axis_Absolute_Error.png')
 plt.clf()
 '''
 
-inlabxoptabs = np.abs(inlabxopt)
+print len(inlabxopt)
+print len(inlabxact)
 
-relativeerror = np.true_divide(absoluteerror, inlabxoptabs)
+print len(outlabxopt)
+print len(outlabxact)
+
+#inlabxoptabs = np.abs(inlabxopt)
+#outlabxoptabs = np.abs(outlabxopt)
+
+#vartest1 = np.var(inlabxoptabs)
+#vartest2 = np.var(outlabxopt)
+
+#print vartest1, vartest2
+#print scipy.stats.ttest_rel(inlabxopt, outlabxact)
+'''
+
+inrelativeerror = np.true_divide(inabsoluteerror, inlabxoptabs)
+outrelativeerror = np.true_divide(outabsoluteerror, outlabxoptabs)
+
+inrelativeerror = np.ma.masked_equal(inrelativeerror,0.0)
+outrelativeerror = np.ma.masked_equal(outrelativeerror,0.0)
+
+meaninlab = np.mean(inrelativeerror)
+sdvinlab = np.std(inrelativeerror)
+varinlab = np.var(inrelativeerror)
+meanoutlab = np.mean(outrelativeerror)
+sdvoutlab = np.std(outrelativeerror)
+varoutlab = np.var(outrelativeerror)
+
+print meaninlab
+print sdvinlab
+print varinlab
+print meanoutlab
+print sdvoutlab
+print varoutlab
+print min(inrelativeerror)
+print max(inrelativeerror)
+print min(outrelativeerror)
+print max(outrelativeerror)
+'''
+
+#print inrelativeerror
+
+'''
 sdvinxrel = np.std(relativeerror)
 meaninxrel = np.mean(relativeerror)
 varinxrel = np.var(relativeerror)
 
-print relativeerror
-print sdvinxrel
-print meaninxrel
-print varinxrel
+bins = np.arange(0, 25, 0.5)
+label1 = ["$\overline{x}$ = " + str(meaninxrel) + "\n" + "$s$ = " + str(sdvinxrel) + "\n" + "$s^2$ = " + str(varinxrel) + "\n" + "Max value: " + str(max(relativeerror)) + "\n" + "Min value: " + str(min(relativeerror))]
+plt.hist(relativeerror, bins, label = label1)
+plt.title("Relative error in Click Sequence limited to \n x-axis movement in lab environment")
+plt.xlabel("Relative error (px)")
+plt.ylabel("Frequency (# of mouse path sequences)")
+plt.legend(loc="best")
+#plt.xticks(np.arange(0, max(bins), 10), rotation = 'vertical')
+plt.savefig('./FinalGraphs/In_Lab_X-Axis_Relative_Error.png')
+#plt.show()
+plt.clf()
 
-#print absoluteerror
-
+#print relativeerror
+#print sdvinxrel
+#print meaninxrel
+#print varinxrel
 
 
 #eff = np.true_divide(inlabxopt, inlabxact)
@@ -71,7 +143,7 @@ print varinxrel
 
 #inlabxeff = np.true_divide(inlabxopt, inlabxact)
 #print max(inlabxeff)
-'''
+
 absoluteerrorlog = np.log(inlabxopt)
 sdvinlablog = np.std(absoluteerrorlog)
 meaninlablog = np.mean(absoluteerrorlog)
