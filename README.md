@@ -1,9 +1,9 @@
 # FYP
 ## Final year CS project
 
-..+ [Download and install Anaconda for Package and Environment](https://www.continuum.io/downloads)
-..+ Conda package manager comes preinstalled. [Here's a thorough walkthrough of package management with Conda](https://conda.io/docs/test-drive.html)
-..+ In command prompt, use 'conda install [packagename]' to install relevant packages in your Python environment
++ [Download and install Anaconda for Package and Environment](https://www.continuum.io/downloads)
++ Conda package manager comes preinstalled. [Here's a thorough walkthrough of package management with Conda](https://conda.io/docs/test-drive.html)
++ In command prompt, use 'conda install [packagename]' to install relevant packages in your Python environment
 
 ## Packages to install:
 1. Numpy
