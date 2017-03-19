@@ -12,19 +12,18 @@
 4. Pandas
 
 ## All imports used throughout the project are:
-1. 
-..+ from __future__ import print_function
-..+ import json
-..+ import csv
-..+ import os
-..+ import numpy as np
-..+ import matplotlib.pyplot as plt
-..+ import scipy
-..+ import statsmodels
-..+ from scipy import stats
-..+ from operator import itemgetter, attrgetter, methodcaller
-..+ from collections import OrderedDict
-..+ from scipy.stats import ttest_ind, ttest_ind_from_stats
-..+ from scipy.special import stdtr
-..+ from statsmodels import +
-..+ from decimal import Decimal
++ from __future__ import print_function
++ import json
++ import csv
++ import os
++ import numpy as np
++ import matplotlib.pyplot as plt
++ import scipy
++ import statsmodels
++ from scipy import stats
++ from operator import itemgetter, attrgetter, methodcaller
++ from collections import OrderedDict
++ from scipy.stats import ttest_ind, ttest_ind_from_stats
++ from scipy.special import stdtr
++ from statsmodels import +
++ from decimal import Decimal
