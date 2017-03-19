@@ -16,12 +16,12 @@ outlabtimes = []
 with handle1 as infile:
 	parsed=csv.reader(infile)
 	for row in parsed:
-		inlabtimes = np.array(list(row)).astype(np.float)
+		inlabtimes = np.array(list(row)).astype(np.float64)
 
 with handle2 as infile:
 	parsed=csv.reader(infile)
 	for row in parsed:
-		outlabtimes = np.array(list(row)).astype(np.float)
+		outlabtimes = np.array(list(row)).astype(np.float64)
 
 
 bins = np.arange(0, 1470, 20)
@@ -45,10 +45,10 @@ plt.title("Histogram of mouse path sequence \n time durations in lab environment
 #plt.title("Histogram of in-lab mousepath efficiency")
 plt.xlabel("Time (ms)")
 plt.ylabel("Frequency (# of mouse path sequences)")
-plt.xticks(np.arange(0, 1451, 100), rotation = 'vertical')
+plt.xticks(np.arange(0, 1550, 100), rotation = 'vertical')
 plt.legend(loc="best")
 plt.show()
-#plt.savefig('./finalgraphs/In_Lab_Time_Histogram.png')
+plt.savefig('./finalgraphs/In_Lab_Time_Histogram.png')
 #plt.savefig('./finalgraphs/' + "PDFinLab" + '.png')
 #plt.savefig('./finalgraphs/' + "WeightedinLabHist" + '.png')
 #plt.savefig('./finalgraphs/' + "WeightedinLabPDF" + '.png')
@@ -64,10 +64,10 @@ plt.title("Histogram of mouse path sequence time durations out of lab environmen
 #plt.title("Histogram of out-of-lab mousepath efficiency")
 plt.xlabel("Time (ms)")
 plt.ylabel("Frequency (# of mouse path sequences)")
-plt.xticks(np.arange(0, 1451, 100), rotation = 'vertical')
+plt.xticks(np.arange(0, 1550, 100), rotation = 'vertical')
 plt.legend(loc="best")
 plt.show()
-#plt.savefig('./finalgraphs/Out_Of_Lab_Time_Histogram.png')
+plt.savefig('./finalgraphs/Out_Of_Lab_Time_Histogram.png')
 #plt.savefig('./finalgraphs/' + "PDFOutOfLab" + '.png')
 #plt.savefig('./finalgraphs/' + "WeightedOutOfLabHist" + '.png')
 #plt.savefig('./finalgraphs/' + "WeightedOutOfLabPDF" + '.png')
@@ -81,7 +81,7 @@ print sdvoutlab
 print meanoutlab
 
 
-
+'''
 data = [inlabtimes, outlabtimes]
 plt.boxplot(data, 0, '', labels=["In lab", "Out of lab"])
 plt.title("Mouse path sequence time length")
@@ -89,3 +89,4 @@ plt.ylabel('Time (ms)')
 #plt.savefig('./finalgraphs/' + "TotalBoxPlot" + '.png')
 plt.show()
 plt.clf()
+'''
