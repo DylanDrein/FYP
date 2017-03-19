@@ -35,10 +35,8 @@ with handle2 as infile:
 	for row in parsed:
 		times2 = np.array(list(row)).astype(np.float)
 
-
 bins1 = range(firstlabmidnight, firstlabmidnight + daymilliseconds, hourmilliseconds)
 bins2 = range(secondlabmidnight, secondlabmidnight + daymilliseconds, hourmilliseconds)
-
 
 #print type(bins1)
 #print type(bins2)
