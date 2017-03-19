@@ -143,7 +143,7 @@ with handleoutxopt as infile:
 	for row in parsed:
 		outlabxopt = np.array(list(row)).astype(np.float64)
 
-'''
+
 inabsolutesubtract = np.subtract(inlabxopt, inlabxact)
 inabsoluteerror = np.abs(inabsolutesubtract)
 inlabxoptabs = np.abs(inlabxopt)
@@ -185,10 +185,29 @@ outabsoluteerror = np.abs(outabsolutesubtract)
 outlabyoptabs = np.abs(outlabyopt)
 outyrelativeerror = np.true_divide(outabsoluteerror, outlabyoptabs)
 
+inlabxeff = np.true_divide(inlabxopt, inlabxact)
+inlabyeff = np.true_divide(inlabyopt, inlabyact)
+outlabxeff = np.true_divide(outlabxopt, outlabxact)
+outlabyeff = np.true_divide(outlabyopt, outlabyact)
 
-n = scipy.stats.ttest_ind(outlabeff, inlabeff, equal_var=False)
-print "t-statistic is %.10f and the p-value is %.75f." % n
+#print inlabxeff
+#print inlabyeff
+#print outlabxeff
+#print outlabyeff
 
+'''
+n = scipy.stats.ttest_ind(inlabxeff, outlabxeff, equal_var=False)
+print "t-statistic is %.10f and the p-value is %.60f." % n
+
+n = scipy.stats.ttest_ind(inlabyeff, outlabyeff, equal_var=False)
+print "t-statistic is %.10f and the p-value is %.50f." % n
+
+
+print np.mean(outlabyeff)
+print np.std(outlabyeff)
+print np.var(outlabyeff)
+print min(outlabyeff)
+print max(outlabyeff)
 
 n = scipy.stats.ttest_ind(outlabtimes, inlabtimes, equal_var=False)
 print "t-statistic is %.10f and the p-value is %.300f." % n
@@ -197,10 +216,11 @@ print "t-statistic is %.10f and the p-value is %.300f." % n
 n = scipy.stats.ttest_ind(outlabspeeds, inlabspeeds, equal_var=False)
 print "t-statistic is %.10f and the p-value is %.10f." % n
 
-
 n = scipy.stats.ttest_ind(inovershoot, outovershoot, equal_var=False)
 print "t-statistic is %.10f and the p-value is %.300f." % n
 
+n = scipy.stats.ttest_ind(inxrelativeerror, outxrelativeerror, equal_var=False)
+print "t-statistic is %.10f and the p-value is %.25f." % n
 
 n = scipy.stats.ttest_ind(inyrelativeerror, outyrelativeerror, equal_var=False)
 print "t-statistic is %.10f and the p-value is %.25f." % n
@@ -251,6 +271,16 @@ print scipy.stats.ttest_ind(varianceoutspeed, varianceinspeed, equal_var=False)
 
 #print "In variance: " + np.var(inlabeff)
 #print "Out variance: " + np.var(outlabeff)
-'''
+
 
 print len(inlabeff) + len(outlabeff) -1
+print len(inlabtimes) + len(outlabtimes) -1
+print len(inlabspeeds) + len(outlabspeeds) -1
+print len(inovershoot) + len(outovershoot) -1
+print len(inhovertime) + len(outhovertime) -1
+print len(inxrelativeerror) + len(outxrelativeerror) -1
+print len(inyrelativeerror) + len(outyrelativeerror) -1
+'''
+
+print len(inlabxeff) + len(outlabxeff) -1
+print len(inlabyeff) + len(outlabyeff) -1
